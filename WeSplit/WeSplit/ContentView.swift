@@ -12,17 +12,27 @@ struct ContentView: View {
     
     @State private var checkAmount = ""
     @State private var tipPercentageIndex = 2
-    @State private var numberOfPeople = 2
+    @State private var numberOfPeople = "2"
     
     var totalPerPerson: Double {
-        let checkAmount = Double(self.checkAmount) ?? 0
+        guard let checkAmount = Double(self.checkAmount) else {
+            return 0
+        }
         let tipPercentage = tipPercentages[tipPercentageIndex] / 100.0
-        let numberOfPeople = Double(self.numberOfPeople) + 2
+        let numberOfPeople = Double(self.numberOfPeople) ?? 0 + 2
         
         let grandTotal = checkAmount + (checkAmount * tipPercentage)
-        let amountPerPerson = grandTotal / numberOfPeople
+        if grandTotal <= 0 {
+            return 0
+        }
         
+        let amountPerPerson = grandTotal / numberOfPeople
+
         return amountPerPerson
+    }
+    
+    var total: Double {
+        totalPerPerson * (Double(numberOfPeople) ?? 0 + 2)
     }
     
     var body: some View {
@@ -34,11 +44,13 @@ struct ContentView: View {
                         TextField("Check amount", text: $checkAmount)
                             .keyboardType(.decimalPad)
                     }
-                    Picker("Number of people", selection: $numberOfPeople) {
-                        ForEach(2 ..< 100) {
-                            Text("\($0) people")
-                        }
-                    }
+//                    Picker("Number of people", selection: $numberOfPeople) {
+//                        ForEach(2 ..< 100) {
+//                            Text("\($0) people")
+//                        }
+//                    }
+                    TextField("Number of people", text: $numberOfPeople)
+                        .keyboardType(.numberPad)
                 }
                 Section(header: Text("How much tip do you want to leave?")) {
                     Picker("Tip percentage", selection: $tipPercentageIndex) {
@@ -48,8 +60,11 @@ struct ContentView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-                Section(header: Text("Total per person")) {
+                Section(header: Text("Amount per person")) {
                     Text("$ \(totalPerPerson, specifier: "%.2f")")
+                }
+                Section(header: Text("Total amount")) {
+                    Text("$ \(total, specifier: "%.2f")")
                 }
             }
             .navigationBarTitle("WeSplit")
