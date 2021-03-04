@@ -8,6 +8,6 @@ Following tutorials from [Hacking with swift](hackingwithswift.com)
 
 ### Challenges
 
-- [ ] Unit Conversion App
+- [x] Unit Conversion App
 
 ### Started on 03/03/21
