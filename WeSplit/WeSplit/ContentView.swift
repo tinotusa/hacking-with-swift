@@ -35,6 +35,10 @@ struct ContentView: View {
         totalPerPerson * (Double(numberOfPeople) ?? 0 + 2)
     }
     
+    var tip: Double {
+        tipPercentages[tipPercentageIndex]
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -65,6 +69,7 @@ struct ContentView: View {
                 }
                 Section(header: Text("Total amount")) {
                     Text("$ \(total, specifier: "%.2f")")
+                        .foregroundColor(tip == 0 ? Color.red : Color.primary )
                 }
             }
             .navigationBarTitle("WeSplit")

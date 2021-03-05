@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Monaco", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
+    @State private var countries = [
+        "Estonia", "France", "Germany", "Ireland", "Italy", "Monaco",
+        "Nigeria", "Poland", "Russia", "Spain", "UK", "US"
+    ].shuffled()
+    
     @State private var correctAnswer = Int.random(in: 0 ... 2)
     
     @State private var alertTitle = ""
@@ -16,12 +20,13 @@ struct ContentView: View {
     @State private var showingAlert = false
     @State private var score = 0
     
-    let angularStroke = AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]),
-                                 center: .center)
     
-    let backgroundGradient = LinearGradient(gradient: Gradient(colors: [Color(red: 0, green: 0.7, blue: 1), .purple]),
-                                            startPoint: .top,
-                                            endPoint: .bottom)
+    
+    let backgroundGradient = LinearGradient(
+        gradient: Gradient(colors: [Color(red: 0, green: 0.7, blue: 1), .purple]),
+        startPoint: .top,
+        endPoint: .bottom
+    )
     
     var body: some View {
         ZStack {
@@ -41,12 +46,7 @@ struct ContentView: View {
                     Button(action: {
                         flagTapped(number)
                     }) {
-                        Image(countries[number])
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .overlay(RoundedRectangle(cornerRadius: 10)
-                                        .stroke(angularStroke, lineWidth: 4)
-                            )
-                            .shadow(radius: 2)
+                        FlagView(for: countries[number])
                     }
                 }
                 Text("Score: \(score)")
