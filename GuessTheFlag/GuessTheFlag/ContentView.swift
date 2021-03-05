@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var correctAnswer = Int.random(in: 0 ... 2)
     
     @State private var alertTitle = ""
+    @State private var alertMessage = ""
     @State private var showingAlert = false
     @State private var score = 0
     
@@ -55,7 +56,7 @@ struct ContentView: View {
         }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text(alertTitle),
-                  message: Text("You score is \(score)"),
+                  message: Text(alertMessage),
                   dismissButton: .default(Text("Continue")) {
                     askQuestion()
                   }
@@ -66,12 +67,11 @@ struct ContentView: View {
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             alertTitle = "Correct"
+            alertMessage = "That is correct"
             score += 1
-//            if score == 10 {
-//                // you have won the game
-//            }
         } else {
             alertTitle = "Wrong"
+            alertMessage = "That is the flag of \(countries[number])"
         }
         showingAlert = true
     }
