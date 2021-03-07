@@ -26,30 +26,37 @@ struct ContentView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     
+    let vstackSpacing: CGFloat = 0
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Text("When do you want to wake up?")
-                    .headline()
-                
-                DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
-                
-                Text("Desired amount of sleep")
-                    .headline()
-                
-                Stepper(value: $sleepAmount, in: 6 ... 12, step: 0.25) {
-                    Text("\(sleepAmount, specifier: "%g") hours")
+            Form {
+                VStack(alignment: .leading, spacing: vstackSpacing) {
+                    Text("When do you want to wake up?")
+                        .headline()
+                    
+                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
                 }
                 
-                Text("Daily coffee intake")
-                    .headline()
+                VStack(alignment: .leading, spacing: vstackSpacing) {
+                    Text("Desired amount of sleep")
+                        .headline()
+                    
+                    Stepper(value: $sleepAmount, in: 6 ... 12, step: 0.25) {
+                        Text("\(sleepAmount, specifier: "%g") hours")
+                    }
+                }
                 
-                Stepper(value: $coffeeAmount, in: 1 ... 20) {
-                    Text("\(coffeeAmount) \(pluralize("cup", count: coffeeAmount))")
+                VStack(alignment: .leading, spacing: vstackSpacing) {
+                    Text("Daily coffee intake")
+                        .headline()
+                    
+                    Stepper(value: $coffeeAmount, in: 1 ... 20) {
+                        Text("\(coffeeAmount) \(pluralize("cup", count: coffeeAmount))")
+                    }
                 }
             }
-            .padding()
             .navigationBarTitle("BetterRest")
             .navigationBarItems(trailing: Button(action: calculateBedTime) {
                 Text("Calculate")
