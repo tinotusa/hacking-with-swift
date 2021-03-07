@@ -6,11 +6,25 @@
 //
 
 import SwiftUI
+import CoreML
 
 struct ContentView: View {
-    @State private var wakeUp = Date()
+    static var defaultWakeTime: Date {
+        var components = DateComponents()
+        components.hour = 7
+        components.minute = 0
+        return Calendar.current.date(from: components)!
+    }
+    
+    let model = try! SleepCalculator(configuration: MLModelConfiguration())
+    
+    @State private var wakeUp = defaultWakeTime
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
+    
+    @State private var showingAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
     
     var body: some View {
         NavigationView {
@@ -37,7 +51,36 @@ struct ContentView: View {
             }
             .padding()
             .navigationBarTitle("BetterRest")
+            .navigationBarItems(trailing: Button(action: calculateBedTime) {
+                Text("Calculate")
+            })
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
+    }
+    
+    func calculateBedTime() {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
+        let hour = (components.hour ?? 0) * 60 * 60
+        let minute = (components.minute ?? 0) * 60
+        
+        do {
+            let totalSeconds = Double(hour + minute)
+            let prediction = try model.prediction(wake: totalSeconds, estimatedSleep: sleepAmount, coffee: Double(coffeeAmount))
+            let sleepTime = wakeUp - prediction.actualSleep
+            
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short
+            
+            alertTitle = "Your ideal bedtime is..."
+            alertMessage = formatter.string(from: sleepTime)
+        } catch {
+            alertTitle = "Error"
+            alertMessage = "Sorr, there was a problem calculating your bedtime"
+        }
+        
+        showingAlert = true
     }
     
     func pluralize(_ text: String, count: Int) -> String {
