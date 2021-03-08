@@ -22,52 +22,48 @@ struct ContentView: View {
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
     
-    @State private var showingAlert = false
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
+    var sleepTime: String {
+        calculateBedTime()
+    }
     
     let vstackSpacing: CGFloat = 0
     
     var body: some View {
         NavigationView {
             Form {
-                VStack(alignment: .leading, spacing: vstackSpacing) {
-                    Text("When do you want to wake up?")
-                        .headline()
-                    
+                Section(header: Text("When do you want to wake up?")) {
                     DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                 }
                 
-                VStack(alignment: .leading, spacing: vstackSpacing) {
-                    Text("Desired amount of sleep")
-                        .headline()
-                    
+                Section(header: Text("Desired amount of sleep")) {
                     Stepper(value: $sleepAmount, in: 6 ... 12, step: 0.25) {
                         Text("\(sleepAmount, specifier: "%g") hours")
                     }
                 }
                 
-                VStack(alignment: .leading, spacing: vstackSpacing) {
-                    Text("Daily coffee intake")
-                        .headline()
-                    
-                    Stepper(value: $coffeeAmount, in: 1 ... 20) {
-                        Text("\(coffeeAmount) \(pluralize("cup", count: coffeeAmount))")
+                Section(header: Text("Daily coffee intake")) {
+                    Picker("Number of cups", selection: $coffeeAmount) {
+                        ForEach(1 ..< 21) { cup in
+                            Text("\(cup) \(pluralize("cup", count: cup))")
+                        }
+                    }
+                }
+                
+                Section(header: Text("Sleep time")) {
+                    HStack {
+                        Spacer()
+                        Text(sleepTime)
+                            .font(.largeTitle)
+                        Spacer()
                     }
                 }
             }
             .navigationBarTitle("BetterRest")
-            .navigationBarItems(trailing: Button(action: calculateBedTime) {
-                Text("Calculate")
-            })
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-            }
         }
     }
     
-    func calculateBedTime() {
+    func calculateBedTime() -> String {
         let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
         let hour = (components.hour ?? 0) * 60 * 60
         let minute = (components.minute ?? 0) * 60
@@ -79,15 +75,12 @@ struct ContentView: View {
             
             let formatter = DateFormatter()
             formatter.timeStyle = .short
-            
-            alertTitle = "Your ideal bedtime is..."
-            alertMessage = formatter.string(from: sleepTime)
+
+            return formatter.string(from: sleepTime)
         } catch {
-            alertTitle = "Error"
-            alertMessage = "Sorr, there was a problem calculating your bedtime"
+            print(error)
         }
-        
-        showingAlert = true
+        return "Error, try again."
     }
     
     func pluralize(_ text: String, count: Int) -> String {
