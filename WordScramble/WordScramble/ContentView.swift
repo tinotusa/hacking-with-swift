@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var usedWords = [String]()
     @State private var rootWord = ""
     @State private var newWord = ""
+    @State private var score = 0
     
     @State private var showingError = false
     @State private var errorTitle = ""
@@ -29,9 +30,15 @@ struct ContentView: View {
                     Image(systemName: "\($0.count).circle")
                     Text($0)
                 }
+                Text("Score: \(score)")
             }
             .navigationBarTitle(rootWord)
-            .onAppear(perform: startGame)
+                        .onAppear(perform: startGame)
+            .navigationBarItems(leading:
+                Button(action: startGame) {
+                    Text("Restart")
+                }
+            )
             .alert(isPresented: $showingError) {
                 Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
             }
@@ -54,11 +61,12 @@ struct ContentView: View {
             return
         }
         guard isReal(word: answer) else {
-            wordError(title: "Word not possible", message: "That isn't a real word")
+            wordError(title: "Word not possible", message: "That isn't a real word (or it is the same as the root word or it is too short (less than 3 letters)")
             return
         }
         
         usedWords.insert(answer, at: 0)
+        score += answer.count
         newWord = ""
     }
     
@@ -72,6 +80,8 @@ struct ContentView: View {
         }
         let allWords = startWords.components(separatedBy: "\n")
         rootWord =  allWords.randomElement() ?? "silkworm"
+        usedWords.removeAll()
+        score = 0
     }
     
     func isOriginal(word: String) -> Bool {
@@ -91,6 +101,9 @@ struct ContentView: View {
     }
     
     func isReal(word: String) -> Bool {
+        if word.count < 3 || word == rootWord {
+            return false
+        }
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
         let missspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
