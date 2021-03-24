@@ -19,8 +19,8 @@ struct ContentView: View {
     @State private var alertMessage = ""
     @State private var showingAlert = false
     @State private var score = 0
-    
-    
+    @State private var rotationAmount = 0.0
+    @State private var opacity = 1.0
     
     let backgroundGradient = LinearGradient(
         gradient: Gradient(colors: [Color(red: 0, green: 0.7, blue: 1), .purple]),
@@ -48,6 +48,8 @@ struct ContentView: View {
                     }) {
                         FlagView(for: countries[number])
                     }
+                    .rotationEffect(isCorrect(number) ? .degrees(rotationAmount) : .zero)
+                    .opacity(isCorrect(number) ? 1 : opacity)
                 }
                 Text("Score: \(score)")
                     .foregroundColor(.white)
@@ -64,14 +66,24 @@ struct ContentView: View {
         }
     }
     
+    func isCorrect(_ number: Int) -> Bool {
+        correctAnswer == number
+    }
+    
     func flagTapped(_ number: Int) {
         if number == correctAnswer {
             alertTitle = "Correct"
             alertMessage = "That is correct"
             score += 1
+            withAnimation {
+                rotationAmount += 360
+            }
         } else {
             alertTitle = "Wrong"
             alertMessage = "That is the flag of \(countries[number])"
+            withAnimation {
+                opacity = 0.25
+            }
         }
         showingAlert = true
     }
@@ -79,6 +91,9 @@ struct ContentView: View {
     func askQuestion() {
         countries.shuffle()
         correctAnswer = Int.random(in: 0 ... 2)
+        withAnimation {
+            opacity = 1
+        }
     }
 }
 
