@@ -9,13 +9,6 @@ import Foundation
 
 
 class Expenses: ObservableObject {
-    enum ExpenseType: String, CaseIterable, Identifiable {
-        var id: ExpenseType {
-            self
-        }
-        case business, personal
-    }
-
     static let itemsKey = "Items"
     
     @Published var items = [ExpenseItem]() {
@@ -26,7 +19,6 @@ class Expenses: ObservableObject {
         }
     }
     
-    // init
     init() {
         guard let data = UserDefaults.standard.data(forKey: Self.itemsKey) else {
             items = []
@@ -35,7 +27,7 @@ class Expenses: ObservableObject {
         let decoder = JSONDecoder()
         items = try! decoder.decode([ExpenseItem].self, from: data)
     }
-    
+    // MARK: Computed properties
     var isEmpty: Bool {
         items.isEmpty
     }
@@ -43,12 +35,20 @@ class Expenses: ObservableObject {
     var count: Int {
         items.count
     }
-    
+    // MARK: Functions
     func add(_ item: ExpenseItem) {
         items.append(item)
     }
     
     func removeItems(atOffsets offsets: IndexSet) {
         items.remove(atOffsets: offsets)
+    }
+    
+    // MARK: Helper type
+    enum ExpenseType: String, CaseIterable, Identifiable {
+        var id: ExpenseType {
+            self
+        }
+        case business, personal
     }
 }

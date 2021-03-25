@@ -10,12 +10,15 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var expenses = Expenses()
     @State private var showingAddView = false
+    @State private var sortByPrice = false
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(expenses.items) { expense in
-                    RowItem(item: expense)
+                ForEach(expenses.items) { item in
+                    NavigationLink(destination: ItemDetail(item: item)) {
+                        RowItem(item: item)
+                    }
                 }
                 .onDelete(perform: expenses.removeItems)
             }

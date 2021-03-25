@@ -15,10 +15,19 @@ struct RowItem: View {
             VStack(alignment: .leading) {
                 Text(item.name)
                     .font(.headline)
-                Text(item.type)
+                Text(item.type.capitalized)
             }
             Spacer()
             Text("$\(item.amount, specifier: "%.2f")")
+                .foregroundColor(amountColor)
+        }
+    }
+    
+    var amountColor: Color {
+        switch item.amount {
+        case ...10: return .green
+        case 10 ... 100: return .orange
+        default: return .red
         }
     }
 }

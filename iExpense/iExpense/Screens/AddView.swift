@@ -15,6 +15,8 @@ struct AddView: View {
     @State private var name = ""
     @State private var type = Expenses.ExpenseType.personal
     @State private var amount = ""
+
+    @State private var showError = false
     
     var body: some View {
         NavigationView {
@@ -47,6 +49,12 @@ struct AddView: View {
                         Text("Add Item")
                     }
             )
+            .alert(isPresented: $showError) {
+                Alert(title: Text("Error"),
+                      message: Text("Invalid input (amount must be a number)"),
+                      dismissButton: .default(Text("OK"))
+                )
+            }
         }
     }
     
@@ -56,7 +64,10 @@ struct AddView: View {
     
     func addItem() {
         guard !formIsEmpty else { return }
-        let amount = Double(self.amount) ?? 0.0
+        guard let amount = Double(self.amount) else {
+            showError = true
+            return
+        }
         let item = ExpenseItem(name: name, type: type.rawValue, amount: amount)
         expenses.add(item)
         presentationMode.wrappedValue.dismiss()
