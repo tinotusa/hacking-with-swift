@@ -37,8 +37,13 @@ struct Checkout: View {
                                 print(order.name)
                             case .failure(let error):
                                 alertTitle = "Error"
-                                confirmationMessage = "An error occured, your order has not been placed."
-                                print(error.rawValue)
+                                switch error {
+                                case .noConnection:
+                                    confirmationMessage = "No internet connection, your order has not been placed."
+                                default:
+                                    confirmationMessage = "An error occured, your order has not been placed.\n\(error.localizedDescription)"
+                                }
+                                print(error)
                             }
                             showingAlert = true
                         }

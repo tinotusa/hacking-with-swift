@@ -48,7 +48,12 @@ class Order: ObservableObject, Codable {
     @Published var zip = ""
     
     var validAddress: Bool {
-        !(name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty)
+        let name = self.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let streetAddress = self.streetAddress.trimmingCharacters(in: .whitespacesAndNewlines)
+        let city = self.city.trimmingCharacters(in: .whitespacesAndNewlines)
+        let zip = self.zip.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return !(name.isEmpty || streetAddress.isEmpty || city.isEmpty || zip.isEmpty)
     }
  
     // MARK: Codable conformance

@@ -8,15 +8,17 @@
 import Foundation
 
 class NetworkManager {
-    enum NetworkError: String, Error {
-        case failedToDecode = "Failed to decode data"
-        case failedToFetch = "Failed to fetch data"
-        case invalidResponse = "Invalid response from server"
+    enum NetworkError: Error {
+        case error(String)
+        case noConnection
+        case failedToDecode
+        case failedToFetch
+        case invalidResponse
     }
     
     static func placeOrder(order: Order, completion: @escaping (Result<Order, NetworkError>) -> Void) {
         guard let encodedData = try? JSONEncoder().encode(order) else {
-            completion(.failure(.failedToDecode))
+            completion(.failure(.error("Failed to decode order")))
             return
         }
         
@@ -28,14 +30,25 @@ class NetworkManager {
         request.httpBody = encodedData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            switch error {
+            case .some(let error as NSError) where error.code == NSURLErrorNotConnectedToInternet:
+                completion(.failure(.noConnection))
+                return
+            case .some(let error):
+                completion(.failure(.error(error.localizedDescription)))
+            default:
+                break
+            }
+            
             guard let data = data else {
                 completion(.failure(.failedToFetch))
                 return
             }
+            
             if let decodedOrder = try? JSONDecoder().decode(Order.self, from: data) {
                 completion(.success(decodedOrder))
             } else {
-                completion(.failure(.failedToFetch))
+                completion(.failure(.failedToDecode))
             }
         }
         task.resume()
