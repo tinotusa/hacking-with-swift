@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct Checkout: View {
-    @ObservedObject var order: Order
+    @ObservedObject var orderContainer: OrderContainer
+    
     @State private var confirmationMessage = ""
     @State private var alertTitle = ""
     @State private var showingAlert = false
@@ -22,17 +23,18 @@ struct Checkout: View {
                         .scaledToFit()
                         .frame(width: geometry.size.width)
                     
-                    Text("Your total is $\(order.cost, specifier: "%.2f")")
+                    Text("Your total is $\(orderContainer.order.cost, specifier: "%.2f")")
                         .font(.title)
                     
                     Button("Place order") {
-                        NetworkManager.placeOrder(order: order) { result in
+                        NetworkManager.placeOrder(orderContainer: orderContainer) { result in
                             switch result {
                             case .success(let order):
                                 alertTitle = "Order complete"
                                 confirmationMessage = """
                                     Your order has been placed.
                                     \(order.quantity) x \(Order.types[order.type].capitalized) cupcakes
+                                    \(specialRequest(order: order))
                                     """
                                 print(order.name)
                             case .failure(let error):
@@ -41,7 +43,7 @@ struct Checkout: View {
                                 case .noConnection:
                                     confirmationMessage = "No internet connection, your order has not been placed."
                                 default:
-                                    confirmationMessage = "An error occured, your order has not been placed.\n\(error.localizedDescription)"
+                                    confirmationMessage = "An error occured, your order has not been placed.\n\(error)"
                                 }
                                 print(error)
                             }
@@ -62,10 +64,27 @@ struct Checkout: View {
         }
         .navigationBarTitle("Check out", displayMode: .inline)
     }
+    
+    func specialRequest(order: Order) -> String {
+        if !order.specialRequestEnabled {
+            return "With no special toppings"
+        }
+        
+        var text = "With "
+        if order.extraFrosting && order.addSprinkles {
+            text += "extra frosting and sprinkles"
+        } else if order.addSprinkles {
+            text += "sprinkles"
+        } else if order.extraFrosting {
+            text += "extra frosting"
+        }
+        
+        return text
+    }
 }
 
 struct Checkout_Previews: PreviewProvider {
     static var previews: some View {
-        Checkout(order: Order())
+        Checkout(orderContainer: OrderContainer())
     }
 }

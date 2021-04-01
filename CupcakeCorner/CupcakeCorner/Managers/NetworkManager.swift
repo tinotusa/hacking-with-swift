@@ -16,8 +16,8 @@ class NetworkManager {
         case invalidResponse
     }
     
-    static func placeOrder(order: Order, completion: @escaping (Result<Order, NetworkError>) -> Void) {
-        guard let encodedData = try? JSONEncoder().encode(order) else {
+    static func placeOrder(orderContainer: OrderContainer, completion: @escaping (Result<Order, NetworkError>) -> Void) {
+        guard let encodedData = try? JSONEncoder().encode(orderContainer.order) else {
             completion(.failure(.error("Failed to decode order")))
             return
         }
