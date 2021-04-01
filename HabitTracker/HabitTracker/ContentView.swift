@@ -36,16 +36,6 @@ struct ContentView: View {
                 }
             )
         }
-        .onAppear(perform: {
-            let decoder = JSONDecoder()
-            guard let data = UserDefaults.standard.data(forKey: Tracker.trackerKey) else {
-                return
-            }
-            guard let decodedHabits = try? decoder.decode([Habit].self, from: data) else {
-                return
-            }
-            tracker.habits = decodedHabits
-        })
     }
 }
 

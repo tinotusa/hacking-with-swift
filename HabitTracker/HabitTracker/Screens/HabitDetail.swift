@@ -16,14 +16,25 @@ struct HabitDetail: View {
         return VStack {
             Text(habit.name)
                 .font(.largeTitle)
-            Text(habit.description.isEmpty ? "Description N/A" : habit.description)
-            Stepper("Times completed: \(timesCompleted)", value: $timesCompleted)
+            Text(habit.description.isEmpty ? "N/A" : habit.description)
+            Stepper(
+                onIncrement: { incrementHabit(by: 1) },
+                onDecrement: { incrementHabit(by: -1) }
+                ){
+                    Text("Times completed: \(timesCompleted)")
+                }
             Spacer()
         }
         .padding()
         .onAppear {
             timesCompleted = habit.timesCompleted
         }
+    }
+    
+    func incrementHabit(by amount: Int) {
+        timesCompleted += amount
+        tracker.updateHabit(habit, by: amount)
+
     }
 }
 struct HabitDetail_Previews: PreviewProvider {

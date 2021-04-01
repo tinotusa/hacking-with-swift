@@ -11,6 +11,10 @@ import Foundation
 struct Habit: Codable, Identifiable {
     let id = UUID()
     
+    enum CodingKeys: CodingKey {
+        case name, timesCompleted, description, timeCompleted
+    }
+    
     var name: String
     var timesCompleted: Int
     var description = ""
@@ -23,5 +27,9 @@ struct Habit: Codable, Identifiable {
             return String(Array(description)[0...30]) + "..."
         }
         return description
+    }
+    
+    mutating func increment(by amount: Int) {
+        timesCompleted += amount
     }
 }

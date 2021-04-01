@@ -15,7 +15,16 @@ class Tracker: ObservableObject, Codable {
         }
     }
 
-    init() { }
+    init() {
+        let decoder = JSONDecoder()
+        guard let data = UserDefaults.standard.data(forKey: Self.trackerKey) else {
+            return
+        }
+        guard let decodedHabits = try? decoder.decode([Habit].self, from: data) else {
+            return
+        }
+        habits = decodedHabits
+    }
     
     func addHabit(_ habit: Habit) {
         habits.append(habit)
@@ -25,12 +34,19 @@ class Tracker: ObservableObject, Codable {
         habits.remove(atOffsets: offsets)
     }
     
+    func updateHabit(_ habit: Habit, by amount: Int) {
+        guard let index = habits.firstIndex(where: { $0.id == habit.id }) else {
+            fatalError("Tracker: ID mismatch")
+        }
+        habits[index].increment(by: amount)
+    }
+    
     func save() {
         let encoder = JSONEncoder()
         guard let data = try? encoder.encode(habits) else {
             fatalError("Tracker: Failed to encode habits array")
         }
-        UserDefaults.standard.setValue(data, forKey: Self.trackerKey)
+        UserDefaults.standard.set(data, forKey: Self.trackerKey)
     }
     
     // MARK: Codable conformance
