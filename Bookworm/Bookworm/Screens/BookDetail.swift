@@ -25,6 +25,8 @@ struct BookDetail: View {
                 .font(.title)
                 .foregroundColor(.secondary)
             
+            Text(formattedDate)
+            
             Text(book.review ?? "No review")
                 .padding()
             
@@ -45,11 +47,17 @@ struct BookDetail: View {
         }
     }
     
-    func deleteBook(_ book: Book) {
+    private func deleteBook(_ book: Book) {
         moc.delete(book)
         try? moc.save()
 
         presentationMode.wrappedValue.dismiss()
+    }
+    
+    private var formattedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        return dateFormatter.string(from: book.date ?? Date())
     }
 }
 
@@ -63,6 +71,7 @@ struct BookDetail_Previews: PreviewProvider {
         book.author = "J. R. R. Tolkien"
         book.rating = 4
         book.review = "yeah, pretty good ay"
+        book.date = Date()
         
         return BookDetail(book: book)
     }

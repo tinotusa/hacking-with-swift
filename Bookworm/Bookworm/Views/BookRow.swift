@@ -16,6 +16,7 @@ struct BookRow: View {
             VStack(alignment: .leading) {
                 Text(book.title ?? "Unknown title")
                     .font(.headline)
+                    .foregroundColor(color(for: book.rating))
                 Text(book.author ?? "Unknown author")
                     .foregroundColor(.secondary)
             }
@@ -23,6 +24,13 @@ struct BookRow: View {
             EmojiRating(rating: book.rating)
                 .font(.largeTitle)
         }
+    }
+    
+    private func color(for rating: Int16) -> Color {
+        if rating == 1 {
+            return .red
+        }
+        return .black
     }
 }
 
@@ -35,9 +43,10 @@ struct BookRow_Previews: PreviewProvider {
         book.id = UUID()
         book.title = "test name"
         book.author = "test author"
-        book.rating = 2
+        book.rating = 1
         book.review = ""
         book.genre = "Fantasy"
+        book.date = Date()
         
         return BookRow(book: book)
     }

@@ -43,12 +43,19 @@ struct AddBook: View {
                         addBook()
                     }
                 }
+                .disabled(!validForm)
             }
             .navigationBarTitle("Add book")
         }
     }
     
-    func addBook() {
+    var validForm: Bool {
+        let title = self.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let author = self.author.trimmingCharacters(in: .whitespacesAndNewlines)
+        return !(title.isEmpty || author.isEmpty)
+    }
+    
+    private func addBook() {
         let book = Book(context: moc)
         book.id = UUID()
         book.title = title
@@ -57,6 +64,8 @@ struct AddBook: View {
         
         book.rating = Int16(rating)
         book.review = review
+        
+        book.date = Date()
         
         try? moc.save()
         presentationMode.wrappedValue.dismiss()
