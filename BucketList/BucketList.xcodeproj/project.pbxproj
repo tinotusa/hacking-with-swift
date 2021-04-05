@@ -11,6 +11,7 @@
 		21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD6BDB261A9C500009EFC1 /* ContentView.swift */; };
 		21CD6BDE261A9C510009EFC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CD6BDD261A9C510009EFC1 /* Assets.xcassets */; };
 		21CD6BE1261A9C510009EFC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CD6BE0261A9C510009EFC1 /* Preview Assets.xcassets */; };
+		21F1D2F5261B0E22000AF4CB /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F1D2F4261B0E22000AF4CB /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		21CD6BDD261A9C510009EFC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21CD6BE0261A9C510009EFC1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21CD6BE2261A9C510009EFC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21F1D2F4261B0E22000AF4CB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		21CD6BD8261A9C500009EFC1 /* BucketList */ = {
 			isa = PBXGroup;
 			children = (
+				21F1D2EB261B0E02000AF4CB /* Screens */,
 				21CD6BD9261A9C500009EFC1 /* BucketListApp.swift */,
 				21CD6BDB261A9C500009EFC1 /* ContentView.swift */,
 				21CD6BDD261A9C510009EFC1 /* Assets.xcassets */,
@@ -67,6 +70,14 @@
 				21CD6BE0261A9C510009EFC1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		21F1D2EB261B0E02000AF4CB /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				21F1D2F4261B0E22000AF4CB /* MapView.swift */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */,
+				21F1D2F5261B0E22000AF4CB /* MapView.swift in Sources */,
 				21CD6BDA261A9C500009EFC1 /* BucketListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
