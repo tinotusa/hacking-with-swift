@@ -13,6 +13,7 @@ struct ContentView: View {
     // MARK: properties
     @State private var image: Image?
     @State private var filterIntensity = 0.5
+    @State private var filterScale = 0.5
     
     @State private var showingImagePicker = false
     @State private var inputImage:  UIImage?
@@ -22,6 +23,10 @@ struct ContentView: View {
     
     @State private var currentFilter: CIFilter = .sepiaTone()
     let context = CIContext()
+    
+    @State private var showingAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
     
     // MARK: body
     var body: some View {
@@ -33,18 +38,34 @@ struct ContentView: View {
             }
         )
         
+        let scale = Binding<Double>(
+            get: { filterScale },
+            set: {
+                filterScale = $0
+                applyProcessing()
+            }
+        )
+        
         return NavigationView {
             VStack {
                 OptionalImageSelect(image: $image) { showingImagePicker = true }
                 
-                HStack {
-                    Text("Intensity")
-                    Slider(value: intensity)
+                VStack {
+                    HStack {
+                        Text("Intensity")
+                            .frame(width: 70)
+                        Slider(value: intensity)
+                    }
+                    HStack {
+                        Text("Scale")
+                            .frame(width: 70)
+                        Slider(value: scale)
+                    }
                 }
                 .padding(.vertical)
                 
                 HStack {
-                    Button("Change filter") { showingActionSheet = true }
+                    Button("Change filter (\(currentFilter.name))") { showingActionSheet = true }
                     
                     Spacer()
                     
@@ -72,12 +93,27 @@ struct ContentView: View {
                     ]
                 )
             }
+            .alert(isPresented: $showingAlert) {
+                Alert(
+                    title: Text(alertTitle),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("OK")) {}
+                )
+            }
         }
     }
-    
-    // MARK: Functions
+}
+
+// MARK: Functions
+extension ContentView {
     func saveImage() {
-        guard let processedImage = self.processedImage else { return }
+        guard let processedImage = self.processedImage else {
+            showingAlert = true
+            alertTitle = "Error"
+            alertMessage = "There is no image to save"
+            return
+        }
+
         let imageSaver = ImageSaver()
         imageSaver.successHandler = {
             print("Success")
@@ -110,7 +146,7 @@ struct ContentView: View {
             currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey)
         }
         if keys.contains(kCIInputScaleKey) {
-            currentFilter.setValue(filterIntensity * 100, forKey: kCIInputScaleKey)
+            currentFilter.setValue(filterScale * 100, forKey: kCIInputScaleKey)
         }
         
         guard let outputImage = currentFilter.outputImage else { return }
