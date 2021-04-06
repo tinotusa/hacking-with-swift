@@ -26,11 +26,12 @@ struct AstronautDetail: View {
         GeometryReader { geometry in
             ScrollView(.vertical) {
                 VStack {
-                    Image(astronaut.id)
+                    Image(decorative: astronaut.id)
                         .resizable()
                         .scaledToFit()
                         .frame(width: geometry.size.width)
-                    
+                        .accessibility(hidden: true)
+
                     Text(astronaut.description)
                         .padding()
                     

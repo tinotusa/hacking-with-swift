@@ -12,7 +12,7 @@ struct CrewMemberRow: View {
     
     var body: some View {
         HStack {
-            Image(member.astronaut.id)
+            Image(decorative: member.astronaut.id)
                 .resizable()
                 .frame(width: 83, height: 60)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -24,12 +24,17 @@ struct CrewMemberRow: View {
                         )
                 )
                 .shadow(radius: 5)
+                .accessibility(hidden: true)
+
             VStack(alignment: .leading) {
                 Text(member.astronaut.name)
                     .font(.headline)
                 Text(member.role)
                     .foregroundColor(.secondary)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibility(label: Text("\(member.astronaut.name) the mission's \(member.role)"))
+            
             
             Spacer()
         }

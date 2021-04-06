@@ -33,10 +33,12 @@ struct MissionRow: View {
     
     var body: some View {
         HStack {
-            Image(mission.imageName)
+            Image(decorative: mission.imageName)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 44, height: 44)
+                .accessibility(hidden: true)
+
             VStack(alignment: .leading, spacing: 0) {
                 Text(mission.displayName)
                     .font(.headline)
@@ -49,6 +51,9 @@ struct MissionRow: View {
                     }
                 }
             }
+            .accessibilityElement(children: .ignore)
+            .accessibility(label: Text("\(mission.displayName) mission"))
+
             Spacer()
         }
     }

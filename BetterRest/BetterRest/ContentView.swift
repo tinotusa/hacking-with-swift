@@ -26,20 +26,23 @@ struct ContentView: View {
         calculateBedTime()
     }
     
-    let vstackSpacing: CGFloat = 0
-    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("When do you want to wake up?")) {
-                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
+                    DatePicker(
+                        "Please enter a time",
+                        selection: $wakeUp,
+                        displayedComponents: .hourAndMinute
+                    )
+                    .labelsHidden()
                 }
                 
                 Section(header: Text("Desired amount of sleep")) {
                     Stepper(value: $sleepAmount, in: 6 ... 12, step: 0.25) {
                         Text("\(sleepAmount, specifier: "%g") hours")
                     }
+                    .accessibility(value: Text("\(sleepAmount, specifier: "%g") hours"))
                 }
                 
                 Section(header: Text("Daily coffee intake")) {
@@ -88,20 +91,6 @@ struct ContentView: View {
             return text
         }
         return text + "s"
-    }
-    
-}
-
-struct HeadLine: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.headline)
-    }
-}
-
-extension View {
-    func headline() -> some View {
-        self.modifier(HeadLine())
     }
 }
 

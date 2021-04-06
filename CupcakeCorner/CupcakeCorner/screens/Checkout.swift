@@ -18,10 +18,11 @@ struct Checkout: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack {
-                    Image("cupcakes")
+                    Image(decorative: "cupcakes")
                         .resizable()
                         .scaledToFit()
                         .frame(width: geometry.size.width)
+                        .accessibility(hidden: true)
                     
                     Text("Your total is $\(orderContainer.order.cost, specifier: "%.2f")")
                         .font(.title)
