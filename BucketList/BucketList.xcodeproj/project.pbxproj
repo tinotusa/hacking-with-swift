@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2199531E261C0DB60084DFA0 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2199531D261C0DB60084DFA0 /* AlertItem.swift */; };
+		21995321261C156D0084DFA0 /* UnlockedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21995320261C156D0084DFA0 /* UnlockedView.swift */; };
+		21995324261C16650084DFA0 /* LockedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21995323261C16650084DFA0 /* LockedView.swift */; };
+		21CBA4EF261BC4DD00892B1E /* MKPointAnnotation-ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA4EE261BC4DD00892B1E /* MKPointAnnotation-ObservableObject.swift */; };
+		21CBA4F2261BC5B500892B1E /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA4F1261BC5B500892B1E /* EditView.swift */; };
+		21CBA4F6261BC7E200892B1E /* WikipediaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA4F5261BC7E200892B1E /* WikipediaResult.swift */; };
+		21CBA4F9261BD5EC00892B1E /* MKPointAnnotation-Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA4F8261BD5EC00892B1E /* MKPointAnnotation-Codable.swift */; };
+		21CBA4FC261BD7F800892B1E /* FileManager-Documents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA4FB261BD7F800892B1E /* FileManager-Documents.swift */; };
+		21CBA500261BD86700892B1E /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA4FF261BD86700892B1E /* FloatingButton.swift */; };
 		21CD6BDA261A9C500009EFC1 /* BucketListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD6BD9261A9C500009EFC1 /* BucketListApp.swift */; };
 		21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD6BDB261A9C500009EFC1 /* ContentView.swift */; };
 		21CD6BDE261A9C510009EFC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CD6BDD261A9C510009EFC1 /* Assets.xcassets */; };
@@ -15,6 +24,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2199531D261C0DB60084DFA0 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
+		21995320261C156D0084DFA0 /* UnlockedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockedView.swift; sourceTree = "<group>"; };
+		21995323261C16650084DFA0 /* LockedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedView.swift; sourceTree = "<group>"; };
+		21CBA4EE261BC4DD00892B1E /* MKPointAnnotation-ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-ObservableObject.swift"; sourceTree = "<group>"; };
+		21CBA4F1261BC5B500892B1E /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
+		21CBA4F5261BC7E200892B1E /* WikipediaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaResult.swift; sourceTree = "<group>"; };
+		21CBA4F8261BD5EC00892B1E /* MKPointAnnotation-Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-Codable.swift"; sourceTree = "<group>"; };
+		21CBA4FB261BD7F800892B1E /* FileManager-Documents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-Documents.swift"; sourceTree = "<group>"; };
+		21CBA4FF261BD86700892B1E /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		21CD6BD6261A9C500009EFC1 /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CD6BD9261A9C500009EFC1 /* BucketListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListApp.swift; sourceTree = "<group>"; };
 		21CD6BDB261A9C500009EFC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +53,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21CBA4ED261BC4CD00892B1E /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				21CBA4EE261BC4DD00892B1E /* MKPointAnnotation-ObservableObject.swift */,
+				21CBA4F8261BD5EC00892B1E /* MKPointAnnotation-Codable.swift */,
+				21CBA4FB261BD7F800892B1E /* FileManager-Documents.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		21CBA4F4261BC7CF00892B1E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				21CBA4F5261BC7E200892B1E /* WikipediaResult.swift */,
+				2199531D261C0DB60084DFA0 /* AlertItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		21CBA4FE261BD85D00892B1E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				21CBA4FF261BD86700892B1E /* FloatingButton.swift */,
+				21995320261C156D0084DFA0 /* UnlockedView.swift */,
+				21995323261C16650084DFA0 /* LockedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		21CD6BCD261A9C500009EFC1 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +101,9 @@
 		21CD6BD8261A9C500009EFC1 /* BucketList */ = {
 			isa = PBXGroup;
 			children = (
+				21CBA4FE261BD85D00892B1E /* Views */,
+				21CBA4F4261BC7CF00892B1E /* Models */,
+				21CBA4ED261BC4CD00892B1E /* Extentions */,
 				21F1D2EB261B0E02000AF4CB /* Screens */,
 				21CD6BD9261A9C500009EFC1 /* BucketListApp.swift */,
 				21CD6BDB261A9C500009EFC1 /* ContentView.swift */,
@@ -76,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				21F1D2F4261B0E22000AF4CB /* MapView.swift */,
+				21CBA4F1261BC5B500892B1E /* EditView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -149,7 +200,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21995324261C16650084DFA0 /* LockedView.swift in Sources */,
+				21CBA4FC261BD7F800892B1E /* FileManager-Documents.swift in Sources */,
+				21CBA4F9261BD5EC00892B1E /* MKPointAnnotation-Codable.swift in Sources */,
+				21CBA500261BD86700892B1E /* FloatingButton.swift in Sources */,
+				2199531E261C0DB60084DFA0 /* AlertItem.swift in Sources */,
 				21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */,
+				21CBA4F2261BC5B500892B1E /* EditView.swift in Sources */,
+				21995321261C156D0084DFA0 /* UnlockedView.swift in Sources */,
+				21CBA4F6261BC7E200892B1E /* WikipediaResult.swift in Sources */,
+				21CBA4EF261BC4DD00892B1E /* MKPointAnnotation-ObservableObject.swift in Sources */,
 				21F1D2F5261B0E22000AF4CB /* MapView.swift in Sources */,
 				21CD6BDA261A9C500009EFC1 /* BucketListApp.swift in Sources */,
 			);

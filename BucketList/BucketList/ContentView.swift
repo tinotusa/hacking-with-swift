@@ -8,66 +8,74 @@
 import SwiftUI
 import MapKit
 
-struct FloatingButton: View {
-    let action: () -> Void
+struct ContentView: View  {
+    @State private var centerCoordinate = CLLocationCoordinate2D()
+    @State private var locations = [CodableMKPointAnnotation]()
+    @State private var selectedPlace: MKPointAnnotation?
+    @State private var showingPlaceDetails = false
+    @State private var showingEditScreen = false
+    @State private var isUnlocked = false
+    
+    @State private var alertItem: AlertItem?
     
     var body: some View {
-        VStack {
-            Spacer()
-            HStack() {
-                Spacer()
-                Button(action: action) {
-                    Image(systemName: "plus")
-                }
-                .padding()
-                .background(Color.black.opacity(0.75))
-                .foregroundColor(.white)
-                .font(.title)
-                .clipShape(Circle())
-                .padding(.trailing)
+        ZStack {
+            switch isUnlocked {
+            case true:
+                UnlockedView(
+                    centerCoordinate: $centerCoordinate,
+                    locations: $locations,
+                    selectedPlace: $selectedPlace,
+                    showingPlaceDetails: $showingPlaceDetails,
+                    showingEditScreen: $showingEditScreen,
+                    alertItem: $alertItem
+                )
+            case false:
+                LockedView(alertItem: $alertItem, isUnlocked: $isUnlocked)
             }
+        }
+        .alert(item: $alertItem) { item in
+            Alert(
+                title: Text(item.title),
+                message: Text(item.message ?? ""),
+                primaryButton: item.primaryButton ?? .default(Text("OK")),
+                secondaryButton: item.secondaryButton ?? .default(Text("Cancel"))
+            )
+        }
+        .sheet(isPresented: $showingEditScreen, onDismiss: saveData) {
+            if self.selectedPlace != nil {
+                EditView(placemark: selectedPlace!)
+            }
+        }
+        .onAppear(perform: loadData)
+    }
+}
+
+// MARK: load and save functionality
+extension ContentView {
+    static let saveFilename = "SavedPlaces"
+    
+    func loadData() {
+        let fileURL = FileManager.default.documentsURL().appendingPathComponent(Self.saveFilename)
+        do {
+            let data = try Data(contentsOf: fileURL)
+            locations = try JSONDecoder().decode([CodableMKPointAnnotation].self, from: data)
+        } catch {
+            print("Unable to load data")
+        }
+    }
+    
+    func saveData() {
+        do {
+            let fileURL = FileManager.default.documentsURL().appendingPathComponent(Self.saveFilename)
+            let data = try JSONEncoder().encode(self.locations)
+            try data.write(to: fileURL, options: [.atomicWrite, .completeFileProtection])
+        } catch {
+            print("Unable to save data")
         }
     }
 }
 
-struct ContentView: View  {
-    @State private var centerCoordinate = CLLocationCoordinate2D()
-    @State private var locations = [MKPointAnnotation]()
-    @State private var selectedPlace: MKPointAnnotation?
-    @State private var showingPlaceDetails = false
-    
-    var body: some View {
-        ZStack {
-            MapView(
-                centerCoordinate: $centerCoordinate,
-                selectedPlace: $selectedPlace,
-                showingPlaceDetails: $showingPlaceDetails,
-                annotations: locations
-            )
-                .edgesIgnoringSafeArea(.all)
-            Circle()
-                .fill(Color.blue)
-                .opacity(0.3)
-                .frame(width: 32, height: 32)
-            FloatingButton(action: addLocation)
-        }
-        .alert(isPresented: $showingPlaceDetails) {
-            Alert(
-                title: Text(selectedPlace?.title ?? "Unknown"),
-                message: Text(selectedPlace?.subtitle ?? "Missing place information"),
-                primaryButton: .default(Text("OK")),
-                secondaryButton: .default(Text("Edit"))
-            )
-        }
-    }
-    
-    func addLocation() {
-        let newLocation = MKPointAnnotation()
-        newLocation.coordinate = centerCoordinate
-        newLocation.title  = "Example location"
-        locations.append(newLocation)
-    }
-}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

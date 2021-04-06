@@ -12,6 +12,8 @@ struct MapView {
     @Binding var centerCoordinate: CLLocationCoordinate2D
     @Binding var selectedPlace: MKPointAnnotation?
     @Binding var showingPlaceDetails: Bool
+    @Binding var showingEditScreen: Bool
+    @Binding var alertItem: AlertItem?
     var annotations: [MKPointAnnotation]
 }
 
@@ -62,6 +64,13 @@ extension MapView {
             guard let placemark = view.annotation as? MKPointAnnotation else { return }
             parent.selectedPlace = placemark
             parent.showingPlaceDetails = true
+            parent.alertItem = AlertItem(
+                title: "\(placemark.wrappedTitle)",
+                message: "\(placemark.wrappedSubtitle)",
+                secondaryButton: .default(Text("Edit")) {
+                    self.parent.showingEditScreen = true
+                }
+            )
         }
     }
     func makeCoordinator() -> Coordinator {
@@ -85,6 +94,8 @@ struct MapView_Previews: PreviewProvider {
             centerCoordinate: .constant(MKPointAnnotation.example.coordinate),
             selectedPlace: .constant(MKPointAnnotation.example),
             showingPlaceDetails: .constant(true),
+            showingEditScreen: .constant(false),
+            alertItem: .constant(AlertItem(title: "test")),
             annotations: [MKPointAnnotation.example]
         )
     }

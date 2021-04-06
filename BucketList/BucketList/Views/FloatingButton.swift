@@ -8,13 +8,32 @@
 import SwiftUI
 
 struct FloatingButton: View {
+    let action: () -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            HStack() {
+                Spacer()
+                Button(action: action) {
+                    Image(systemName: "plus")
+                        .padding()
+                        .background(
+                            Color.black
+                                .opacity(0.75)
+                        )
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .clipShape(Circle())
+                        .padding(.trailing)
+                }
+            }
+        }
     }
 }
 
 struct FloatingButton_Previews: PreviewProvider {
     static var previews: some View {
-        FloatingButton()
+        FloatingButton() {}
     }
 }
