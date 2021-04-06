@@ -29,28 +29,53 @@ extension LockedView {
     func authenticate() {
         let context = LAContext()
         var error: NSError?
-        if !context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            // no biometrics
+        
+        let hasBiometrics = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        let hasPasscode = context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
+        
+        if !hasPasscode && !hasBiometrics {
+            // no form of authentication
             return
         }
-        if let error = error as NSError? {
-            alertItem = AlertItem(
-                title: "Error",
-                message: "\(error.domain) \(error.userInfo)"
-            )
-        }
+
         let reason = "Unlock to see your saved places"
+        
+        if hasBiometrics {
+            authenticateWithBiometrics(context: context, reason: reason)
+        } else {
+            authenticateWithPasscode(context: context, reason: reason)
+        }
+    }
+    
+    func authenticateWithBiometrics(context: LAContext, reason: String) {
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,localizedReason: reason) { success, error in
             DispatchQueue.main.async {
                 if success {
                     isUnlocked = true
-                } else {
-                    if let error = error as NSError? {
-                        alertItem = AlertItem(
-                            title: "Error",
-                            message: "\(error.domain) \(error.userInfo)"
-                        )
-                    }
+                    return
+                }
+                if let error = error as NSError? {
+                    alertItem = AlertItem(
+                        title: "Biometrics Error",
+                        message: "\(error.domain) \(error.userInfo)"
+                    )
+                }
+            }
+        }
+    }
+    
+    func authenticateWithPasscode(context: LAContext, reason: String) {
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
+            DispatchQueue.main.async {
+                if success {
+                    isUnlocked = true
+                    return
+                }
+                if let error = error as NSError? {
+                    alertItem = AlertItem(
+                        title: "Passcode Error",
+                        message: "\(error.domain) \(error.userInfo)"
+                    )
                 }
             }
         }
