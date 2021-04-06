@@ -29,9 +29,8 @@ struct Icon: View {
         .clipShape(Circle())
         .overlay(Circle().stroke(user.isActive ? Color.green : Color.gray, lineWidth: 1))
     }
-
-    
 }
+
 struct Icon_Previews: PreviewProvider {
     static var previews: some View {
         Icon(user: User.testUser)

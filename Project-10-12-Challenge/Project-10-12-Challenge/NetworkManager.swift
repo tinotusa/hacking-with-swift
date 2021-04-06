@@ -14,7 +14,7 @@ enum NetworkError: Error {
     case failedToDecodeData
 }
 
-func getUsers(completion: @escaping (Result<[User], NetworkError>) -> Void) {
+func getUsers(completion: @escaping (Result<[UserStruct], NetworkError>) -> Void) {
     let url = URL(string: "https://hackingwithswift.com/samples/friendface.json")!
     let request = URLRequest(url: url)
     
@@ -34,7 +34,7 @@ func getUsers(completion: @escaping (Result<[User], NetworkError>) -> Void) {
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        guard let userData = try? decoder.decode([User].self, from: data) else {
+        guard let userData = try? decoder.decode([UserStruct].self, from: data) else {
             completion(.failure(.failedToDecodeData))
             return
         }

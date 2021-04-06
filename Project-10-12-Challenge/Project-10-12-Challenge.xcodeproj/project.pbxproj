@@ -18,6 +18,11 @@
 		21854A232619523F00C3A273 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21854A222619523F00C3A273 /* UserRow.swift */; };
 		21854A272619528000C3A273 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21854A262619528000C3A273 /* NetworkManager.swift */; };
 		21C766892619572800AEAE9F /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C766882619572800AEAE9F /* UserDetail.swift */; };
+		21CBA507261BE3CA00892B1E /* Friend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA503261BE3CA00892B1E /* Friend+CoreDataClass.swift */; };
+		21CBA508261BE3CA00892B1E /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA504261BE3CA00892B1E /* Friend+CoreDataProperties.swift */; };
+		21CBA509261BE3CA00892B1E /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA505261BE3CA00892B1E /* User+CoreDataClass.swift */; };
+		21CBA50A261BE3CA00892B1E /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA506261BE3CA00892B1E /* User+CoreDataProperties.swift */; };
+		21CBA50E261BE8B000892B1E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CBA50D261BE8B000892B1E /* Persistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		21854A222619523F00C3A273 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		21854A262619528000C3A273 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		21C766882619572800AEAE9F /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
+		21CBA503261BE3CA00892B1E /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		21CBA504261BE3CA00892B1E /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		21CBA505261BE3CA00892B1E /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		21CBA506261BE3CA00892B1E /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		21CBA50D261BE8B000892B1E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,16 +85,18 @@
 		21854A0F26194BBC00C3A273 /* Project-10-12-Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				21854A262619528000C3A273 /* NetworkManager.swift */,
+				21CBA502261BE3A300892B1E /* Data Model Classes */,
 				217BA573261965F80004E03B /* Models */,
 				21854A212619523700C3A273 /* Screens */,
 				21854A202619522F00C3A273 /* Views */,
 				21854A1026194BBC00C3A273 /* Project_10_12_ChallengeApp.swift */,
 				21854A1226194BBC00C3A273 /* ContentView.swift */,
+				21CBA50D261BE8B000892B1E /* Persistence.swift */,
 				217BA582261970460004E03B /* Project-10-12-Challenge.xcdatamodeld */,
 				21854A1426194BBD00C3A273 /* Assets.xcassets */,
 				21854A1926194BBD00C3A273 /* Info.plist */,
 				21854A1626194BBD00C3A273 /* Preview Content */,
-				21854A262619528000C3A273 /* NetworkManager.swift */,
 			);
 			path = "Project-10-12-Challenge";
 			sourceTree = "<group>";
@@ -112,6 +124,17 @@
 				21C766882619572800AEAE9F /* UserDetail.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		21CBA502261BE3A300892B1E /* Data Model Classes */ = {
+			isa = PBXGroup;
+			children = (
+				21CBA503261BE3CA00892B1E /* Friend+CoreDataClass.swift */,
+				21CBA504261BE3CA00892B1E /* Friend+CoreDataProperties.swift */,
+				21CBA505261BE3CA00892B1E /* User+CoreDataClass.swift */,
+				21CBA506261BE3CA00892B1E /* User+CoreDataProperties.swift */,
+			);
+			path = "Data Model Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,12 +207,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				21854A272619528000C3A273 /* NetworkManager.swift in Sources */,
+				21CBA507261BE3CA00892B1E /* Friend+CoreDataClass.swift in Sources */,
+				21CBA509261BE3CA00892B1E /* User+CoreDataClass.swift in Sources */,
+				21CBA50E261BE8B000892B1E /* Persistence.swift in Sources */,
+				21CBA508261BE3CA00892B1E /* Friend+CoreDataProperties.swift in Sources */,
 				217BA578261966210004E03B /* Friend.swift in Sources */,
 				21854A232619523F00C3A273 /* UserRow.swift in Sources */,
 				217BA584261970460004E03B /* Project-10-12-Challenge.xcdatamodeld in Sources */,
 				217BA5752619660F0004E03B /* User.swift in Sources */,
 				21854A1326194BBC00C3A273 /* ContentView.swift in Sources */,
 				21C766892619572800AEAE9F /* UserDetail.swift in Sources */,
+				21CBA50A261BE3CA00892B1E /* User+CoreDataProperties.swift in Sources */,
 				217BA57B261966580004E03B /* Icon.swift in Sources */,
 				21854A1126194BBC00C3A273 /* Project_10_12_ChallengeApp.swift in Sources */,
 			);

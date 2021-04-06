@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable, Identifiable {
+struct UserStruct: Codable, Identifiable {
     let id: UUID
     let isActive: Bool
     let name: String
@@ -18,10 +18,10 @@ struct User: Codable, Identifiable {
     let about: String
     let registered: Date
     let tags: [String]
-    let friends: [Friend]
+    let friends: [FriendStruct]
     
-    static var testUser: User {
-        User(id: UUID(uuidString: "50a48fa3-2c0f-4397-ac50-64da464f9954")!,
+    static var testUser: UserStruct {
+        UserStruct(id: UUID(uuidString: "50a48fa3-2c0f-4397-ac50-64da464f9954")!,
              isActive: false,
              name: "test name",
              age: 23,
@@ -32,7 +32,7 @@ struct User: Codable, Identifiable {
              registered: Date(),
              tags: ["some", "tag"],
              friends: [
-                Friend(id: UUID(), name: "some friend name")
+                FriendStruct(id: UUID(), name: "some friend name")
              ])
     }
     

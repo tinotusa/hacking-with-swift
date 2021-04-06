@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserDetail: View {
     let user: User
-    let users: [User]
+    let users: FetchedResults<User>
     
     @State private var showMore = false
     var body: some View {
@@ -18,27 +18,29 @@ struct UserDetail: View {
                 VStack {
                     Icon(user: user, width: 100, height: 100)
                     HStack {
-                        Text(user.name.capitalized)
+                        Text(user.wrappedName.capitalized)
                             .font(.headline)
                         Text("\(user.age)")
                     }
-                    Text(user.email)
-                    Text(user.address)
-                    Text("Company: \(user.company)")
+                    Text(user.wrappedEmail)
+                    Text(user.wrappedAddress)
+                    Text("Company: \(user.wrappedCompany)")
                     Text(about)
+                        .layoutPriority(1)
                     
                     if showMore {
                         Divider()
                         Text("Joinend: \(user.formattedRegistedDate)")
                         Text("Tags")
-                        HStack {
-                            ForEach(user.tags, id: \.self) { tag in
+                        VStack {
+                            ForEach(user.wrappedTags, id: \.self) { tag in
                                 Text(tag)
                             }
                         }
+                        Divider()
                     }
                     
-                    List(user.friends) { friend in
+                    List(user.wrappedFriends) { friend in
                         NavigationLink(destination: UserDetail(user: findUser(named: friend.name), users: users)) {
                             UserRow(user: findUser(named: friend.name))
                         }
@@ -57,7 +59,7 @@ struct UserDetail: View {
     
     var about: String {
         if showMore {
-            return user.about
+            return user.wrappedAbout
         } else {
             return user.shortAbout
         }
@@ -72,10 +74,24 @@ struct UserDetail: View {
 }
 
 struct UserDetail_Previews: PreviewProvider {
+    static let viewContext = PersistenceController.shared.container.viewContext
     static let user = User.testUser
-    static let users = [User]()
-
+    @FetchRequest(entity: User.entity(), sortDescriptors: [])
+    static var users: FetchedResults<User>
+    
     static var previews: some View {
-        UserDetail(user: user, users: users)
+        let newUser = User(context: viewContext)
+        newUser.name = "test name"
+        newUser.age = 42
+        newUser.isActive = true
+        newUser.company = "A company"
+        do {
+            try viewContext.save()
+        } catch {
+            print("unresolved error \(error.localizedDescription)")
+        }
+        
+        return UserDetail(user: user, users: users)
+            .environment(\.managedObjectContext, viewContext)
     }
 }

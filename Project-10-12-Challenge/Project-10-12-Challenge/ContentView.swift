@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var users = [User]()
-    @State private var loadedData = false
+    @Environment(\.managedObjectContext) var viewContext
+    @FetchRequest(
+        entity: User.entity(),
+        sortDescriptors: [NSSortDescriptor(key: "name", ascending: true)],
+        predicate: nil
+    ) var users: FetchedResults<User>
     
     var body: some View {
         NavigationView {
@@ -24,25 +28,59 @@ struct ContentView: View {
             })
         }
     }
-    
+}
+
+// MARK: helper functions
+extension ContentView {
     func loadUsers() {
-        if loadedData { return }
-        loadedData = true
+        if !users.isEmpty { return }
         getUsers { result in
             switch result {
             case .success(let data):
-                users = data
+                data.forEach(addUser)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
+    
+    func addUser(user: UserStruct) {
+        let newUser = User(context: viewContext)
+        newUser.id = user.id
+        newUser.age = Int16(user.age)
+        newUser.isActive = user.isActive
+        newUser.name = user.name
+        newUser.company = user.company
+        newUser.email = user.email
+        newUser.address = user.address
+        newUser.about = user.about
+        newUser.registered = user.registered
+        do {
+            newUser.tags = try JSONEncoder().encode(user.tags)
+            newUser.friends = try JSONEncoder().encode(user.friends)
+        } catch {
+            print("unresolved error \(error.localizedDescription)")
+        }
+
+        saveContext()
+    }
+
+    func saveContext() {
+        if viewContext.hasChanges {
+            do {
+                try viewContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
 }
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environment(
+                \.managedObjectContext,
+                PersistenceController.shared.container.viewContext)
     }
 }

@@ -18,12 +18,12 @@ struct UserRow: View {
                 Icon(user: user)
                 VStack(alignment: .leading) {
                     HStack {
-                    Text(user.name)
+                    Text(user.wrappedName)
                         .font(.headline)
                     Text("\(user.age)")
                         .foregroundColor(.secondary)
                     }
-                    Text(user.email)
+                    Text(user.wrappedEmail)
                         .foregroundColor(.secondary)
                 }
             }
