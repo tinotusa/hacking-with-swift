@@ -27,7 +27,7 @@ class Prospect: Codable {
         case name, emailAddress, isContacted
     }
     
-    func toggle() {
+    func toggleContacted() {
         isContacted.toggle()
     }
 }

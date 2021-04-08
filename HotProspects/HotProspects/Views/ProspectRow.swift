@@ -10,14 +10,22 @@ import UserNotifications
 
 struct ProspectRow: View {
     let prospect: Prospect
+    let filterType: FilterType
     @EnvironmentObject var prospects: Prospects
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(prospect.name)
-                .font(.headline)
-            Text(prospect.emailAddress)
-                .foregroundColor(.secondary)
+        HStack {
+            VStack(alignment: .leading) {
+                Text(prospect.name)
+                    .font(.headline)
+                Text(prospect.emailAddress)
+                    .foregroundColor(.secondary)
+            }
+            if prospect.isContacted && filterType == .none {
+                Spacer()
+                Image(systemName: "checkmark")
+                    .font(.title)
+            }
         }
         .contextMenu {
             Button(prospect.isContacted ? "Mark Uncontacted" : "Mark Contacted") {
@@ -32,6 +40,7 @@ struct ProspectRow: View {
     }
 }
 
+// MARK: Functions
 extension ProspectRow {
     func addNotification(for prospect: Prospect) {
         let center = UNUserNotificationCenter.current()
@@ -71,6 +80,8 @@ extension ProspectRow {
 
 struct ProspectRow_Previews: PreviewProvider {
     static var previews: some View {
-        ProspectRow(prospect: Prospect())
+        let test = Prospect(name: "test name", emailAddress: "some@email.com")
+        test.toggleContacted()
+        return ProspectRow(prospect: test, filterType: .none)
     }
 }

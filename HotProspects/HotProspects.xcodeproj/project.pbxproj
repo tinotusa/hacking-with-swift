@@ -11,6 +11,8 @@
 		2172B9ED261D7779008CC57E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2172B9EC261D7779008CC57E /* ContentView.swift */; };
 		2172B9EF261D777A008CC57E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172B9EE261D777A008CC57E /* Assets.xcassets */; };
 		2172B9F2261D777A008CC57E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2172B9F1261D777A008CC57E /* Preview Assets.xcassets */; };
+		21A8901B261E7640000B9860 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A8901A261E7640000B9860 /* FilterType.swift */; };
+		21AE169D261E7F67003F89F3 /* FileManager-DocumentsURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AE169C261E7F67003F89F3 /* FileManager-DocumentsURL.swift */; };
 		21AEF964261D964400A300B3 /* ProspectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AEF963261D964400A300B3 /* ProspectRow.swift */; };
 		21AEF969261DA94400A300B3 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 21AEF968261DA94400A300B3 /* CodeScanner */; };
 		21AEF96D261DAD8F00A300B3 /* Prospects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AEF96C261DAD8F00A300B3 /* Prospects.swift */; };
@@ -26,6 +28,8 @@
 		2172B9EE261D777A008CC57E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2172B9F1261D777A008CC57E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2172B9F3261D777A008CC57E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21A8901A261E7640000B9860 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
+		21AE169C261E7F67003F89F3 /* FileManager-DocumentsURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsURL.swift"; sourceTree = "<group>"; };
 		21AEF963261D964400A300B3 /* ProspectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectRow.swift; sourceTree = "<group>"; };
 		21AEF96C261DAD8F00A300B3 /* Prospects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospects.swift; sourceTree = "<group>"; };
 		21B6D00B261D8E1700249E05 /* ProspectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsView.swift; sourceTree = "<group>"; };
@@ -64,6 +68,7 @@
 		2172B9E9261D7779008CC57E /* HotProspects */ = {
 			isa = PBXGroup;
 			children = (
+				21AE169B261E7F59003F89F3 /* Extensions */,
 				21AEF962261D963800A300B3 /* Views */,
 				21B6D012261D90F700249E05 /* Models */,
 				21B6D011261D90E500249E05 /* Screens */,
@@ -83,11 +88,18 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		21AE169B261E7F59003F89F3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				21AE169C261E7F67003F89F3 /* FileManager-DocumentsURL.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		21AEF962261D963800A300B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				21AEF963261D964400A300B3 /* ProspectRow.swift */,
-				21AEF96C261DAD8F00A300B3 /* Prospects.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -106,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				21B6D013261D910500249E05 /* Prospect.swift */,
+				21AEF96C261DAD8F00A300B3 /* Prospects.swift */,
+				21A8901A261E7640000B9860 /* FilterType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,7 +201,9 @@
 			files = (
 				21AEF96D261DAD8F00A300B3 /* Prospects.swift in Sources */,
 				21B6D00F261D8E2400249E05 /* MeView.swift in Sources */,
+				21AE169D261E7F67003F89F3 /* FileManager-DocumentsURL.swift in Sources */,
 				21B6D014261D910500249E05 /* Prospect.swift in Sources */,
+				21A8901B261E7640000B9860 /* FilterType.swift in Sources */,
 				21B6D00C261D8E1700249E05 /* ProspectsView.swift in Sources */,
 				21AEF964261D964400A300B3 /* ProspectRow.swift in Sources */,
 				2172B9ED261D7779008CC57E /* ContentView.swift in Sources */,
