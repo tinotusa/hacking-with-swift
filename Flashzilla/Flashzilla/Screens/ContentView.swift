@@ -10,12 +10,13 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.accessibilityDifferentiateWithoutColor) var differentiateWithoutColor
     @Environment(\.accessibilityEnabled) var accessibilityEnabled
+    
     @State private var cards = [Card]()
     @State private var timeRemaining = 100
     @State private var isActive = true
     @State private var showingEditScreen = true
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
@@ -25,29 +26,11 @@ struct ContentView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack {
-                Text("Time: \(timeRemaining)")
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 5)
-                    .background(
-                        Capsule()
-                            .fill(Color.black)
-                            .opacity(0.75)
-                    )
-                ZStack {
-                    ForEach(0..<cards.count, id: \.self) { index in
-                        CardView(card: cards[index]) {
-                           withAnimation {
-                               removeCard(at: index)
-                           }
-                        }
-                        .stacked(at: index, in: cards.count)
-                        .allowsHitTesting(index == cards.count - 1)
-                        .accessibility(hidden: index < cards.count - 1)
-                    }
-                }
-                .allowsHitTesting(timeRemaining > 0)
+                TimeView(time: $timeRemaining)
+                
+                StackedCards(cards: cards, removal: removeCard)
+                    .allowsHitTesting(timeRemaining > 0)
+                
                 if cards.isEmpty {
                     Button("Start again", action: resetCards)
                         .padding()
@@ -56,59 +39,14 @@ struct ContentView: View {
                         .clipShape(Capsule())
                 }
             }
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: { showingEditScreen = true }) {
-                        Image(systemName: "plus.circle")
-                            .padding()
-                            .background(Color.black.opacity(0.7))
-                            .clipShape(Circle())
-                    }
-                }
-                Spacer()
-            }
-            .foregroundColor(.white)
-            .font(.largeTitle)
-            .padding()
+            
+            FloatingButton(action: { showingEditScreen = true })
+            
             if differentiateWithoutColor || accessibilityEnabled {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Button(action: {
-                            withAnimation {
-                                removeCard(at: cards.count - 1)
-                            }
-                        }) {
-                            Image(systemName: "xmark.circle")
-                                .blackCircleImage()
-                        }
-                        .accessibility(label: Text("Wrong"))
-                        .accessibility(hint: Text("Mark your answer as being incorrect."))
-                        Spacer()
-                        Button(action: {
-                            withAnimation {
-                                removeCard(at: cards.count - 1)
-                            }
-                        }) {
-                            Image(systemName: "checkmark.circle")
-                                .blackCircleImage()
-                        }
-                        .accessibility(label: Text("Correct"))
-                        .accessibility(hint: Text("Mark your answer as being correct."))
-                    }
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
-                    .padding()
-                }
+                AccessibilityButtons(cards: cards, removal: removeCard)
             }
         }
-        .onReceive(timer) { time in
-            guard isActive else { return }
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            }
-        }
+        .onReceive(timer, perform: updateTime)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             isActive = false
         }
@@ -124,25 +62,10 @@ struct ContentView: View {
     }
 }
 
-struct BlackCircleImage: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .background(Color.black.opacity(0.7))
-            .clipShape(Circle())
-    }
-}
-
-extension View {
-    func blackCircleImage() -> some View {
-        self.modifier(BlackCircleImage())
-    }
-}
-
 // MARK: Functions
 extension ContentView {
     func removeCard(at index: Int) {
-        guard index >= 0 else { return }
+        if index < 0 { return }
         cards.remove(at: index)
         if cards.isEmpty {
             isActive = false
@@ -150,7 +73,6 @@ extension ContentView {
     }
     
     func resetCards() {
-        cards = [Card](repeating: Card.example, count: 10)
         timeRemaining = 100
         isActive = true
         loadData()
@@ -163,12 +85,12 @@ extension ContentView {
             }
         }
     }
-}
-
-extension View {
-    func stacked(at position: Int, in total: Int) -> some View {
-        let offset = CGFloat(total - position)
-        return self.offset(CGSize(width: 0, height: offset * 10))
+    
+    func updateTime(date: Date) {
+        if !isActive { return }
+        if timeRemaining > 0 {
+            timeRemaining -= 1
+        }
     }
 }
 
