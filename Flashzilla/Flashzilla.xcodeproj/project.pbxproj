@@ -20,6 +20,7 @@
 		21B81031261FD0F900CB3172 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B81030261FD0F900CB3172 /* FloatingButton.swift */; };
 		21B81034261FD24700CB3172 /* AccessibilityButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B81033261FD24700CB3172 /* AccessibilityButtons.swift */; };
 		21B81038261FD29600CB3172 /* View-Stacked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B81037261FD29600CB3172 /* View-Stacked.swift */; };
+		21FF451E261FED40002D27C3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FF451D261FED40002D27C3 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		21B81030261FD0F900CB3172 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		21B81033261FD24700CB3172 /* AccessibilityButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityButtons.swift; sourceTree = "<group>"; };
 		21B81037261FD29600CB3172 /* View-Stacked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Stacked.swift"; sourceTree = "<group>"; };
+		21FF451D261FED40002D27C3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				21AE16AD261E8224003F89F3 /* ContentView.swift */,
 				212B6264261EF2CD00A0C2AC /* EditCards.swift */,
+				21FF451D261FED40002D27C3 /* Settings.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				21B81038261FD29600CB3172 /* View-Stacked.swift in Sources */,
 				21B8102B261FCC6C00CB3172 /* TimeView.swift in Sources */,
 				21AE16BE261EA1B6003F89F3 /* Card.swift in Sources */,
+				21FF451E261FED40002D27C3 /* Settings.swift in Sources */,
 				21AE16C2261EA1FF003F89F3 /* CardView.swift in Sources */,
 				21B81034261FD24700CB3172 /* AccessibilityButtons.swift in Sources */,
 				212B6265261EF2CD00A0C2AC /* EditCards.swift in Sources */,

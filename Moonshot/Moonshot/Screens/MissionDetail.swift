@@ -27,16 +27,18 @@ struct MissionDetail: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        GeometryReader { fullGeometry in
             ScrollView(.vertical) {
                 VStack {
-                    Image(decorative: mission.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: geometry.size.width * 0.7)
-                        .padding(.top)
-                        .accessibility(hidden: true)
-                    
+                    GeometryReader { iamgeGeometry in
+                        Image(decorative: mission.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: fullGeometry.size.width)
+                            .scaleEffect(scaleFactor(parent: fullGeometry, child: iamgeGeometry))
+                            .padding(.top)
+                            .accessibility(hidden: true)
+                    }
                     Text("Launch date: \(mission.formattedLaunchDate)")
                     
                     Text(mission.description)
@@ -63,6 +65,12 @@ struct MissionDetail: View {
     struct CrewMember {
         let role: String
         let astronaut: Astronaut
+    }
+}
+
+extension MissionDetail {
+    func scaleFactor(parent: GeometryProxy, child: GeometryProxy) -> CGFloat {
+        return max(0.8, min(1.1, child.frame(in: .global).maxY / (parent.size.height * 0.3)))
     }
 }
 

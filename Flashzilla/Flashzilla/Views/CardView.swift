@@ -10,7 +10,7 @@ import SwiftUI
 struct CardView: View {
     let card: Card
     var removal: (() -> Void)? = nil
-
+    
     @State private var isShowingAnswer = false
     @State private var offset = CGSize.zero
     @State private var feedback = UINotificationFeedbackGenerator()

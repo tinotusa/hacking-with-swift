@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct StackedCards: View {
-    let cards: [Card]
+    var cards: [Card]
     let removal: ((Int) -> Void)?
     
     var body: some View {
         ZStack {
             ForEach(0..<cards.count, id: \.self) { index in
                 CardView(card: cards[index]) {
-                   withAnimation {
-                       removal?(index)
-                   }
+                    withAnimation {
+                        removal?(index)
+                    }
                 }
                 .stacked(at: index, in: cards.count)
                 .allowsHitTesting(index == cards.count - 1)

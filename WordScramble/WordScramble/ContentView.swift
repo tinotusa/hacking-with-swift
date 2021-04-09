@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var usedWords = [String]()
+    @State private var usedWords = [String](repeating: "testing", count: 20)
     @State private var rootWord = ""
     @State private var newWord = ""
     @State private var score = 0
@@ -19,25 +19,33 @@ struct ContentView: View {
     @State private var errorMessage = ""
     
     var body: some View {
-        NavigationView {
-            VStack {
-                TextField("Enter your word", text: $newWord, onCommit: addNewWord)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .autocapitalization(.none)
-                    .padding()
-                
-                List(usedWords, id: \.self) { word in
-                    HStack {
-                        Image(systemName: "\(word.count).circle")
-                        Text(word)
+        
+            NavigationView {
+                VStack {
+                    TextField("Enter your word", text: $newWord, onCommit: addNewWord)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .autocapitalization(.none)
+                        .padding()
+                    GeometryReader { geometry in
+                    List(usedWords, id: \.self) { word in
+                        GeometryReader { geo in
+                            HStack {
+                                Image(systemName: "\(word.count).circle")
+                                Text(word)
+                            }
+                            .offset(
+                                x: getOffset(listGeometry: geometry, itemGeometry: geo),
+                                y: 0
+                            )
+                        }
+                        .accessibilityElement(children: .ignore)
+                        .accessibility(label: Text("\(word), \(word.count) letters"))
                     }
-                    .accessibilityElement(children: .ignore)
-                    .accessibility(label: Text("\(word), \(word.count) letters"))
+                    Text("Score: \(score)")
                 }
-                Text("Score: \(score)")
             }
             .navigationBarTitle(rootWord)
-                        .onAppear(perform: startGame)
+            .onAppear(perform: startGame)
             .navigationBarItems(leading:
                 Button(action: startGame) {
                     Text("Restart")
@@ -54,6 +62,14 @@ struct ContentView: View {
 
 // MARK: functions
 extension ContentView {
+    func getOffset(listGeometry: GeometryProxy, itemGeometry: GeometryProxy) -> CGFloat {
+        let itemMaxY = itemGeometry.frame(in: .global).maxY
+        let listWidth = listGeometry.size.width
+        let itemWidth = itemGeometry.size.width * 3
+        
+        return max(0, itemMaxY / listWidth * itemMaxY - itemWidth)
+    }
+    
     func addNewWord() {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         
@@ -90,6 +106,8 @@ extension ContentView {
         let allWords = startWords.components(separatedBy: "\n")
         rootWord =  allWords.randomElement() ?? "silkworm"
         usedWords.removeAll()
+        // MARK: REMOVE ME
+        usedWords = [String](repeating: "testing", count: 20)
         score = 0
     }
     

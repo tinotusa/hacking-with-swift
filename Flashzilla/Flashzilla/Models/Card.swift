@@ -15,6 +15,13 @@ struct Card: Codable {
 
 extension Card: Identifiable { }
 
+extension Card: CustomStringConvertible {
+    var description: String {
+        "\(prompt) \(answer)\n"
+    }
+}
+
 extension Card {
     static var example = Card(prompt: "What is the capital of Australia?", answer: "Canberra")
 }
+

@@ -8,28 +8,60 @@
 import SwiftUI
 
 struct FloatingButton: View {
+    enum Position {
+        case topLeading, topTrailing
+        case bottomLeading, bottomTrailing
+    }
+    
+    let image: Image
+    let position: Position
     let action: () -> Void
+
+    init(image: Image, position: Position = .bottomTrailing, action: @escaping () -> Void) {
+        self.image = image
+        self.position = position
+        self.action = action
+    }
+    
     var body: some View {
         VStack {
-            HStack {
+            if position == .bottomLeading || position == .bottomTrailing {
                 Spacer()
-                Button(action: action) {
-                    Image(systemName: "plus.circle")
-                        .padding()
-                        .background(Color.black.opacity(0.7))
-                        .clipShape(Circle())
+            }
+            HStack {
+                switch position {
+                case .topLeading, .bottomLeading:
+                    button
+                    Spacer()
+                case .topTrailing, .bottomTrailing:
+                    Spacer()
+                    button
                 }
             }
-            Spacer()
+            if position == .topLeading || position == .topTrailing {
+                Spacer()
+            }
         }
         .foregroundColor(.white)
         .font(.largeTitle)
         .padding()
     }
+    
+    var button: some View {
+        Button(action: action) {
+            image
+                .padding()
+                .background(Color.black.opacity(0.7))
+                .clipShape(Circle())
+        }
+    }
 }
 
 struct FloatingButton_Previews: PreviewProvider {
     static var previews: some View {
-        FloatingButton(action: {})
+        FloatingButton(
+            image: Image(systemName: "plus.circle"),
+            position: .topLeading,
+            action: {})
     }
 }
