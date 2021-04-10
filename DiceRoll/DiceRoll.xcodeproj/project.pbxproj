@@ -7,19 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		210628F1262143AE00514FF1 /* Roll+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210628EF262143AE00514FF1 /* Roll+CoreDataClass.swift */; };
+		210628F2262143AE00514FF1 /* Roll+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210628F0262143AE00514FF1 /* Roll+CoreDataProperties.swift */; };
+		2111B2B22621392100A2DDB1 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2111B2B12621392100A2DDB1 /* Persistence.swift */; };
 		2165B009262115980049AD1E /* DiceRollApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B008262115980049AD1E /* DiceRollApp.swift */; };
 		2165B00B262115980049AD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B00A262115980049AD1E /* ContentView.swift */; };
 		2165B00D262115990049AD1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2165B00C262115990049AD1E /* Assets.xcassets */; };
 		2165B010262115990049AD1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2165B00F262115990049AD1E /* Preview Assets.xcassets */; };
+		2165B01B26212E3C0049AD1E /* DiceRoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B01A26212E3C0049AD1E /* DiceRoller.swift */; };
+		2165B01E26212E6C0049AD1E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B01D26212E6C0049AD1E /* SettingsView.swift */; };
+		2165B02126212E8C0049AD1E /* RollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B02026212E8C0049AD1E /* RollView.swift */; };
+		2165B02526212EA30049AD1E /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B02426212EA30049AD1E /* ResultsView.swift */; };
+		2165B02826212ECE0049AD1E /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B02726212ECE0049AD1E /* Tab.swift */; };
+		2165B02C262130D90049AD1E /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2165B02B262130D90049AD1E /* Dice.swift */; };
+		21E840712621362400E2F111 /* DiceRoll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21E8406F2621362400E2F111 /* DiceRoll.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		210628EF262143AE00514FF1 /* Roll+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Roll+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		210628F0262143AE00514FF1 /* Roll+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Roll+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		2111B2B12621392100A2DDB1 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2165B005262115980049AD1E /* DiceRoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiceRoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2165B008262115980049AD1E /* DiceRollApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollApp.swift; sourceTree = "<group>"; };
 		2165B00A262115980049AD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2165B00C262115990049AD1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2165B00F262115990049AD1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2165B011262115990049AD1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2165B01A26212E3C0049AD1E /* DiceRoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRoller.swift; sourceTree = "<group>"; };
+		2165B01D26212E6C0049AD1E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2165B02026212E8C0049AD1E /* RollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollView.swift; sourceTree = "<group>"; };
+		2165B02426212EA30049AD1E /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		2165B02726212ECE0049AD1E /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		2165B02B262130D90049AD1E /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
+		21E840702621362400E2F111 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +72,12 @@
 		2165B007262115980049AD1E /* DiceRoll */ = {
 			isa = PBXGroup;
 			children = (
+				21E840732621367E00E2F111 /* Core Data Classes */,
+				2165B01926212E270049AD1E /* Models */,
+				2165B01826212E1E0049AD1E /* Views */,
 				2165B008262115980049AD1E /* DiceRollApp.swift */,
-				2165B00A262115980049AD1E /* ContentView.swift */,
+				2111B2B12621392100A2DDB1 /* Persistence.swift */,
+				21E8406F2621362400E2F111 /* DiceRoll.xcdatamodeld */,
 				2165B00C262115990049AD1E /* Assets.xcassets */,
 				2165B011262115990049AD1E /* Info.plist */,
 				2165B00E262115990049AD1E /* Preview Content */,
@@ -67,6 +91,36 @@
 				2165B00F262115990049AD1E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2165B01826212E1E0049AD1E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2165B01D26212E6C0049AD1E /* SettingsView.swift */,
+				2165B00A262115980049AD1E /* ContentView.swift */,
+				2165B02026212E8C0049AD1E /* RollView.swift */,
+				2165B02426212EA30049AD1E /* ResultsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2165B01926212E270049AD1E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2165B01A26212E3C0049AD1E /* DiceRoller.swift */,
+				2165B02726212ECE0049AD1E /* Tab.swift */,
+				2165B02B262130D90049AD1E /* Dice.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		21E840732621367E00E2F111 /* Core Data Classes */ = {
+			isa = PBXGroup;
+			children = (
+				210628EF262143AE00514FF1 /* Roll+CoreDataClass.swift */,
+				210628F0262143AE00514FF1 /* Roll+CoreDataProperties.swift */,
+			);
+			path = "Core Data Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +193,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				2165B00B262115980049AD1E /* ContentView.swift in Sources */,
+				2165B02526212EA30049AD1E /* ResultsView.swift in Sources */,
+				210628F2262143AE00514FF1 /* Roll+CoreDataProperties.swift in Sources */,
+				2165B02C262130D90049AD1E /* Dice.swift in Sources */,
+				2165B01E26212E6C0049AD1E /* SettingsView.swift in Sources */,
+				2165B02126212E8C0049AD1E /* RollView.swift in Sources */,
+				21E840712621362400E2F111 /* DiceRoll.xcdatamodeld in Sources */,
 				2165B009262115980049AD1E /* DiceRollApp.swift in Sources */,
+				2165B01B26212E3C0049AD1E /* DiceRoller.swift in Sources */,
+				2111B2B22621392100A2DDB1 /* Persistence.swift in Sources */,
+				2165B02826212ECE0049AD1E /* Tab.swift in Sources */,
+				210628F1262143AE00514FF1 /* Roll+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +392,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		21E8406F2621362400E2F111 /* DiceRoll.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				21E840702621362400E2F111 /* Model.xcdatamodel */,
+			);
+			currentVersion = 21E840702621362400E2F111 /* Model.xcdatamodel */;
+			path = DiceRoll.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2165AFFD262115980049AD1E /* Project object */;
 }

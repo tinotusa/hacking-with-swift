@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct DiceRollApp: App {
+    let diceRoller = DiceRoller()
+    let persistentController = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(
+                    \.managedObjectContext,
+                    persistentController.container.viewContext
+                )
+                .environmentObject(diceRoller)
+                
         }
     }
 }
