@@ -7,19 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21731BB626296F2A00CA0BCC /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731BB526296F2A00CA0BCC /* SplashScreen.swift */; };
+		21731BB926296FD200CA0BCC /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731BB826296FD200CA0BCC /* MainScreen.swift */; };
+		21731BBC2629762600CA0BCC /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731BBB2629762600CA0BCC /* RoundedTextField.swift */; };
 		21A6C04C25EF701F00560D4B /* WeSplitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6C04B25EF701F00560D4B /* WeSplitApp.swift */; };
 		21A6C04E25EF701F00560D4B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A6C04D25EF701F00560D4B /* ContentView.swift */; };
 		21A6C05025EF702000560D4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A6C04F25EF702000560D4B /* Assets.xcassets */; };
 		21A6C05325EF702000560D4B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A6C05225EF702000560D4B /* Preview Assets.xcassets */; };
+		21DE8B23262997EE009F79EE /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DE8B22262997EE009F79EE /* CustomSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21731BB126296CC300CA0BCC /* SignPainter.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignPainter.ttc; sourceTree = "<group>"; };
+		21731BB526296F2A00CA0BCC /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		21731BB826296FD200CA0BCC /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		21731BBB2629762600CA0BCC /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		21A6C04825EF701F00560D4B /* WeSplit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeSplit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A6C04B25EF701F00560D4B /* WeSplitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeSplitApp.swift; sourceTree = "<group>"; };
 		21A6C04D25EF701F00560D4B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		21A6C04F25EF702000560D4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21A6C05225EF702000560D4B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21A6C05425EF702000560D4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21DE8B22262997EE009F79EE /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21731BB326296F1000CA0BCC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				21731BBB2629762600CA0BCC /* RoundedTextField.swift */,
+				21DE8B22262997EE009F79EE /* CustomSlider.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		21731BB426296F1700CA0BCC /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				21731BB526296F2A00CA0BCC /* SplashScreen.swift */,
+				21731BB826296FD200CA0BCC /* MainScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		21A6C03F25EF701F00560D4B = {
 			isa = PBXGroup;
 			children = (
@@ -52,9 +79,12 @@
 		21A6C04A25EF701F00560D4B /* WeSplit */ = {
 			isa = PBXGroup;
 			children = (
+				21731BB426296F1700CA0BCC /* Screens */,
+				21731BB326296F1000CA0BCC /* Views */,
 				21A6C04B25EF701F00560D4B /* WeSplitApp.swift */,
 				21A6C04D25EF701F00560D4B /* ContentView.swift */,
 				21A6C04F25EF702000560D4B /* Assets.xcassets */,
+				21731BB126296CC300CA0BCC /* SignPainter.ttc */,
 				21A6C05425EF702000560D4B /* Info.plist */,
 				21A6C05125EF702000560D4B /* Preview Content */,
 			);
@@ -138,7 +168,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21731BB926296FD200CA0BCC /* MainScreen.swift in Sources */,
+				21DE8B23262997EE009F79EE /* CustomSlider.swift in Sources */,
+				21731BB626296F2A00CA0BCC /* SplashScreen.swift in Sources */,
 				21A6C04E25EF701F00560D4B /* ContentView.swift in Sources */,
+				21731BBC2629762600CA0BCC /* RoundedTextField.swift in Sources */,
 				21A6C04C25EF701F00560D4B /* WeSplitApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
