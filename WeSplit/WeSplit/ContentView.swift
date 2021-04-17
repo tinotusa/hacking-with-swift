@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-// MARK: - TODO
-// fix geometry reader layouts
-
 struct ContentView: View {
     @State private var showingSplash = true
     

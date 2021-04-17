@@ -13,49 +13,55 @@ struct CustomSlider: View {
     let range: ClosedRange<Int>
     @Binding var value: Int
     
+    let knobSize = CGFloat(30)
+    
     var body: some View {
         GeometryReader { proxy in
-            ZStack {
+            ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(Color("slider"))
-                    .frame(width: proxyWidth(proxy), height: 10)
+                    .frame(height: knobSize * (1 / 3.0))
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                 
                 Circle()
                     .fill(Color("orange"))
-                    .frame(width: 30, height: 30)
+                    .frame(width: knobSize, height: knobSize)
                     .offset(x: currentPosition.width)
                     .gesture(
                         DragGesture()
                             .onChanged { value in
-                                let width = clamp(value.translation.width + newPosition.width,
-                                                  from: -proxyWidth(proxy) / 2, to: proxyWidth(proxy) / 2)
-                                setValue(width: width, proxy: proxy)
-                                currentPosition = CGSize(width: width, height: 0)
+                                updateCurrentPosition(dragValue: value, proxy: proxy)
+                                setValue(proxy: proxy)
                             }
                             .onEnded { value in
-                                let width = clamp(value.translation.width + newPosition.width,
-                                                  from: -proxyWidth(proxy) / 2, to: proxyWidth(proxy) / 2)
-                                setValue(width: width, proxy: proxy)
-                                currentPosition = CGSize(width: width, height: 0)
+                                updateCurrentPosition(dragValue: value, proxy: proxy)
+                                setValue(proxy: proxy)
                                 newPosition = currentPosition
                             }
                     )
             }
         }
-        .frame(maxHeight: 30)
+        .frame(maxHeight: knobSize)
+    }
+}
+
+private extension CustomSlider {
+    func updateCurrentPosition(dragValue value: DragGesture.Value, proxy: GeometryProxy) {
+        let width = clamp(value.translation.width + newPosition.width,
+                          from: 0, to: maxWidth(proxy))
+        currentPosition = CGSize(width: width, height: 0)
     }
     
-    func proxyWidth(_ proxy: GeometryProxy) -> CGFloat {
-        proxy.size.width
+    func maxWidth(_ proxy: GeometryProxy) -> CGFloat {
+        proxy.size.width - knobSize
     }
     
-    private func setValue(width: CGFloat, proxy: GeometryProxy) {
-        let width = Int(width) + Int(proxyWidth(proxy)) / 2
-        let maxAllowed = range.last!
+    func setValue(proxy: GeometryProxy) {
+        let width = Int(currentPosition.width)
         let minAllowed = range.first!
+        let maxAllowed = range.last!
         let minRange = 0
-        let maxRange = Int(proxyWidth(proxy))
+        let maxRange = Int(maxWidth(proxy))
         value = (maxAllowed - minAllowed) * (width - minRange) / (maxRange - minRange) + minAllowed
     }
     
@@ -70,6 +76,7 @@ struct CustomSlider: View {
         return value
     }
 }
+
 struct CustomSlider_Previews: PreviewProvider {
     static var previews: some View {
         CustomSlider(range: 1...10, value: .constant(2))

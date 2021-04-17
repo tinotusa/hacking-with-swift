@@ -21,8 +21,8 @@ struct RoundedTextField: View {
         ZStack(alignment: .center) {
             Rectangle()
                 .fill(Color.white)
-                .frame(width: 300, height: 50)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
+
             Group {
                 if isEditing || !text.isEmpty{
                     Text("")
@@ -38,10 +38,10 @@ struct RoundedTextField: View {
                     self.isEditing = isEditing
                 }
             }
+            .font(.title)
+            .multilineTextAlignment(.center)
             .padding(.horizontal)
-            .frame(width: 300, height: 50)
         }
-        
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2155597F262A631F00DA1154 /* TotalCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2155597E262A631F00DA1154 /* TotalCard.swift */; };
+		21555983262A6A6300DA1154 /* LabeledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21555982262A6A6300DA1154 /* LabeledTextField.swift */; };
 		21731BB626296F2A00CA0BCC /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731BB526296F2A00CA0BCC /* SplashScreen.swift */; };
 		21731BB926296FD200CA0BCC /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731BB826296FD200CA0BCC /* MainScreen.swift */; };
 		21731BBC2629762600CA0BCC /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21731BBB2629762600CA0BCC /* RoundedTextField.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2155597E262A631F00DA1154 /* TotalCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCard.swift; sourceTree = "<group>"; };
+		21555982262A6A6300DA1154 /* LabeledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledTextField.swift; sourceTree = "<group>"; };
 		21731BB126296CC300CA0BCC /* SignPainter.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = SignPainter.ttc; sourceTree = "<group>"; };
 		21731BB526296F2A00CA0BCC /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		21731BB826296FD200CA0BCC /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
@@ -42,11 +46,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21555981262A6A4B00DA1154 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				21555982262A6A6300DA1154 /* LabeledTextField.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		21731BB326296F1000CA0BCC /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				21731BBB2629762600CA0BCC /* RoundedTextField.swift */,
 				21DE8B22262997EE009F79EE /* CustomSlider.swift */,
+				2155597E262A631F00DA1154 /* TotalCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -79,6 +92,7 @@
 		21A6C04A25EF701F00560D4B /* WeSplit */ = {
 			isa = PBXGroup;
 			children = (
+				21555981262A6A4B00DA1154 /* Modifiers */,
 				21731BB426296F1700CA0BCC /* Screens */,
 				21731BB326296F1000CA0BCC /* Views */,
 				21A6C04B25EF701F00560D4B /* WeSplitApp.swift */,
@@ -171,7 +185,9 @@
 				21731BB926296FD200CA0BCC /* MainScreen.swift in Sources */,
 				21DE8B23262997EE009F79EE /* CustomSlider.swift in Sources */,
 				21731BB626296F2A00CA0BCC /* SplashScreen.swift in Sources */,
+				21555983262A6A6300DA1154 /* LabeledTextField.swift in Sources */,
 				21A6C04E25EF701F00560D4B /* ContentView.swift in Sources */,
+				2155597F262A631F00DA1154 /* TotalCard.swift in Sources */,
 				21731BBC2629762600CA0BCC /* RoundedTextField.swift in Sources */,
 				21A6C04C25EF701F00560D4B /* WeSplitApp.swift in Sources */,
 			);

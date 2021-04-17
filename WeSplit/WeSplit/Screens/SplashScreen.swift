@@ -30,7 +30,6 @@ struct SplashScreen: View {
             .shadow(color: Color.black, radius: 8, x: 0, y: 8)
         }
         .font(.custom("SignPainter", size: 110))
-        
     }
 }
 

@@ -2,14 +2,9 @@
 Following tutorials from [Hacking with swift](hackingwithswift.com)
 
 ### Completed tutorial projects
-
-- [x] WeSplit
-- [x] Guess The Flag
-- [ ] BetterRest
-
-### Challenges
-
-- [x] Unit Conversion App
-- [ ] Rock paper scissors
+|Project               |Images                                              |                                                              |                                                     |
+|----------------------|----------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------|
+| ✅ Project 1 WeSplit | ![WeSplit splash](projectImages/WeSplit/splash.png)|  ![WeSplit main screen](projectImages/WeSplit/mainScreen.png)|![WeSplit demo run](projectImages/WeSplit/appRun.mp4)|
 
 ### Started on 03/03/21
+### Completed on 12/04/21
