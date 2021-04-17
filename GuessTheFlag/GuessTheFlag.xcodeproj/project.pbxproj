@@ -7,21 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21018DE9262AD8420069D731 /* CustomStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21018DE8262AD8420069D731 /* CustomStepper.swift */; };
+		21018DED262AD8D40069D731 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21018DEC262AD8D40069D731 /* SettingsModel.swift */; };
+		21018DF1262AE9D50069D731 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21018DF0262AE9D50069D731 /* GameScreen.swift */; };
+		212F43A1262AAFB200C00234 /* VarelaRound-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 212F439F262AAEE000C00234 /* VarelaRound-Regular.ttf */; };
+		212F43A9262AB26500C00234 /* CustomUnderline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212F43A8262AB26500C00234 /* CustomUnderline.swift */; };
+		212F43B6262AB73200C00234 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212F43B5262AB73200C00234 /* MenuButton.swift */; };
+		212F43B9262AC21E00C00234 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212F43B8262AC21E00C00234 /* SettingsScreen.swift */; };
+		212F43BD262AC71900C00234 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212F43BC262AC71900C00234 /* SettingsItem.swift */; };
+		212F43C0262ACBC600C00234 /* CustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212F43BF262ACBC600C00234 /* CustomToggle.swift */; };
+		2152F59C262AA45800AA1D30 /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152F59B262AA45800AA1D30 /* Splash.swift */; };
+		2152F5A2262AA8BC00AA1D30 /* MenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152F5A1262AA8BC00AA1D30 /* MenuScreen.swift */; };
 		217FED7425F0F7CB009EE351 /* GuessTheFlagApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FED7325F0F7CB009EE351 /* GuessTheFlagApp.swift */; };
 		217FED7625F0F7CB009EE351 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FED7525F0F7CB009EE351 /* ContentView.swift */; };
 		217FED7825F0F7CE009EE351 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 217FED7725F0F7CE009EE351 /* Assets.xcassets */; };
 		217FED7B25F0F7CE009EE351 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 217FED7A25F0F7CE009EE351 /* Preview Assets.xcassets */; };
-		2191DB8325F213110007819E /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2191DB8225F213110007819E /* FlagView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21018DE8262AD8420069D731 /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
+		21018DEC262AD8D40069D731 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		21018DF0262AE9D50069D731 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+		212F439F262AAEE000C00234 /* VarelaRound-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VarelaRound-Regular.ttf"; sourceTree = "<group>"; };
+		212F43A8262AB26500C00234 /* CustomUnderline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnderline.swift; sourceTree = "<group>"; };
+		212F43B5262AB73200C00234 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		212F43B8262AC21E00C00234 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		212F43BC262AC71900C00234 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
+		212F43BF262ACBC600C00234 /* CustomToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggle.swift; sourceTree = "<group>"; };
+		2152F59B262AA45800AA1D30 /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
+		2152F5A1262AA8BC00AA1D30 /* MenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScreen.swift; sourceTree = "<group>"; };
 		217FED7025F0F7CB009EE351 /* GuessTheFlag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessTheFlag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		217FED7325F0F7CB009EE351 /* GuessTheFlagApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessTheFlagApp.swift; sourceTree = "<group>"; };
 		217FED7525F0F7CB009EE351 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		217FED7725F0F7CE009EE351 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		217FED7A25F0F7CE009EE351 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		217FED7C25F0F7CE009EE351 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2191DB8225F213110007819E /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +55,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21018DEB262AD8CB0069D731 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				21018DEC262AD8D40069D731 /* SettingsModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		212F43A3262AAFE100C00234 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				212F439F262AAEE000C00234 /* VarelaRound-Regular.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		212F43A7262AB25400C00234 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				212F43A8262AB26500C00234 /* CustomUnderline.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		212F43B4262AB72900C00234 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				212F43B5262AB73200C00234 /* MenuButton.swift */,
+				212F43BC262AC71900C00234 /* SettingsItem.swift */,
+				212F43BF262ACBC600C00234 /* CustomToggle.swift */,
+				21018DE8262AD8420069D731 /* CustomStepper.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2152F59A262AA44D00AA1D30 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2152F59B262AA45800AA1D30 /* Splash.swift */,
+				2152F5A1262AA8BC00AA1D30 /* MenuScreen.swift */,
+				212F43B8262AC21E00C00234 /* SettingsScreen.swift */,
+				21018DF0262AE9D50069D731 /* GameScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		217FED6725F0F7CB009EE351 = {
 			isa = PBXGroup;
 			children = (
@@ -54,9 +120,13 @@
 		217FED7225F0F7CB009EE351 /* GuessTheFlag */ = {
 			isa = PBXGroup;
 			children = (
+				21018DEB262AD8CB0069D731 /* Model */,
+				212F43B4262AB72900C00234 /* Views */,
+				212F43A7262AB25400C00234 /* Modifiers */,
+				212F43A3262AAFE100C00234 /* Resources */,
+				2152F59A262AA44D00AA1D30 /* Screens */,
 				217FED7325F0F7CB009EE351 /* GuessTheFlagApp.swift */,
 				217FED7525F0F7CB009EE351 /* ContentView.swift */,
-				2191DB8225F213110007819E /* FlagView.swift */,
 				217FED7725F0F7CE009EE351 /* Assets.xcassets */,
 				217FED7C25F0F7CE009EE351 /* Info.plist */,
 				217FED7925F0F7CE009EE351 /* Preview Content */,
@@ -131,6 +201,7 @@
 			files = (
 				217FED7B25F0F7CE009EE351 /* Preview Assets.xcassets in Resources */,
 				217FED7825F0F7CE009EE351 /* Assets.xcassets in Resources */,
+				212F43A1262AAFB200C00234 /* VarelaRound-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,9 +212,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21018DED262AD8D40069D731 /* SettingsModel.swift in Sources */,
+				2152F5A2262AA8BC00AA1D30 /* MenuScreen.swift in Sources */,
+				21018DF1262AE9D50069D731 /* GameScreen.swift in Sources */,
 				217FED7625F0F7CB009EE351 /* ContentView.swift in Sources */,
-				2191DB8325F213110007819E /* FlagView.swift in Sources */,
+				212F43C0262ACBC600C00234 /* CustomToggle.swift in Sources */,
+				212F43B9262AC21E00C00234 /* SettingsScreen.swift in Sources */,
+				212F43B6262AB73200C00234 /* MenuButton.swift in Sources */,
+				212F43A9262AB26500C00234 /* CustomUnderline.swift in Sources */,
+				2152F59C262AA45800AA1D30 /* Splash.swift in Sources */,
+				21018DE9262AD8420069D731 /* CustomStepper.swift in Sources */,
 				217FED7425F0F7CB009EE351 /* GuessTheFlagApp.swift in Sources */,
+				212F43BD262AC71900C00234 /* SettingsItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

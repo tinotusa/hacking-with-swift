@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct GuessTheFlagApp: App {
+    @StateObject var settingsModel = SettingsModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(settingsModel)
         }
     }
 }
