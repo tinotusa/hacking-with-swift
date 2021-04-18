@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
-// MARK: - TODO
-// add a close button that goes back to the main menu
-// implement hint ui and functionality
 
 struct GameScreen: View {
     @EnvironmentObject var settingsModel: SettingsModel
-    
+    @Environment(\.presentationMode) var presentationMode
+
     @State private var countries = [
         "Estonia", "France", "Germany", "Ireland", "Italy", "Monaco",
         "Nigeria", "Poland", "Russia", "Spain", "UK", "US",
@@ -23,41 +21,37 @@ struct GameScreen: View {
     @State private var score = 0
     @State private var isCorrect = false
     @State private var gameOver = false
-    
+    @State private var hintChoice = 0
+    @State private var showingHint = false
+
     var body: some View {
         ZStack {
+            NavigationLink(destination: GameOverScreen(score: score), isActive: $gameOver) { EmptyView() }
+            GeometryReader { proxy in
             background
-            
-            NavigationLink(destination: Text("Game over"), isActive: $gameOver) { EmptyView() }
-            
-            VStack {
-                Text("Tap the flag of")
-                    .font(.custom("Varela Round", size: 40))
-                    .foregroundColor(Color("pink"))
-                
-                Text(choices[correctAnswer])
-                    .font(.custom("Varela Round", size: 60))
-                    .foregroundColor(Color("green"))
-                
-                VStack(spacing: 30) {
-                    imageButtons
-                }
-                
-                Spacer()
-                
-                HStack {
-                    Text("score: \(score)/\(settingsModel.numberOfQuestions)")
+                VStack(spacing: 20) {
                     Spacer()
-                    Text("hint")
+                    Text("Tap the flag of")
+                        .font(.custom("Varela Round", size: proxy.size.width * 0.1))
+                        .foregroundColor(Color("pink"))
+                    
+                    Text(choices[correctAnswer])
+                        .font(.custom("Varela Round", size: proxy.size.width * 0.15))
+                        .foregroundColor(Color("green"))
+                    
+                    imageButtons
+                        .frame(width: proxy.size.width * 0.8, height: proxy.size.width * 0.35)
+                    
+                    HStack(alignment: .bottom) {
+                        scoreLabel
+                        Spacer()
+                        hintButton
+                    }
+                    .padding(.horizontal)
+                    
+                    Spacer()
                 }
             }
-            .padding()
-            
-//            if isCorrect {
-//                Text("CORRECT")
-//                    .font(.title)
-//                    .scaleEffect()
-//            }
         }
         .onAppear(perform: generateQuestion)
         .navigationBarHidden(true)
@@ -71,7 +65,6 @@ struct FlagView: View {
             .resizable()
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 5))
-            .frame(width: 320, height: 150)
             
     }
 }
@@ -88,21 +81,61 @@ private extension GameScreen {
                 .onTapGesture {
                     checkAnswer(answer: index)
                 }
+                .opacity(showingHint && index == hintChoice ? 0.2 : 1)
+                .colorMultiply(showingHint && index == hintChoice ? .red : .white)
         }
     }
     
+    var scoreLabel: some View {
+        VStack(spacing: 0) {
+            Text("Score")
+                .font(.custom("Varela Round", size: 35))
+                .foregroundColor(Color("green"))
+            Text("\(score) / \(settingsModel.numberOfQuestions)")
+                .font(.custom("Varela Round", size: 33))
+                .foregroundColor(Color("pink"))
+                .padding(6)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.white)
+                )
+        }
+    }
+    
+    var hintButton: some View {
+        Button(action: showHint) {
+            Text("Hint")
+                .font(.custom("Varela Round", size: 20))
+                .foregroundColor(Color("pink"))
+                .padding(22)
+                .background(Color.white)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                .padding(4)
+                .overlay(Circle().stroke(Color.white, lineWidth: 3))
+        }
+    }
+    
+    func showHint() {
+        // highlights one of the wrong choices
+        // leaving two others (one correct, one incorrect)
+        hintChoice = 0
+        repeat {
+            hintChoice = Int.random(in: 0 ..< choices.count)
+        } while hintChoice == correctAnswer
+        showingHint = true
+    }
+
     func generateQuestion() {
         countries.shuffle()
         choices = Array(countries.prefix(3))
         correctAnswer = Int.random(in: 0..<choices.count)
+        showingHint = false
     }
     
     func checkAnswer(answer: Int) {
         if answer == correctAnswer {
             score += 1
-            isCorrect = true
-        } else {
-            isCorrect = false
         }
         if score == settingsModel.numberOfQuestions {
             gameOver = true

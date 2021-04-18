@@ -22,7 +22,7 @@ struct MenuScreen: View {
                     
                     VStack(spacing: 40) {
                         Text("Guess the flag")
-                            .font(.custom("Varela Round", size: 50))
+                            .font(.custom("Varela Round", size: proxy.size.width * 0.12))
                             .foregroundColor(Color("pink"))
                             .customUnderline()
                         
@@ -34,7 +34,7 @@ struct MenuScreen: View {
                                     height: proxy.size.height * heightPercentage
                                 )
                         }
-                        
+
                         NavigationLink(destination: SettingsScreen()) {
                             MenuButton("Settings", action: {})
                                 .disabled(true) // again, just want the navigation

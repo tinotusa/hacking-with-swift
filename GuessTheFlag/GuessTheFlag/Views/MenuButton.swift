@@ -26,10 +26,8 @@ struct MenuButton: View {
                 .font(.custom("Varela Round", size: 56))
                 .foregroundColor(Color("pink"))
         }
-        .cornerRadius(10)
+        .cornerRadius(31)
         .onTapGesture {
-            // MARK: TODO
-            // look up blink animation, this seems hacky
             withAnimation {
                 isPressed.toggle()
             }

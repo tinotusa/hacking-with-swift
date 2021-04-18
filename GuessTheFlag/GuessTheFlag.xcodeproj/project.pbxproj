@@ -22,6 +22,7 @@
 		217FED7625F0F7CB009EE351 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FED7525F0F7CB009EE351 /* ContentView.swift */; };
 		217FED7825F0F7CE009EE351 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 217FED7725F0F7CE009EE351 /* Assets.xcassets */; };
 		217FED7B25F0F7CE009EE351 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 217FED7A25F0F7CE009EE351 /* Preview Assets.xcassets */; };
+		218ADB95262BA9690066708C /* GameOverScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218ADB94262BA9690066708C /* GameOverScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		217FED7725F0F7CE009EE351 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		217FED7A25F0F7CE009EE351 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		217FED7C25F0F7CE009EE351 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		218ADB94262BA9690066708C /* GameOverScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				2152F5A1262AA8BC00AA1D30 /* MenuScreen.swift */,
 				212F43B8262AC21E00C00234 /* SettingsScreen.swift */,
 				21018DF0262AE9D50069D731 /* GameScreen.swift */,
+				218ADB94262BA9690066708C /* GameOverScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				21018DED262AD8D40069D731 /* SettingsModel.swift in Sources */,
 				2152F5A2262AA8BC00AA1D30 /* MenuScreen.swift in Sources */,
 				21018DF1262AE9D50069D731 /* GameScreen.swift in Sources */,
+				218ADB95262BA9690066708C /* GameOverScreen.swift in Sources */,
 				217FED7625F0F7CB009EE351 /* ContentView.swift in Sources */,
 				212F43C0262ACBC600C00234 /* CustomToggle.swift in Sources */,
 				212F43B9262AC21E00C00234 /* SettingsScreen.swift in Sources */,
