@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		212B523E262D2B73003C7FBA /* Splash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212B523D262D2B73003C7FBA /* Splash.swift */; };
+		212B5241262D2B88003C7FBA /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212B5240262D2B88003C7FBA /* GameScreen.swift */; };
 		21A66DDE25F5D7D900D1FDC3 /* WordScrambleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66DDD25F5D7D900D1FDC3 /* WordScrambleApp.swift */; };
 		21A66DE025F5D7D900D1FDC3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A66DDF25F5D7D900D1FDC3 /* ContentView.swift */; };
 		21A66DE225F5D7DA00D1FDC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A66DE125F5D7DA00D1FDC3 /* Assets.xcassets */; };
 		21A66DE525F5D7DA00D1FDC3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21A66DE425F5D7DA00D1FDC3 /* Preview Assets.xcassets */; };
 		21A66DEE25F6215A00D1FDC3 /* start.txt in Resources */ = {isa = PBXBuildFile; fileRef = 21A66DED25F6215A00D1FDC3 /* start.txt */; };
+		21C448EC262D410600C6C6A1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C448EB262D410600C6C6A1 /* Constants.swift */; };
+		21C448EF262D45DF00C6C6A1 /* ListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C448EE262D45DF00C6C6A1 /* ListRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		212B523D262D2B73003C7FBA /* Splash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splash.swift; sourceTree = "<group>"; };
+		212B5240262D2B88003C7FBA /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
 		21A66DDA25F5D7D900D1FDC3 /* WordScramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordScramble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21A66DDD25F5D7D900D1FDC3 /* WordScrambleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordScrambleApp.swift; sourceTree = "<group>"; };
 		21A66DDF25F5D7D900D1FDC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -22,6 +28,8 @@
 		21A66DE425F5D7DA00D1FDC3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21A66DE625F5D7DA00D1FDC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21A66DED25F6215A00D1FDC3 /* start.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.txt; sourceTree = "<group>"; };
+		21C448EB262D410600C6C6A1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		21C448EE262D45DF00C6C6A1 /* ListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +63,11 @@
 			isa = PBXGroup;
 			children = (
 				21A66DDD25F5D7D900D1FDC3 /* WordScrambleApp.swift */,
+				212B523D262D2B73003C7FBA /* Splash.swift */,
 				21A66DDF25F5D7D900D1FDC3 /* ContentView.swift */,
+				212B5240262D2B88003C7FBA /* GameScreen.swift */,
+				21C448EE262D45DF00C6C6A1 /* ListRow.swift */,
+				21C448EB262D410600C6C6A1 /* Constants.swift */,
 				21A66DE125F5D7DA00D1FDC3 /* Assets.xcassets */,
 				21A66DE625F5D7DA00D1FDC3 /* Info.plist */,
 				21A66DED25F6215A00D1FDC3 /* start.txt */,
@@ -142,7 +154,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C448EC262D410600C6C6A1 /* Constants.swift in Sources */,
 				21A66DE025F5D7D900D1FDC3 /* ContentView.swift in Sources */,
+				21C448EF262D45DF00C6C6A1 /* ListRow.swift in Sources */,
+				212B5241262D2B88003C7FBA /* GameScreen.swift in Sources */,
+				212B523E262D2B73003C7FBA /* Splash.swift in Sources */,
 				21A66DDE25F5D7D900D1FDC3 /* WordScrambleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

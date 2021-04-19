@@ -8,139 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @State private var usedWords = [String](repeating: "testing", count: 20)
-    @State private var rootWord = ""
-    @State private var newWord = ""
-    @State private var score = 0
-    
-    @State private var showingError = false
-    @State private var errorTitle = ""
-    @State private var errorMessage = ""
+    @State private var showingSplash = false
     
     var body: some View {
-        
-            NavigationView {
-                VStack {
-                    TextField("Enter your word", text: $newWord, onCommit: addNewWord)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .autocapitalization(.none)
-                        .padding()
-                    GeometryReader { geometry in
-                    List(usedWords, id: \.self) { word in
-                        GeometryReader { geo in
-                            HStack {
-                                Image(systemName: "\(word.count).circle")
-                                Text(word)
-                            }
-                            .offset(
-                                x: getOffset(listGeometry: geometry, itemGeometry: geo),
-                                y: 0
-                            )
-                        }
-                        .accessibilityElement(children: .ignore)
-                        .accessibility(label: Text("\(word), \(word.count) letters"))
-                    }
-                    Text("Score: \(score)")
-                }
-            }
-            .navigationBarTitle(rootWord)
-            .onAppear(perform: startGame)
-            .navigationBarItems(leading:
-                Button(action: startGame) {
-                    Text("Restart")
-                }
-            )
-            .alert(isPresented: $showingError) {
-                Alert(title: Text(errorTitle), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-            }
-        }
-    }
-    
-    
-}
-
-// MARK: functions
-extension ContentView {
-    func getOffset(listGeometry: GeometryProxy, itemGeometry: GeometryProxy) -> CGFloat {
-        let itemMaxY = itemGeometry.frame(in: .global).maxY
-        let listWidth = listGeometry.size.width
-        let itemWidth = itemGeometry.size.width * 3
-        
-        return max(0, itemMaxY / listWidth * itemMaxY - itemWidth)
-    }
-    
-    func addNewWord() {
-        let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        guard answer.count > 0 else {
-            return
-        }
-        
-        guard isOriginal(word: answer) else {
-            wordError(title: "Word used already", message: "Be more original")
-            return
-        }
-        guard isPossible(word: answer) else {
-            wordError(title: "Word not recognised", message: "You can't just make them up, you know?")
-            return
-        }
-        guard isReal(word: answer) else {
-            wordError(title: "Word not possible", message: "That isn't a real word (or it is the same as the root word or it is too short (less than 3 letters)")
-            return
-        }
-        
-        usedWords.insert(answer, at: 0)
-        score += answer.count
-        newWord = ""
-    }
-    
-    func startGame() {
-        let errorMessage = "Could not load start.txt from bundle."
-        guard let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") else {
-            fatalError(errorMessage)
-        }
-        guard let startWords = try? String(contentsOf: startWordsURL) else {
-            fatalError(errorMessage)
-        }
-        let allWords = startWords.components(separatedBy: "\n")
-        rootWord =  allWords.randomElement() ?? "silkworm"
-        usedWords.removeAll()
-        // MARK: REMOVE ME
-        usedWords = [String](repeating: "testing", count: 20)
-        score = 0
-    }
-    
-    func isOriginal(word: String) -> Bool {
-        !usedWords.contains(word)
-    }
-    
-    func isPossible(word: String) -> Bool {
-        var tempWord = word
-        for letter in word {
-            if let position = tempWord.firstIndex(of: letter) {
-                tempWord.remove(at: position)
+        Group {
+            if showingSplash {
+                Splash()
             } else {
-                return false
+                GameScreen()
             }
         }
-        return true
-    }
-    
-    func isReal(word: String) -> Bool {
-        if word.count < 3 || word == rootWord {
-            return false
+        .animation(.default)
+        .onAppear {
+            showingSplash = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                showingSplash = false
+            }
         }
-        let checker = UITextChecker()
-        let range = NSRange(location: 0, length: word.utf16.count)
-        let missspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
-        return missspelledRange.location == NSNotFound
-    }
-    
-    func wordError(title: String, message: String) {
-        errorTitle = title
-        errorMessage = message
-        showingError = true
     }
 }
 
