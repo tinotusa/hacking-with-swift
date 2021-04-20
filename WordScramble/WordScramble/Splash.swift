@@ -9,13 +9,16 @@ import SwiftUI
 
 struct Splash: View {
     var body: some View {
-        ZStack {
-            Constants.background
-                .ignoresSafeArea()
-            VStack {
-                BlockLetters("Word")
-                BlockLetters("Scrable")
+        GeometryReader { proxy in
+            ZStack {
+                Constants.background
+                    .ignoresSafeArea()
+                VStack {
+                    BlockLetters("Word")
+                    BlockLetters("Scrable")
+                }
             }
+            
         }
     }
 }
@@ -66,6 +69,7 @@ struct BlockLetter: View {
     }
     
     var body: some View {
+        
         ZStack {
             RoundedRectangle(cornerRadius: radius)
                 .overlay(blockGradient)

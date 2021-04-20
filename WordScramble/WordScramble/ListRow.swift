@@ -12,19 +12,19 @@ struct ListRow: View {
     let radius = CGFloat(18)
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: radius)
-                .fill(Color("darkBrown"))
-                .overlay(
-                    RoundedRectangle(cornerRadius: radius)
-                        .stroke(Color("lightBrown"), lineWidth: 4)
-                )
+//        ZStack {
+////            RoundedRectangle(cornerRadius: radius)
+////                .fill(Color("darkBrown"))
+////                .overlay(
+////                    RoundedRectangle(cornerRadius: radius)
+////                        .stroke(Color("lightBrown"), lineWidth: 4)
+////                )
             HStack {
                 Letters(word)
                 Spacer()
                 Letters("\(word.count)")
             }
-        }
+//        }
     }
     
     private struct Letters: View {

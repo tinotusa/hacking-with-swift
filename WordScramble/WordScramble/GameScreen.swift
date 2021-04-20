@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-// MARK: TODO
-// word checking has an problem
-// check other screen sizes
-
 struct GameScreen: View {
     @State private var usedWords = [String](repeating: "testing", count: 20)
     @State private var rootWord = ""
@@ -46,9 +42,8 @@ struct GameScreen: View {
                             .font(.custom("kefa", size: proxy.size.width * 0.09))
                             .foregroundColor(.white)
         
-                        usedWordsList
+                        usedWordsList(proxy: proxy)
                             .frame(width: proxy.size.width * 0.9)
-                            .animation(nil)
                     }
                 }
                 .blur(radius: showingError ? 6 : 0)
@@ -132,15 +127,11 @@ private extension GameScreen {
         .onAppear(perform:startGame)
     }
     
-    var usedWordsList: some View {
+    func usedWordsList(proxy: GeometryProxy) -> some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 22)
-                .fill(Color("darkBrown"))
-                .shadow(radius: 5)
             ScrollView {
                 ForEach(usedWords, id: \.self) { word in
                     ListRow(word: word)
-                        .frame(height: 70)
                         .padding(.horizontal)
                         .padding(.vertical, 3)
                 }
@@ -194,7 +185,7 @@ private extension GameScreen {
     }
     
     func isPossible(word: String) -> Bool {
-        var tempWord = word
+        var tempWord = rootWord
         for letter in word {
             if let position = tempWord.firstIndex(of: letter) {
                 tempWord.remove(at: position)
