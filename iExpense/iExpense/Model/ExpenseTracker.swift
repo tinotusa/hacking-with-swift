@@ -7,10 +7,21 @@
 
 import Foundation
 
-class ExpenseTracker: ObservableObject {
+class ExpenseTracker: ObservableObject, Codable {
     @Published var expenses = [ExpenseItem]()
     @Published var savings: Double = 0
     @Published var spending: Double = 0
+    
+    init() {
+        load()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        expenses = try container.decode([ExpenseItem].self, forKey: .expenses)
+        savings = try container.decode(Double.self, forKey: .savings)
+        spending = try container.decode(Double.self, forKey: .spending)
+    }
     
     func add(_ expense: ExpenseItem) {
         if expense.expenseType == .savings {
@@ -41,5 +52,53 @@ class ExpenseTracker: ObservableObject {
         }
 
         expenses.remove(at: index)
+    }
+
+    
+    
+    static let saveURL = FileManager.default.documentsURL().appendingPathComponent("expenses.data")
+    enum CodingKeys: CodingKey {
+        case expenses, savings, spending
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(expenses, forKey: .expenses)
+        try container.encode(savings, forKey: .savings)
+        try container.encode(spending, forKey: .spending)
+    }
+    
+    func save() {
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(self)
+            try data.write(to: Self.saveURL, options: .atomic)
+        } catch {
+            print("Error saving\n\(error)")
+        }
+    }
+    
+    func load() {
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: Self.saveURL)
+            let tempTracker = try decoder.decode(ExpenseTracker.self, from: data)
+            expenses = tempTracker.expenses
+            spending = tempTracker.spending
+            savings = tempTracker.savings
+        } catch CocoaError.fileReadNoSuchFile {
+            expenses = [ExpenseItem]()
+            spending = 0
+            savings = 0
+        } catch let error as NSError {
+            print("Error loading data\n\(error.domain)\n\(error.localizedDescription)")
+        }
+    }
+}
+
+extension FileManager {
+    func documentsURL() -> URL {
+        let urls = Self.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return urls.first!
     }
 }

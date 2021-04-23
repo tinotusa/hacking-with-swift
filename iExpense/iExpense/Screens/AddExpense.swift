@@ -13,7 +13,7 @@ struct AddExpense: View {
     
     @State private var amount = ""
     @State private var expenseType: ExpenseItem.ExpenseType = .personal
-    @State private var expenseUse: ExpenseItem.Use? = .shopping
+    @State private var expenseUse: ExpenseItem.Use? = nil
     @State private var invalidAmount = false
     
     var body: some View {
@@ -26,9 +26,10 @@ struct AddExpense: View {
                
                 expenseTypePicker
             
-                if expenseType == .personal {
-                    personalUsePicker
+                if expenseType != .savings {
+                    usePicker
                 }
+                
                 
                 addExpenseButton
             }
@@ -42,7 +43,7 @@ struct AddExpense: View {
 
 // MARK: - Helper properties
 private extension AddExpense {
-    var personalUsePicker: some View {
+    var usePicker: some View {
         VStack {
             Text("Used for")
             Picker("Used for", selection: $expenseUse) {
@@ -118,7 +119,7 @@ private extension AddExpense {
             dateAdded: Date()
         )
         expenseTracker.add(expense)
-        
+        expenseTracker.save()
         dismiss()
     }
     

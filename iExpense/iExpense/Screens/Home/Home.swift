@@ -32,8 +32,10 @@ struct Home: View {
     }
     
     var quote: String {
-        let index = Int.random(in: 0 ..< quotes.count)
-        return quotes[index]
+        let today = Date()
+        let components = Calendar.current.dateComponents(Set<Calendar.Component>(arrayLiteral: .day), from: today)
+        let day = components.day ?? 0
+        return quotes[day % (quotes.count - 1)]
     }
     
     var header: some View {
