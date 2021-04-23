@@ -24,7 +24,7 @@ struct ExpenseItem: Codable, Identifiable {
     
     var amount: Double
     var expenseType: ExpenseType
-    var expenseUse: Use? // might be just a business type
+    var expenseUse: Use?
     
     let id = UUID()
     var dateAdded = Date()

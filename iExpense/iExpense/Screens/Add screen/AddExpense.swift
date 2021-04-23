@@ -62,12 +62,12 @@ private extension AddExpense {
             Button(action: addExpense) {
                 Text("Add Expense")
                     .padding()
-                    .background(amount.isEmpty ? Color.red.opacity(0.6) : Color.red)
+                    .background(!allFormsFilled ? Color.red.opacity(0.6) : Color.red)
                     .animation(.easeIn)
             }
             Spacer()
         }
-        .disabled(amount.isEmpty)
+        .disabled(!allFormsFilled)
     }
     
     var amountTextField: some View {
@@ -99,6 +99,13 @@ private extension AddExpense {
             .pickerStyle(SegmentedPickerStyle())
         }
     }
+    
+    var allFormsFilled: Bool {
+        if expenseType == .savings {
+            return !amount.isEmpty
+        }
+        return !amount.isEmpty && expenseUse != nil
+    }
 }
 
 // MARK: - Functions
@@ -118,8 +125,8 @@ private extension AddExpense {
             expenseUse: expenseUse,
             dateAdded: Date()
         )
+        
         expenseTracker.add(expense)
-        expenseTracker.save()
         dismiss()
     }
     

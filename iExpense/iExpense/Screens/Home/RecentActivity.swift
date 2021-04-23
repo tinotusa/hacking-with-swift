@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RecentActivity: View {
     @EnvironmentObject var expenseTracker: ExpenseTracker
-    
     let radius: CGFloat = 23
     
     var body: some View {
@@ -19,9 +18,8 @@ struct RecentActivity: View {
                 .font(.subheadline)
             
             ZStack(alignment: .top) {
-            
                 roundedBackground
-
+                
                 if expenseTracker.expenses.isEmpty {
                     VStack {
                         Spacer()
@@ -30,26 +28,22 @@ struct RecentActivity: View {
                             .font(.largeTitle)
                         Spacer()
                     }
-                    
-                }
-                ScrollView(showsIndicators: false) {
-                    
-                    VStack {
-                        Spacer().frame(height: 10)
-                        ForEach(expenseTracker.expenses) { expense in
-                            ExpenseRow(expense: expense)
-//                                .padding(.bottom)
-                        }
-                        .onDelete(perform: { _ in })
-                    }
-                    
                 }
                 
-                .clipShape(RoundedRectangle(cornerRadius: radius))
+                ScrollView {
+                    VStack {
+                        Spacer()
+                        ForEach(expenseTracker.expenses) { expense in
+                            ExpenseRow(expense: expense)
+                                .padding(.horizontal)
+                        }
+                        .onDelete(perform: expenseTracker.remove)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: radius))
+                }
             }
+            .ignoresSafeArea(edges: .bottom)
         }
-        .ignoresSafeArea(edges: .bottom)
-        
     }
 }
 

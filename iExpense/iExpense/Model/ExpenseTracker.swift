@@ -8,6 +8,8 @@
 import Foundation
 
 class ExpenseTracker: ObservableObject, Codable {
+    static let saveURL = FileManager.default.documentsURL().appendingPathComponent("expenses.data")
+    
     @Published var expenses = [ExpenseItem]()
     @Published var savings: Double = 0
     @Published var spending: Double = 0
@@ -22,7 +24,10 @@ class ExpenseTracker: ObservableObject, Codable {
         savings = try container.decode(Double.self, forKey: .savings)
         spending = try container.decode(Double.self, forKey: .spending)
     }
-    
+}
+
+// MARK:- Functions
+extension ExpenseTracker {
     func add(_ expense: ExpenseItem) {
         if expense.expenseType == .savings {
             savings += expense.amount
@@ -30,13 +35,14 @@ class ExpenseTracker: ObservableObject, Codable {
             spending += expense.amount
         }
         expenses.append(expense)
+        save()
     }
     
-    func update(expense: ExpenseItem, to newItem: ExpenseItem) {
-        guard let index = expenses.firstIndex(where: { $0.id == expense.id }) else {
-            fatalError("Tried to update non-existent expense item")
+    func remove(atOffsets offsets: IndexSet) {
+        for index in offsets {
+            expenses.remove(at: index)
         }
-        expenses[index] = newItem
+        save()
     }
     
     func remove(_ expense: ExpenseItem) {
@@ -52,11 +58,13 @@ class ExpenseTracker: ObservableObject, Codable {
         }
 
         expenses.remove(at: index)
+        save()
     }
+}
 
+// MARK: Load and Save
+extension ExpenseTracker {
     
-    
-    static let saveURL = FileManager.default.documentsURL().appendingPathComponent("expenses.data")
     enum CodingKeys: CodingKey {
         case expenses, savings, spending
     }
@@ -93,12 +101,5 @@ class ExpenseTracker: ObservableObject, Codable {
         } catch let error as NSError {
             print("Error loading data\n\(error.domain)\n\(error.localizedDescription)")
         }
-    }
-}
-
-extension FileManager {
-    func documentsURL() -> URL {
-        let urls = Self.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return urls.first!
     }
 }
