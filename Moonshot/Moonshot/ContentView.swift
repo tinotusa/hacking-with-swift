@@ -8,22 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    let astronauts: [Astronaut] = Bundle.main.decode("astronauts.json")
-    let missions: [Mission] = Bundle.main.decode("missions.json")
-    @State private var showingDates = true
-    
     var body: some View {
-        NavigationView {
-            List(missions) { mission in
-                NavigationLink(destination: MissionDetail(mission: mission, astronauts: astronauts)) {
-                    MissionRow(mission: mission, showLaunchDates: showingDates)
-                }
-            }
-            .navigationBarTitle("Moonshot")
-            .navigationBarItems(trailing: Button("Show \(showingDates ? "Crew" : "Dates")") {
-                showingDates.toggle()
-            })
-        }
+        MissionView()
     }
 }
 
