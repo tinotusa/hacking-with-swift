@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var orderContainer = OrderContainer()
-    
     var body: some View {
-        NavigationView {
-            Home(orderContainer: orderContainer)
-                .navigationBarTitle("Cupcake Corner")
-        }
+        OrderSelection()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(Cart())
     }
 }

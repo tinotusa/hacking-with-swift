@@ -7,31 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21AE6622261333CC00E8E3D1 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AE6621261333CC00E8E3D1 /* NetworkManager.swift */; };
-		21CEC3782615852E00489FB1 /* OrderContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CEC3772615852E00489FB1 /* OrderContainer.swift */; };
-		21CEC37B261586AF00489FB1 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CEC37A261586AF00489FB1 /* Home.swift */; };
+		211F0AF8263426C4009F5DD3 /* OrderSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 211F0AF7263426C4009F5DD3 /* OrderSelection.swift */; };
+		213E0385263428670000196D /* CupcakeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213E0384263428670000196D /* CupcakeCard.swift */; };
+		213E038926342B8F0000196D /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213E038826342B8F0000196D /* Cart.swift */; };
+		213E0390263436120000196D /* ExtrasSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213E038F263436120000196D /* ExtrasSelection.swift */; };
 		21F40AC52611FDC30086B6D4 /* CupcakeCornerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F40AC42611FDC30086B6D4 /* CupcakeCornerApp.swift */; };
 		21F40AC72611FDC30086B6D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F40AC62611FDC30086B6D4 /* ContentView.swift */; };
 		21F40AC92611FDC50086B6D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21F40AC82611FDC50086B6D4 /* Assets.xcassets */; };
 		21F40ACC2611FDC50086B6D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21F40ACB2611FDC50086B6D4 /* Preview Assets.xcassets */; };
-		21F40AD62612129F0086B6D4 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F40AD52612129F0086B6D4 /* Order.swift */; };
-		21F40ADB261214C90086B6D4 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F40ADA261214C90086B6D4 /* Address.swift */; };
-		21F40ADF261218BB0086B6D4 /* Checkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F40ADE261218BB0086B6D4 /* Checkout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		21AE6621261333CC00E8E3D1 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		21CEC3772615852E00489FB1 /* OrderContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderContainer.swift; sourceTree = "<group>"; };
-		21CEC37A261586AF00489FB1 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		211F0AF7263426C4009F5DD3 /* OrderSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSelection.swift; sourceTree = "<group>"; };
+		213E0384263428670000196D /* CupcakeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCard.swift; sourceTree = "<group>"; };
+		213E038826342B8F0000196D /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		213E038F263436120000196D /* ExtrasSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasSelection.swift; sourceTree = "<group>"; };
 		21F40AC12611FDC30086B6D4 /* CupcakeCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CupcakeCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21F40AC42611FDC30086B6D4 /* CupcakeCornerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerApp.swift; sourceTree = "<group>"; };
 		21F40AC62611FDC30086B6D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		21F40AC82611FDC50086B6D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21F40ACB2611FDC50086B6D4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21F40ACD2611FDC50086B6D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21F40AD52612129F0086B6D4 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
-		21F40ADA261214C90086B6D4 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
-		21F40ADE261218BB0086B6D4 /* Checkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,12 +41,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		21AE6620261333BA00E8E3D1 /* Managers */ = {
+		211F0AFA263426DF009F5DD3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				21AE6621261333CC00E8E3D1 /* NetworkManager.swift */,
+				211F0AF7263426C4009F5DD3 /* OrderSelection.swift */,
+				213E0384263428670000196D /* CupcakeCard.swift */,
+				213E038F263436120000196D /* ExtrasSelection.swift */,
 			);
-			path = Managers;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		213E038726342B880000196D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				213E038826342B8F0000196D /* Cart.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		21F40AB82611FDC30086B6D4 = {
@@ -72,9 +78,8 @@
 		21F40AC32611FDC30086B6D4 /* CupcakeCorner */ = {
 			isa = PBXGroup;
 			children = (
-				21AE6620261333BA00E8E3D1 /* Managers */,
-				21F40AD9261214BE0086B6D4 /* screens */,
-				21F40AD4261212960086B6D4 /* model */,
+				213E038726342B880000196D /* Model */,
+				211F0AFA263426DF009F5DD3 /* Views */,
 				21F40AC42611FDC30086B6D4 /* CupcakeCornerApp.swift */,
 				21F40AC62611FDC30086B6D4 /* ContentView.swift */,
 				21F40AC82611FDC50086B6D4 /* Assets.xcassets */,
@@ -90,25 +95,6 @@
 				21F40ACB2611FDC50086B6D4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		21F40AD4261212960086B6D4 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				21F40AD52612129F0086B6D4 /* Order.swift */,
-				21CEC3772615852E00489FB1 /* OrderContainer.swift */,
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		21F40AD9261214BE0086B6D4 /* screens */ = {
-			isa = PBXGroup;
-			children = (
-				21F40ADA261214C90086B6D4 /* Address.swift */,
-				21F40ADE261218BB0086B6D4 /* Checkout.swift */,
-				21CEC37A261586AF00489FB1 /* Home.swift */,
-			);
-			path = screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,14 +166,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21AE6622261333CC00E8E3D1 /* NetworkManager.swift in Sources */,
-				21F40AD62612129F0086B6D4 /* Order.swift in Sources */,
 				21F40AC72611FDC30086B6D4 /* ContentView.swift in Sources */,
-				21F40ADF261218BB0086B6D4 /* Checkout.swift in Sources */,
-				21F40ADB261214C90086B6D4 /* Address.swift in Sources */,
+				211F0AF8263426C4009F5DD3 /* OrderSelection.swift in Sources */,
+				213E038926342B8F0000196D /* Cart.swift in Sources */,
+				213E0390263436120000196D /* ExtrasSelection.swift in Sources */,
+				213E0385263428670000196D /* CupcakeCard.swift in Sources */,
 				21F40AC52611FDC30086B6D4 /* CupcakeCornerApp.swift in Sources */,
-				21CEC37B261586AF00489FB1 /* Home.swift in Sources */,
-				21CEC3782615852E00489FB1 /* OrderContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

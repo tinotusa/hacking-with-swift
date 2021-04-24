@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct CupcakeCornerApp: App {
+    @StateObject var cart = Cart()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(cart)
         }
     }
 }
