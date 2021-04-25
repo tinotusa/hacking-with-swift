@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("hello world")
+        MenuView()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(Cart())
+            .environmentObject(OrderDetails())
+            .environmentObject(ShoppingCart())
     }
 }
