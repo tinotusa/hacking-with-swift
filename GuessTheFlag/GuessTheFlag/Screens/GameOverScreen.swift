@@ -65,7 +65,7 @@ private extension GameOverScreen {
 
 struct GameOverScreen_Previews: PreviewProvider {
     static var previews: some View {
-        GameOverScreen(score: 1)
+        GameOverScreen(score: 8)
             .environmentObject(SettingsModel())
     }
 }

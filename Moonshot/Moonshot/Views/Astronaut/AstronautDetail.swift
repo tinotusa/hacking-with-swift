@@ -24,7 +24,6 @@ struct AstronautDetail: View {
     var body: some View {
         ZStack {
             Constants.background
-                .ignoresSafeArea()
             
             ScrollView {
                 VStack(alignment: .leading) {

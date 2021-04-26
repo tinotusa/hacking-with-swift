@@ -25,9 +25,8 @@ struct AstronautProfile: View {
         self.astronaut = astronaut
         self.size = size
     }
-    
+
     var body: some View {
-    
         Image(astronaut.id)
             .resizable()
             .scaledToFill()

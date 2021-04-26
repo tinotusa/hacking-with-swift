@@ -8,14 +8,12 @@
 import SwiftUI
 
 class Favourites {
-    private var _resorts: Set<String>
+    private var _resorts: Set<String> = []
     private static var saveKey = "FavouritesSave"
     private static var saveURL = FileManager.default.documentsURL().appendingPathComponent(saveKey)
     
     init() {
-        _resorts = []
         load()
-        
     }
 }
 
@@ -66,8 +64,10 @@ extension Favourites {
         do {
             let data = try Data(contentsOf: Self.saveURL)
             _resorts = try decoder.decode(Set<String>.self, from: data)
+            return
         } catch {
             print(error)
         }
+        _resorts = []
     }
 }

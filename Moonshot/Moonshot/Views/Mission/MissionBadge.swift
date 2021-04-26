@@ -11,6 +11,11 @@ struct MissionBadge: View {
     let mission: Mission
     let size: Size
     
+    init(mission: Mission, size: Size = .medium) {
+        self.mission = mission
+        self.size = size
+    }
+    
     enum Size {
         case small, medium, large
     }
@@ -32,6 +37,6 @@ struct MissionBadge: View {
 }
 struct MissionBadge_Previews: PreviewProvider {
     static var previews: some View {
-        MissionBadge(mission: Constants.missions[0], size: .medium)
+        MissionBadge(mission: Constants.missions[0])
     }
 }

@@ -14,7 +14,7 @@ struct MissionView: View {
         NavigationView {
             ZStack {
                 Constants.background
-                    .ignoresSafeArea()
+                    
                 ScrollView(showsIndicators: false) {
                     apolloTitle
                     missionsList

@@ -15,16 +15,11 @@ struct MissionDetail: View {
     var body: some View {
         ZStack {
             background
-                .ignoresSafeArea()
             
             ScrollView {
-                HStack {
-                    backButton
-                    Spacer()
-                }
-                .padding(.horizontal)
+                backButton
+                
                 VStack(alignment: .center) {
-                    
                     
                     Text(mission.displayName)
                         .font(.largeTitle)
@@ -57,18 +52,22 @@ struct MissionDetail: View {
                 .resizable()
                 .scaledToFit()
                 .offset(x: 280)
-                
         }
+        .ignoresSafeArea()
     }
     
     var backButton: some View {
-        Button(action: dismiss) {
-            HStack {
-                Image(systemName: "chevron.left")
-                Text("Back")
+        HStack {
+            Button(action: dismiss) {
+                HStack {
+                    Image(systemName: "chevron.left")
+                    Text("Back")
+                }
+                .foregroundColor(.blue)
             }
-            .foregroundColor(.blue)
+            Spacer()
         }
+        .padding(.horizontal)
     }
     
     func dismiss() {

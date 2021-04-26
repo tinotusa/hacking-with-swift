@@ -13,6 +13,7 @@ struct Constants {
 
     static var background: some View {
         Color("darkGray")
+            .ignoresSafeArea()
     }
 }
 

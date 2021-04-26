@@ -16,10 +16,21 @@ struct ResortDetail: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Image(decorative: resort.id)
-                    .resizable()
-                    .scaledToFit()
-                
+                ZStack(alignment: .bottomTrailing) {
+                    Image(decorative: resort.id)
+                        .resizable()
+                        .scaledToFit()
+                        
+                    Text("Photo by: \(resort.imageCredit)")
+                        .font(.subheadline)
+                        .padding(5)
+                        .background(Color.black.opacity(0.4))
+                        .foregroundColor(Color(red: 225 / 255, green: 225 / 255, blue: 235/255))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding(5)
+                        
+                    
+                }
                 Group {
                     HStack {
                         if sizeClass == .compact {
@@ -67,6 +78,7 @@ extension ResortDetail {
     }
 }
 
+// MARK: - Preview
 struct ResortDetail_Previews: PreviewProvider {
     static var previews: some View {
         ResortDetail(resort: Resort.example)
