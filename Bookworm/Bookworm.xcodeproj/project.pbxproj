@@ -13,6 +13,8 @@
 		21FB54D42636A68A0048AF2E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21FB54D32636A68A0048AF2E /* Preview Assets.xcassets */; };
 		21FB54D62636A68A0048AF2E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB54D52636A68A0048AF2E /* Persistence.swift */; };
 		21FB54E42636A6CB0048AF2E /* Bookworm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 21FB54E22636A6CB0048AF2E /* Bookworm.xcdatamodeld */; };
+		21FB54E92636A7AC0048AF2E /* Book+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB54E72636A7AC0048AF2E /* Book+CoreDataClass.swift */; };
+		21FB54EA2636A7AC0048AF2E /* Book+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FB54E82636A7AC0048AF2E /* Book+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		21FB54D52636A68A0048AF2E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		21FB54DA2636A68A0048AF2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21FB54E32636A6CB0048AF2E /* Bookworm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bookworm.xcdatamodel; sourceTree = "<group>"; };
+		21FB54E72636A7AC0048AF2E /* Book+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		21FB54E82636A7AC0048AF2E /* Book+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Book+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		21FB54CB2636A6890048AF2E /* Bookworm */ = {
 			isa = PBXGroup;
 			children = (
+				21FB54E62636A7970048AF2E /* Core data classes */,
 				21FB54E22636A6CB0048AF2E /* Bookworm.xcdatamodeld */,
 				21FB54CC2636A6890048AF2E /* BookwormApp.swift */,
 				21FB54CE2636A6890048AF2E /* ContentView.swift */,
@@ -73,6 +78,15 @@
 				21FB54D32636A68A0048AF2E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		21FB54E62636A7970048AF2E /* Core data classes */ = {
+			isa = PBXGroup;
+			children = (
+				21FB54E72636A7AC0048AF2E /* Book+CoreDataClass.swift */,
+				21FB54E82636A7AC0048AF2E /* Book+CoreDataProperties.swift */,
+			);
+			path = "Core data classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +158,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21FB54E92636A7AC0048AF2E /* Book+CoreDataClass.swift in Sources */,
 				21FB54D62636A68A0048AF2E /* Persistence.swift in Sources */,
+				21FB54EA2636A7AC0048AF2E /* Book+CoreDataProperties.swift in Sources */,
 				21FB54E42636A6CB0048AF2E /* Bookworm.xcdatamodeld in Sources */,
 				21FB54CF2636A6890048AF2E /* ContentView.swift in Sources */,
 				21FB54CD2636A6890048AF2E /* BookwormApp.swift in Sources */,
