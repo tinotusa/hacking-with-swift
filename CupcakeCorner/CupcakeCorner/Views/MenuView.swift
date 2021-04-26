@@ -17,29 +17,37 @@ struct MenuView: View {
         NavigationView {
             ZStack {
                 background
-                
+                    
                 NavigationLink(destination: OrderView(), isActive: $placedOrder) { EmptyView() }
-                
                 VStack {
-                    cartIcon
+                    HStack {
+                        Text("Cupcakes")
+                            .foregroundColor(.white)
+                            .font(.title)
+                        Spacer()
+                        cartIcon
+                    }
+                    
+                    Divider()
                     
                     LazyHGrid(rows: gridItems) {
                         ForEach(cupcakes, id: \.self) { cupcakeName in
                             CupcakeCard(name: cupcakeName)
                         }
                     }
-                    
                     orderButton
                         .disabled(shoppingCart.isEmpty)
                 }
+                .padding()
             }
+            .navigationBarHidden(true)
         }
     }
 }
-
 private extension MenuView {
     var background: some View {
         Color("gray")
+            .ignoresSafeArea()
     }
     
     var cartIcon: some View {
@@ -53,17 +61,10 @@ private extension MenuView {
     }
     
     var orderButton: some View {
-        HStack {
-            Spacer()
-            Button(action: placeOrder) {
-                Text("Place order")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(shoppingCart.isEmpty ? Color(.systemGray) : Color.black)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-            }
-            Spacer()
+        Button(action: placeOrder) {
+            Text("Place order")
         }
+        .buttonStyle(RoundBlueButtonStyle())
     }
     
     func placeOrder() {

@@ -39,8 +39,8 @@ extension ShoppingCart {
     }
     
     var cupcakesList: String {
-        cupcakes.map { cupcake in
-            var listEntry = cupcake.name
+        let entries = cupcakes.map { (cupcake: Cupcake) -> String in
+            var listEntry = cupcake.name + " cupcake(s)"
             if cupcake.addExtraFrosting || cupcake.addSprinkles {
                 listEntry += " with"
                 if cupcake.addSprinkles {
@@ -52,7 +52,7 @@ extension ShoppingCart {
             }
             return listEntry
         }
-            .joined(separator: "\n")
+        return ListFormatter.localizedString(byJoining: entries)
     }
     
     func add(_ cupcake: Cupcake) {

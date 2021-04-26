@@ -13,7 +13,7 @@ struct OrderView: View {
     @EnvironmentObject var shoppingCart: ShoppingCart
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack {
             NavigationLink(destination: DeliveryInformation(), isActive: $confirmedOrder) { EmptyView() }
             ScrollView {
                 ForEach(shoppingCart.cupcakes) { cupcake in
@@ -23,6 +23,7 @@ struct OrderView: View {
             Button("Confirm") {
                 confirmedOrder = true
             }
+            .buttonStyle(RoundBlueButtonStyle())
             .navigationTitle("Check your order")
         }
     }

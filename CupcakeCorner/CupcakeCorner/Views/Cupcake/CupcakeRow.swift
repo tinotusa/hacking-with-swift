@@ -11,28 +11,37 @@ struct CupcakeRow: View {
     let cupcake: Cupcake
     @EnvironmentObject var shoppingCart: ShoppingCart
     
-    var index: Int {
-        shoppingCart.cupcakes.firstIndex(where: { $0.name == cupcake.name })!
-    }
-    
     var body: some View {
         HStack {
             Image(cupcake.name)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 100, height: 100)
+                .frame(width: 120, height: 120)
                 .clipped()
-            VStack {
-                Text(cupcake.name)
-                CheckBox("Add sprinkes?", isOn: $shoppingCart.cupcakes[index].addSprinkles)
-                CheckBox("Add extra frosting?", isOn: $shoppingCart.cupcakes[index].addExtraFrosting)
+                .cornerRadius(20)
+                .shadow(radius: 5)
+
+            VStack(alignment: .leading, spacing: 3) {
+                HStack {
+                    Text(cupcake.name.capitalized)
+                    Spacer()
+                    Text("x \(cupcake.amount)")
+                }
+                .font(.title3)
+                
+                Divider()
+                CheckBox("Sprinkes?", isOn: $shoppingCart.cupcakes[index].addSprinkles)
+                CheckBox("Extra frosting?", isOn: $shoppingCart.cupcakes[index].addExtraFrosting)
             }
             .padding(.trailing)
-            Spacer()
-            Text("\(cupcake.amount)")
         }
-        
+        .padding()
     }
+    
+    var index: Int {
+        shoppingCart.cupcakes.firstIndex(where: { $0.name == cupcake.name })!
+    }
+    
 }
 
 struct CupcakeRow_Previews: PreviewProvider {

@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import CoreImage
+import CoreImage.CIFilterBuiltins
 
 struct CupcakeCard: View {
     let name: String
     let size: CGFloat = 200
     let radius: CGFloat = 30
+    @State private var averageColour: Color! = nil
     @State private var addToCart = false
     @State private var amount = 0
     @EnvironmentObject var shoppingCart: ShoppingCart
@@ -23,6 +26,7 @@ struct CupcakeCard: View {
             if !addToCart {
                 cartButton
                     .floatView()
+                    
             } else {
                 amountStepper
                     .floatView()
@@ -30,8 +34,10 @@ struct CupcakeCard: View {
             
         }
         .frame(width: size, height: size)
+        .cornerRadius(20)
         .onAppear {
             cupcake = Cupcake(name: name, amount: 0)
+            averageColour = CupcakeCorner.averageColour(for: cupcake.name)
         }
     }
 }
@@ -65,7 +71,7 @@ private extension CupcakeCard {
                 .foregroundColor(.white)
                 .background(Color.gray)
                 .clipShape(Circle())
-                .shadow(radius: 5)
+                
         }
         .padding()
     }
@@ -73,8 +79,15 @@ private extension CupcakeCard {
     var amountStepper: some View {
         VStack {
             updateButton(label: "+", incrementBy: 1)
+            
             Text("\(amount)")
+                .padding()
                 .font(.title)
+                .foregroundColor(.white)
+                .background(averageColour)
+                .cornerRadius(20)
+                .shadow(radius: 5)
+            
             updateButton(label: "-", incrementBy: -1)
         }
         .padding(.trailing)
@@ -95,12 +108,13 @@ private extension CupcakeCard {
     func updateButton(label: String, incrementBy amount: Int) -> some View {
         Button(action: amount > 0 ? increment : decrement) {
             Text(label)
-                .font(.title3)
+                .font(.title)
                 .padding(10)
                 .foregroundColor(.white)
                 .background(Color.gray)
                 .clipShape(Circle())
-                .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 10)
+                .shadow(radius: 4)
+                
         }
     }
     // don't like the way im updating

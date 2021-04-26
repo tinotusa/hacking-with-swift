@@ -12,6 +12,8 @@
 		2160295A26364AE0004F8A22 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160295926364AE0004F8A22 /* AlertItem.swift */; };
 		2160295D26364B15004F8A22 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160295C26364B15004F8A22 /* NetworkManager.swift */; };
 		2160296126364CFE004F8A22 /* DeliveryInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160296026364CFE004F8A22 /* DeliveryInformation.swift */; };
+		2160296526366C54004F8A22 /* RoundBlueButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160296426366C54004F8A22 /* RoundBlueButtonStyle.swift */; };
+		2160296826368249004F8A22 /* AverageColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2160296726368249004F8A22 /* AverageColour.swift */; };
 		219B91E2263549DB00A47D30 /* CustomCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B91E1263549DB00A47D30 /* CustomCorners.swift */; };
 		219B91E526354A0F00A47D30 /* CupcakeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B91E426354A0F00A47D30 /* CupcakeCard.swift */; };
 		219B91E926354FF000A47D30 /* FloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219B91E826354FF000A47D30 /* FloatView.swift */; };
@@ -32,6 +34,8 @@
 		2160295926364AE0004F8A22 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		2160295C26364B15004F8A22 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		2160296026364CFE004F8A22 /* DeliveryInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryInformation.swift; sourceTree = "<group>"; };
+		2160296426366C54004F8A22 /* RoundBlueButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundBlueButtonStyle.swift; sourceTree = "<group>"; };
+		2160296726368249004F8A22 /* AverageColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageColour.swift; sourceTree = "<group>"; };
 		219B91E1263549DB00A47D30 /* CustomCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCorners.swift; sourceTree = "<group>"; };
 		219B91E426354A0F00A47D30 /* CupcakeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCard.swift; sourceTree = "<group>"; };
 		219B91E826354FF000A47D30 /* FloatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatView.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				219B91E826354FF000A47D30 /* FloatView.swift */,
 				2160295926364AE0004F8A22 /* AlertItem.swift */,
 				2160295C26364B15004F8A22 /* NetworkManager.swift */,
+				2160296426366C54004F8A22 /* RoundBlueButtonStyle.swift */,
+				2160296726368249004F8A22 /* AverageColour.swift */,
 			);
 			path = Uitilies;
 			sourceTree = "<group>";
@@ -219,6 +225,8 @@
 			files = (
 				21F40AC72611FDC30086B6D4 /* ContentView.swift in Sources */,
 				219B91E2263549DB00A47D30 /* CustomCorners.swift in Sources */,
+				2160296526366C54004F8A22 /* RoundBlueButtonStyle.swift in Sources */,
+				2160296826368249004F8A22 /* AverageColour.swift in Sources */,
 				219B91E926354FF000A47D30 /* FloatView.swift in Sources */,
 				219B91F126356B1200A47D30 /* OrderDetails.swift in Sources */,
 				219B91FB26356E4100A47D30 /* Cupcake.swift in Sources */,
