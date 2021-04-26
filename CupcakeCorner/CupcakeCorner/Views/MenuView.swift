@@ -30,6 +30,7 @@ struct MenuView: View {
                     }
                     
                     orderButton
+                        .disabled(shoppingCart.isEmpty)
                 }
             }
         }
@@ -58,7 +59,7 @@ private extension MenuView {
                 Text("Place order")
                     .padding()
                     .foregroundColor(.white)
-                    .background(Color.black)
+                    .background(shoppingCart.isEmpty ? Color(.systemGray) : Color.black)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             }
             Spacer()

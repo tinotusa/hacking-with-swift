@@ -7,15 +7,52 @@
 
 import SwiftUI
 
-class ShoppingCart: ObservableObject {
+class ShoppingCart: ObservableObject, Codable {
     @Published var cupcakes: [Cupcake] = []
     
+    enum CodingKeys: CodingKey {
+        case cupcakes
+    }
+    
+    init() {
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        cupcakes = try container.decode([Cupcake].self, forKey: .cupcakes)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(cupcakes, forKey: .cupcakes)
+    }
+}
+
+
+extension ShoppingCart {
     var count: Int {
         cupcakes.count
     }
     
     var isEmpty: Bool {
         cupcakes.isEmpty
+    }
+    
+    var cupcakesList: String {
+        cupcakes.map { cupcake in
+            var listEntry = cupcake.name
+            if cupcake.addExtraFrosting || cupcake.addSprinkles {
+                listEntry += " with"
+                if cupcake.addSprinkles {
+                    listEntry += " sprinkles"
+                }
+                if cupcake.addExtraFrosting {
+                    listEntry += " extra frosting"
+                }
+            }
+            return listEntry
+        }
+            .joined(separator: "\n")
     }
     
     func add(_ cupcake: Cupcake) {

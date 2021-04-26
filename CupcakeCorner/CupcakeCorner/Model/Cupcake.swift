@@ -12,14 +12,6 @@ struct Cupcake: Codable, Identifiable {
     let name: String
     var amount: Int
     
-    var hasSpecialRequest = false {
-        didSet {
-            if hasSpecialRequest == false {
-                addExtraFrosting = false
-                addSprinkles = false
-            }
-        }
-    }
     var addExtraFrosting = false
     var addSprinkles = false
     
@@ -38,6 +30,6 @@ struct Cupcake: Codable, Identifiable {
     }
     
     enum CodingKeys: CodingKey {
-        case name, amount
+        case name, amount, addExtraFrosting, addSprinkles
     }
 }
