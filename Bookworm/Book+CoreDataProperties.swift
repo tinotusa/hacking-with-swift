@@ -27,15 +27,18 @@ extension Book {
     @NSManaged public var imagePath: String?
 
     var wrappedTitle: String {
-        title ?? "N/A"
+        get { title ?? "N/A" }
+        set { title = newValue }
     }
     
     var wrappedAuthor: String {
-        author ?? "N/A"
+        get { author ?? "N/A" }
+        set { author = newValue }
     }
     
     var wrappedGenre: String {
-        genre ?? "N/A"
+        get { genre ?? "N/A" }
+        set { genre = newValue }
     }
     
     var wrappedISBN: String {
@@ -43,7 +46,13 @@ extension Book {
     }
     
     var wrappedImagePath: String {
-        imagePath ?? "N/A"
+        get { imagePath ?? "N/A" }
+        set { imagePath = newValue }
+    }
+    
+    var wrappedReview:  String {
+        get { review ?? "N/A" }
+        set { review = newValue }
     }
     
 }

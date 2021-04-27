@@ -10,11 +10,12 @@ import SwiftUI
 @main
 struct BookwormApp: App {
     let persistenceController = PersistenceController.shared
-
+    @StateObject var imageLoader = ImageLoader()
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(imageLoader)
         }
     }
 }
