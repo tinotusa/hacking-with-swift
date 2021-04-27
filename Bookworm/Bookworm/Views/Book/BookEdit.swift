@@ -46,12 +46,19 @@ struct BookEdit: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-                
-                Text("Rating")
-                RatingView(rating: $bookInfo.rating)
-                
-                Text("Review")
-                TextView("What are your thoughts on this book", text: $bookInfo.review)
+                Group {
+                    Text("Rating")
+                    RatingView(rating: $bookInfo.rating)
+                    HStack {
+                        Text("Like")
+                        Spacer()
+                        LikeButton(isLiked: $bookInfo.isFavourite)
+                    }
+                }
+                Group {
+                    Text("Review")
+                    TextView("What are your thoughts on this book", text: $bookInfo.review)
+                }
                 
             }
             .textFieldStyle(MyTextFieldStyle())

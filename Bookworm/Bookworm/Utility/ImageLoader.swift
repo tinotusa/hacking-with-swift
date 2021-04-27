@@ -9,6 +9,7 @@ import SwiftUI
 
 class ImageLoader: Codable, ObservableObject {
     var images: [String: Image] = [:]
+    
     var paths = [String]() {
         didSet {
             savePaths()
@@ -52,7 +53,9 @@ class ImageLoader: Codable, ObservableObject {
         do {
             let data = try Data(contentsOf: url)
             if let uiImage = UIImage(data: data) {
-                paths.append(path)
+                if !paths.contains(path) {
+                    paths.append(path)
+                }
                 images[path] = Image(uiImage: uiImage)
             } else {
                 fatalError("Failed to load image data")

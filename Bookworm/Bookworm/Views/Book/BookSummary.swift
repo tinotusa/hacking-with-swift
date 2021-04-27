@@ -35,7 +35,7 @@ struct BookSummary: View {
                     HStack {
                         RatingView(rating: .constant(book.rating))
                         Spacer()
-                        LikeButton(isLiked: .constant(false))
+                        LikeButton(isLiked: .constant(book.isFavourite))
                     }
                 }
             }

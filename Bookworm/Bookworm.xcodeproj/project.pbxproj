@@ -75,16 +75,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2152D4B7263803BF005ADCDA /* Book Detail */ = {
-			isa = PBXGroup;
-			children = (
-				21FB55092636D0810048AF2E /* BookDetail.swift */,
-				2152D4B8263803D5005ADCDA /* BookEdit.swift */,
-				2152D4BB263803F5005ADCDA /* BookSummary.swift */,
-			);
-			path = "Book Detail";
-			sourceTree = "<group>";
-		};
 		21FB54C02636A6890048AF2E = {
 			isa = PBXGroup;
 			children = (
@@ -142,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				21FB55072636CFE20048AF2E /* Screens */,
-				21FB54FC2636CE8A0048AF2E /* Books */,
+				21FB54FC2636CE8A0048AF2E /* Book */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,13 +158,16 @@
 			path = Modifiers;
 			sourceTree = "<group>";
 		};
-		21FB54FC2636CE8A0048AF2E /* Books */ = {
+		21FB54FC2636CE8A0048AF2E /* Book */ = {
 			isa = PBXGroup;
 			children = (
+				21FB55092636D0810048AF2E /* BookDetail.swift */,
+				2152D4B8263803D5005ADCDA /* BookEdit.swift */,
+				2152D4BB263803F5005ADCDA /* BookSummary.swift */,
 				21FB54FD2636CE990048AF2E /* BookItem.swift */,
 				21FB55002636CF450048AF2E /* BooksRow.swift */,
 			);
-			path = Books;
+			path = Book;
 			sourceTree = "<group>";
 		};
 		21FB55032636CFB60048AF2E /* Model */ = {
@@ -188,7 +181,6 @@
 		21FB55072636CFE20048AF2E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				2152D4B7263803BF005ADCDA /* Book Detail */,
 				21FB54ED2636AA740048AF2E /* Bookshelf.swift */,
 				21CC9524263794150028EAEF /* AddBookView.swift */,
 			);

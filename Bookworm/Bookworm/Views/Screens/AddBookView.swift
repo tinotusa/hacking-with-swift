@@ -53,6 +53,7 @@ struct AddBookView: View {
         book.rating = rating
         book.genre = genre.rawValue
         book.imagePath = selectedImageURL?.lastPathComponent
+        book.id = UUID()
         Constants.saveContext(viewContext)
         presentationMode.wrappedValue.dismiss()
     }

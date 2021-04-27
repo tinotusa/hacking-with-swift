@@ -30,6 +30,7 @@ struct BookItem: View {
                     .shadow(radius: 10)
                 if book.isFavourite {
                     LikeButton(isLiked: .constant(book.isFavourite))
+                        .floatView(to: .topRight)
                 }
             }
             .padding(.vertical)

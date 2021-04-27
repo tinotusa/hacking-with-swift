@@ -13,6 +13,8 @@ struct Bookshelf: View {
     @FetchRequest(entity: Book.entity(), sortDescriptors: [])
     var books: FetchedResults<Book>
     
+    @EnvironmentObject var imageLoader: ImageLoader
+    
     @State private var showingAddView = false
     
     var body: some View {
@@ -44,21 +46,17 @@ struct Bookshelf: View {
                         Image(systemName: "plus")
                             .font(.title)
                     }
-                    // see if you can create a menut t
-                    Button("delete all") {
-                        books.forEach(viewContext.delete)
-                        saveContext()
+                    // see if you can create a menu
+                    Button(action: deleteBooks) {
+                        Image(systemName: "trash")
                     }
                 }
             }
         }
     }
     
-    // MARK: - testing functions
-    func deleteBooks(atOffsets offsets: IndexSet) {
-        offsets.map { books[$0] }
-            .forEach(viewContext.delete)
-        saveContext()
+    func deleteBooks() {
+        
     }
 }
 

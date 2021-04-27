@@ -15,6 +15,8 @@ struct BookInfo {
     var genre: Genre = .fantasy
     var rating = Int16(0)
     var review = ""
+    var id: UUID? = nil
+    var isFavourite = false
 }
 struct BookDetail: View {
     let book: Book
@@ -33,13 +35,14 @@ struct BookDetail: View {
         ZStack {
             Color("background")
                 .ignoresSafeArea()
+
             if editMode?.wrappedValue == .active {
-                BookEdit(book: book, bookInfo: $copyBookInfo)
+                BookEdit(book: book, bookInfo: $bookInfo)
                     .onAppear {
-                        setBookInfo(book, info: copyBookInfo)
+                        bookInfo = setBookInfo(book, info: bookInfo)
                     }
                     .onDisappear {
-                        setBookData(book, info: copyBookInfo)
+                        setBookData(book, info: bookInfo)
                     }
             } else {
                 BookSummary(book: book)
@@ -53,37 +56,33 @@ struct BookDetail: View {
                 secondaryButton: .destructive(Text("Delete"), action: deleteBook)
             )
         }
+        .onAppear {
+            copyBookInfo = setBookInfo(book, info: copyBookInfo)
+        }
         .toolbar {
             HStack {
                 Button("Delete", action: deleteBook)
                 if editMode?.wrappedValue == .active {
                     Button("Cancel") {
-                        // no changes have been made
-                        // no save required
-                        
-                        // store prev state
-                        setBookData(book, info: bookInfo)
-                        Constants.saveContext(viewContext)
-                        // restore on cancel
+                        bookInfo = copyBookInfo
                         editMode?.animation().wrappedValue = .inactive
                     }
                 }
                 EditButton()
-                
             }
-        }
-        .onAppear {
-            setBookInfo(book, info: bookInfo)
         }
     }
     
-    func setBookInfo(_ book: Book, info: BookInfo) {
+    func setBookInfo(_ book: Book, info: BookInfo) -> BookInfo {
         bookInfo.imagePath =    book.wrappedImagePath
         bookInfo.title =        book.wrappedTitle
         bookInfo.author =       book.wrappedAuthor
         bookInfo.genre =        Genre(rawValue: book.wrappedGenre)!
         bookInfo.rating =       book.rating
         bookInfo.review =       book.wrappedReview
+        bookInfo.id =           book.id
+        bookInfo.isFavourite =  book.isFavourite
+        return bookInfo
     }
     
     func setBookData(_ book: Book, info: BookInfo) {
@@ -93,7 +92,8 @@ struct BookDetail: View {
         book.genre =        bookInfo.genre.rawValue
         book.rating =       bookInfo.rating
         book.review =       bookInfo.review
-
+        book.id =           bookInfo.id
+        book.isFavourite =  bookInfo.isFavourite
         Constants.saveContext(viewContext)
     }
     
