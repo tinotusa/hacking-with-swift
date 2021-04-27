@@ -12,7 +12,8 @@ struct BookItem: View {
     let radius: CGFloat = 10
     
     @EnvironmentObject var imageLoader: ImageLoader
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         NavigationLink(destination: BookDetail(book: book)) {
             ZStack(alignment: .bottom) {
@@ -34,7 +35,7 @@ struct BookItem: View {
                 }
             }
             .padding(.vertical)
-            .shadow(color: .gray, radius: 5, x: 0, y: 3)
+            .shadow(color: (colorScheme == .dark ? Color.black.opacity(0.4) : Color.gray), radius: 5, x: 0, y: 3)
         }
         .foregroundColor(Color("fontColour"))
     }

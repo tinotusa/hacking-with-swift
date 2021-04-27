@@ -26,9 +26,9 @@ struct TextView: UIViewRepresentable {
         textView.backgroundColor = UIColor(Color("textFieldColour"))
         textView.isEditable = isEditable
         textView.allowsEditingTextAttributes = true
-        textView.font = UIFont.systemFont(ofSize: 25)
-        textView.text = placeholder
-        textView.textColor = placeholderColour
+        textView.font = UIFont.systemFont(ofSize: 20)
+        textView.text = text.isEmpty ? placeholder : text
+        textView.textColor = text.isEmpty ? placeholderColour : UIColor(Color("fontColour"))
         return textView
     }
     

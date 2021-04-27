@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 
+// couldn't figure out how to bind to a core data object
+// made this struct i could bind to and passed that around instead
 struct BookInfo {
     var imagePath = ""
     var title = ""
@@ -18,6 +20,7 @@ struct BookInfo {
     var id: UUID? = nil
     var isFavourite = false
 }
+
 struct BookDetail: View {
     let book: Book
 
@@ -28,8 +31,8 @@ struct BookDetail: View {
     @EnvironmentObject var imageLoader: ImageLoader
     @State private var isAboutToDelete = false
 
-    @State private var bookInfo = BookInfo()
-    @State private var copyBookInfo = BookInfo()
+    @State private var bookInfo = BookInfo() // to edit
+    @State private var copyBookInfo = BookInfo() // to store the book info as it is
     
     var body: some View {
         ZStack {
@@ -50,7 +53,7 @@ struct BookDetail: View {
         }
         .alert(isPresented: $isAboutToDelete) {
             Alert(
-                title: Text("Delete"),
+                title: Text("About to delete \(book.wrappedTitle)?"),
                 message: Text("Are you sure?"),
                 primaryButton: .cancel(),
                 secondaryButton: .destructive(Text("Delete"), action: deleteBook)
@@ -61,7 +64,11 @@ struct BookDetail: View {
         }
         .toolbar {
             HStack {
-                Button("Delete", action: deleteBook)
+                if editMode?.wrappedValue == .inactive {
+                    Button(action: { isAboutToDelete = true }) {
+                        Image(systemName: "trash")
+                    }
+                }
                 if editMode?.wrappedValue == .active {
                     Button("Cancel") {
                         bookInfo = copyBookInfo
@@ -100,20 +107,8 @@ struct BookDetail: View {
     func deleteBook() {
         viewContext.delete(book)
         imageLoader.removePath(book.wrappedImagePath)
-        saveContext(context: viewContext)
+        Constants.saveContext(viewContext)
         dismiss()
-    }
-    
-    func saveContext(context: NSManagedObjectContext) {
-        if context.hasChanges {
-            do {
-                try withAnimation {
-                    try context.save()
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
     }
     
     func dismiss() {

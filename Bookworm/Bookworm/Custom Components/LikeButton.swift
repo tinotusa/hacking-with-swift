@@ -15,9 +15,8 @@ struct LikeButton: View {
         Image(systemName: "heart.fill")
             .font(.title)
             .foregroundColor(isLiked ? .red : .gray)
-            .scaleEffect(isLiked ? 1.2 : 1)
-            .rotationEffect(.degrees(isLiked ? 360 : 0))
-            .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.3))
+            .scaleEffect(isLiked ? 1.3 : 1)
+            .animation(.interpolatingSpring(stiffness: 200, damping: 5))
             .onTapGesture {
                 isLiked.toggle()
             }

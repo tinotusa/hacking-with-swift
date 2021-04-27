@@ -9,8 +9,10 @@ import SwiftUI
 
 struct BookSummary: View {
     let book: Book
+    
     @EnvironmentObject var imageLoader: ImageLoader
     @State private var testText = ""
+    
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {

@@ -48,9 +48,8 @@ struct BookEdit: View {
                 }
                 Group {
                     Text("Rating")
-                    RatingView(rating: $bookInfo.rating)
                     HStack {
-                        Text("Like")
+                        RatingView(rating: $bookInfo.rating)
                         Spacer()
                         LikeButton(isLiked: $bookInfo.isFavourite)
                     }
