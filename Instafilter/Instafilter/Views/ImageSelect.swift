@@ -22,6 +22,7 @@ struct ImageSelect: View {
                 grayImageSelectBox
             }
         }
+        .frame(height: 300)
         .sheet(isPresented: $showImagePicker, onDismiss: setImage) {
             ImagePicker(selectedImage: $selectedImage)
         }

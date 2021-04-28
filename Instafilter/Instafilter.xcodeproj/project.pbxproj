@@ -13,6 +13,7 @@
 		217BA59A261990A80004E03B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 217BA599261990A80004E03B /* Preview Assets.xcassets */; };
 		21C3A83A2639309800F2D707 /* ImageSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C3A8392639309800F2D707 /* ImageSelect.swift */; };
 		21C3A83F2639320E00F2D707 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C3A83E2639320E00F2D707 /* ImagePicker.swift */; };
+		21C3A84326395B3200F2D707 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C3A84226395B3200F2D707 /* ImageSaver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		217BA59B261990A80004E03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21C3A8392639309800F2D707 /* ImageSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelect.swift; sourceTree = "<group>"; };
 		21C3A83E2639320E00F2D707 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		21C3A84226395B3200F2D707 /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				21C3A83E2639320E00F2D707 /* ImagePicker.swift */,
+				21C3A84226395B3200F2D707 /* ImageSaver.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			files = (
 				21C3A83A2639309800F2D707 /* ImageSelect.swift in Sources */,
 				21C3A83F2639320E00F2D707 /* ImagePicker.swift in Sources */,
+				21C3A84326395B3200F2D707 /* ImageSaver.swift in Sources */,
 				217BA595261990A80004E03B /* ContentView.swift in Sources */,
 				217BA593261990A80004E03B /* InstafilterApp.swift in Sources */,
 			);
@@ -301,7 +305,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Instafilter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.Instafilter2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -323,7 +327,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Instafilter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.Instafilter2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
