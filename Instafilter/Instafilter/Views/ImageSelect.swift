@@ -10,9 +10,9 @@ import SwiftUI
 struct ImageSelect: View {
     let size: CGFloat = 400
     
-    @State var image: Image? = nil
+    @Binding var selectedImage: UIImage?
+    @Binding var image: Image?
     @State private var showImagePicker = false
-    @State private var selectedImage: UIImage? = nil
     
     var body: some View {
         ZStack {
@@ -61,6 +61,8 @@ private extension ImageSelect {
 
 struct ImageSelect_Previews: PreviewProvider {
     static var previews: some View {
-        ImageSelect()
+        ImageSelect(
+            selectedImage: .constant(UIImage()),
+            image: .constant(Image("nothing")))
     }
 }

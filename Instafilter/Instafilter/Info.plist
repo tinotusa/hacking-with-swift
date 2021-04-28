@@ -47,6 +47,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>We would like to save the filtered photo</string>
+	<string>We would like to save your filtered photo</string>
 </dict>
 </plist>
