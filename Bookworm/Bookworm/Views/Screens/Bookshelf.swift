@@ -43,6 +43,10 @@ struct Bookshelf: View {
                         }
                     }
 
+                    if showingDeleteList {
+                        Button("Delete all", action: deleteAll)
+                    }
+                    
                     Button(action: deleteBooks) {
                         if showingDeleteList {
                             Text("Done")
@@ -52,9 +56,18 @@ struct Bookshelf: View {
                     }
                 }
             }
+            
+            Text("Select a book from the shelf (on the left)")
+                .foregroundColor(Color("fontColour"))
+            
         }
     }
     
+    func deleteAll() {
+        imageLoader.paths.removeAll()
+        books.forEach(viewContext.delete)
+        Constants.saveContext(viewContext)
+    }
     
     func deleteFromGenres(atOffsets offsets: IndexSet, genre: Genre) {
         for offset in offsets {

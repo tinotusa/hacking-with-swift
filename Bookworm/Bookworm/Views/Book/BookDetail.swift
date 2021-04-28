@@ -31,8 +31,7 @@ struct BookDetail: View {
     @EnvironmentObject var imageLoader: ImageLoader
     @State private var isAboutToDelete = false
 
-    @State private var bookInfo = BookInfo() // to edit
-    @State private var copyBookInfo = BookInfo() // to store the book info as it is
+    @State private var bookInfo = BookInfo()
     
     var body: some View {
         ZStack {
@@ -42,10 +41,10 @@ struct BookDetail: View {
             if editMode?.wrappedValue == .active {
                 BookEdit(book: book, bookInfo: $bookInfo)
                     .onAppear {
-                        bookInfo = setBookInfo(book, info: bookInfo)
+                        bookInfo = setBookInfo(from: book)
                     }
                     .onDisappear {
-                        setBookData(book, info: bookInfo)
+                        setBookData(from: bookInfo, to: book)
                     }
             } else {
                 BookSummary(book: book)
@@ -59,9 +58,6 @@ struct BookDetail: View {
                 secondaryButton: .destructive(Text("Delete"), action: deleteBook)
             )
         }
-        .onAppear {
-            copyBookInfo = setBookInfo(book, info: copyBookInfo)
-        }
         .toolbar {
             HStack {
                 if editMode?.wrappedValue == .inactive {
@@ -71,7 +67,7 @@ struct BookDetail: View {
                 }
                 if editMode?.wrappedValue == .active {
                     Button("Cancel") {
-                        bookInfo = copyBookInfo
+                        bookInfo = setBookInfo(from: book)
                         editMode?.animation().wrappedValue = .inactive
                     }
                 }
@@ -80,7 +76,8 @@ struct BookDetail: View {
         }
     }
     
-    func setBookInfo(_ book: Book, info: BookInfo) -> BookInfo {
+    func setBookInfo(from book: Book) -> BookInfo {
+        var bookInfo = BookInfo()
         bookInfo.imagePath =    book.wrappedImagePath
         bookInfo.title =        book.wrappedTitle
         bookInfo.author =       book.wrappedAuthor
@@ -92,8 +89,10 @@ struct BookDetail: View {
         return bookInfo
     }
     
-    func setBookData(_ book: Book, info: BookInfo) {
-        book.imagePath =    bookInfo.imagePath
+    
+    func setBookData(from bookInfo: BookInfo, to book: Book) {
+        imageLoader.removePath(book.wrappedImagePath) // old one
+        book.imagePath =    bookInfo.imagePath // write new one
         book.title =        bookInfo.title
         book.author =       bookInfo.author
         book.genre =        bookInfo.genre.rawValue

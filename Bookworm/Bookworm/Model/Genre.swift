@@ -6,11 +6,15 @@
 //
 
 enum Genre: String, Identifiable, Comparable, CaseIterable {
-    case fantasy, fiction, children, scifi, horror, romance
+    case fantasy, fiction, nonFiction, action, crime, mystery, scifi, horror, romance
     
     static func <(lhs: Genre, rhs: Genre) -> Bool {
         return lhs.rawValue < rhs.rawValue
     }
   
+    var capitalized: String {
+        self.rawValue.capitalized
+    }
+    
     var id: Genre { self }
 }

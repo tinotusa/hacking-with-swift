@@ -37,6 +37,7 @@ struct ImageSelectionView: View  {
             }
             
         }
+        .frame(height: 300)
         .onTapGesture { showImagePicker = true }
         .sheet(isPresented: $showImagePicker, onDismiss: setImage) {
             ImagePicker(selectedImage: $selectedImage, imageURL: $imageURL)

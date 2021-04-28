@@ -18,32 +18,52 @@ struct AddBookView: View {
     @State private var author = ""
     @State private var rating: Int16 = 0
     @State private var genre: Genre = .fantasy
-    
+    @State private var review = ""
     var body: some View {
-        VStack {
-            ImageSelectionView(selectedImage: $selectedImage, imageURL: $selectedImageURL)
-            Divider()
-            Form {
-                Section {
-                    TextField("Title", text: $title)
-                    TextField("Author", text: $author)
-                }
-                
-                Section {
-                    RatingView("Rating", rating: $rating)
-                    Picker("genre", selection: $genre) {
-                        ForEach(Genre.allCases) { genre in
-                            Text(genre.rawValue.capitalized)
+        ZStack {
+            Color("background")
+                .ignoresSafeArea()
+            
+            ScrollView {
+                VStack(alignment: .leading) {
+                    ImageSelectionView(selectedImage: $selectedImage, imageURL: $selectedImageURL)
+                        .floatView(to: .center)
+                        
+                    Divider()
+                    
+                    Group {
+                        Text("Title")
+                        TextField("Title", text: $title)
+                    }
+                    Group {
+                        Text("Author")
+                        TextField("Author", text: $author)
+                    }
+                    
+                    RatingView("Rating", rating: $rating, showLabel: true)
+                    Group {
+                        Text("Genre")
+                        Picker("Genre", selection: $genre) {
+                            ForEach(Genre.allCases) { genre in
+                                Text(genre.capitalized)
+                            }
                         }
                     }
+
+                    Text("Review")
+                    
+                    TextView("Enter a review of this book", text: $review)
+                        .frame(minHeight: 300)
                 }
-                Section {
-                    Button("Add book", action: addBook)
-                        .disabled(!allFormsFilled)
-                }
+                .padding()
             }
         }
-        .padding()
+        .foregroundColor(Color("fontColour"))
+        .textFieldStyle(MyTextFieldStyle())
+        .toolbar {
+            Button("Add book", action: addBook)
+                .disabled(!allFormsFilled)
+        }
     }
     
     func addBook() {
@@ -52,6 +72,7 @@ struct AddBookView: View {
         book.author = author
         book.rating = rating
         book.genre = genre.rawValue
+        book.review = review
         book.imagePath = selectedImageURL?.lastPathComponent
         book.id = UUID()
         Constants.saveContext(viewContext)

@@ -51,7 +51,6 @@ struct ImagePicker: UIViewControllerRepresentable {
             let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             let movedURL = documents.appendingPathComponent(url.lastPathComponent)
             do {
-                // do i have to move these?
                 try FileManager.default.moveItem(at: url, to: movedURL)
                 parent.imageURL = movedURL
                 parent.selectedImage = info[.originalImage] as? UIImage

@@ -12,14 +12,21 @@ struct RatingView: View {
     @Binding var rating: Int16
     let label: String
     let maxRating: Int16
-    init (_ label: String = "Rating", rating: Binding<Int16>, maxRating: Int16 = 5) {
+    let showLabel: Bool
+    
+    init (_ label: String = "Rating", rating: Binding<Int16>, maxRating: Int16 = 5, showLabel: Bool = false) {
         self.label = label
         _rating = rating
         self.maxRating = maxRating
+        self.showLabel = showLabel
     }
     
     var body: some View {
         HStack {
+            if showLabel {
+                Text(label)
+                Spacer()
+            }
             ForEach(1 ..< Int(maxRating + 1)) { index in
                 Image(systemName: "star.fill")
                     .foregroundColor(getColor(for: index))

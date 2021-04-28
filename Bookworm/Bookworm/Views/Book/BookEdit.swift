@@ -24,44 +24,48 @@ struct BookEdit: View {
             Color("background")
                 .ignoresSafeArea()
             
-            VStack(alignment: .leading) {
-                ImageSelectionView("Tap to select a new book cover", selectedImage: $selectedImage, imageURL: urlBinding)
-                    .frame(height: 200)
-                Group {
-                    Text("Title")
-                    TextField(bookInfo.title, text: $bookInfo.title)
-                }
+            ScrollView {
+                VStack(alignment: .leading) {
+                    ImageSelectionView("Tap to select a new book cover", selectedImage: $selectedImage, imageURL: urlBinding)
+                        .floatView(to: .center)
+                        
+                    Group {
+                        Text("Title")
+                        TextField(bookInfo.title, text: $bookInfo.title)
+                    }
+                        
+                    Group {
+                        Text("Author")
+                        TextField(bookInfo.author, text: $bookInfo.author)
+                            .disableAutocorrection(true)
+                    }
                     
-                Group {
-                    Text("Author")
-                    TextField(bookInfo.author, text: $bookInfo.author)
-                }
-                
-                Group {
-                    Text("Genre")
-                    Picker("Genre", selection: $bookInfo.genre) {
-                        ForEach(Genre.allCases) { genre in
-                            Text(genre.rawValue)
+                    Group {
+                        Text("Genre")
+                        Picker("Genre", selection: $bookInfo.genre) {
+                            ForEach(Genre.allCases) { genre in
+                                Text(genre.rawValue)
+                            }
                         }
                     }
-                    .pickerStyle(SegmentedPickerStyle())
-                }
-                Group {
-                    Text("Rating")
-                    HStack {
-                        RatingView(rating: $bookInfo.rating)
-                        Spacer()
-                        LikeButton(isLiked: $bookInfo.isFavourite)
+                    Group {
+                        Text("Rating")
+                        HStack {
+                            RatingView(rating: $bookInfo.rating)
+                            Spacer()
+                            LikeButton(isLiked: $bookInfo.isFavourite)
+                        }
                     }
+                    Group {
+                        Text("Review")
+                        TextView("What are your thoughts on this book", text: $bookInfo.review)
+                            .frame(minHeight: 400)
+                    }
+                    
                 }
-                Group {
-                    Text("Review")
-                    TextView("What are your thoughts on this book", text: $bookInfo.review)
-                }
-                
+                .textFieldStyle(MyTextFieldStyle())
+                .foregroundColor(Color("fontColour"))
             }
-            .textFieldStyle(MyTextFieldStyle())
-            .foregroundColor(Color("fontColour"))
         }
         
     }

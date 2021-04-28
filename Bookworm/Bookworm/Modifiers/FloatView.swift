@@ -16,11 +16,15 @@ struct FloatView: ViewModifier {
     
     func body(content: Content) -> some View {
         VStack {
-            if side == .bottomLeft || side == .bottomRight {
+            if side == .bottomLeft || side == .bottomRight || side == .center {
                 Spacer()
             }
             HStack {
-                if side == .topLeft {
+                if side == .center {
+                    Spacer()
+                    content
+                    Spacer()
+                } else if side == .topLeft {
                     content
                     Spacer()
                 } else if side ==  .topRight {
@@ -28,7 +32,7 @@ struct FloatView: ViewModifier {
                     content
                 }
             }
-            if side == .topLeft || side == .topRight {
+            if side == .topLeft || side == .topRight || side == .center {
                 Spacer()
             }
         }
@@ -38,6 +42,7 @@ struct FloatView: ViewModifier {
     enum Side {
         case topLeft, topRight
         case bottomLeft, bottomRight
+        case center
     }
 }
 

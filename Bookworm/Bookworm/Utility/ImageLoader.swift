@@ -18,7 +18,6 @@ class ImageLoader: Codable, ObservableObject {
     
     init() {
         loadPaths()
-        print("paths: \(paths)")
         loadImages()
     }
     
@@ -34,16 +33,12 @@ class ImageLoader: Codable, ObservableObject {
     
     func removePath(_ path: String) {
         if let index = paths.firstIndex(where: { $0 == path }) {
+            images[path] = nil
             paths.remove(at: index)
         }
     }
     
     func loadImage(path: String) -> Image {
-        // MARK: - TODO
-        // remove this
-        if path == "N/A" {
-            return Image("default")
-        }
         if images[path] != nil {
             return images[path]!
         }
@@ -60,8 +55,10 @@ class ImageLoader: Codable, ObservableObject {
             } else {
                 fatalError("Failed to load image data")
             }
+        } catch CocoaError.fileReadNoSuchFile {
+            // do nothing, will create the file when the user first saves
         } catch {
-//            fatalError("Error getting data from url (\(path))")
+            print("Error getting data from url (\(path))")
             return Image("default")
         }
         
