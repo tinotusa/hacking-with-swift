@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct BucketListApp: App {
+    @StateObject var places = PlacesContainer()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(places)
         }
     }
 }

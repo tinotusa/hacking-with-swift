@@ -11,11 +11,41 @@ import LocalAuthentication
 struct AuthenticationView: View {
     @Binding var isAuthenticated: Bool
     let context = LAContext()
+    let imageLoader = ImageLoader()
+    let url = "https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg"
+    @State private var image: Image? = nil
     
     var body: some View {
-        ZStack {
-            // background here
-            Button("Authenticate", action: authenticate)
+        GeometryReader { proxy in
+            ZStack {
+                image?
+                    .resizable()
+                    .scaledToFill()
+                    .blur(radius: 10)
+                
+                image?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: proxy.size.width)
+                    .shadow(radius: 10)
+                
+                VStack {
+                    Spacer()
+                    Button(action: authenticate) {
+                        Text("Authenticate")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+            }
+            .frame(width: proxy.size.width)
+        }
+        .onAppear {
+            if let uiImage = imageLoader.load(string: url) {
+                image = Image(uiImage: uiImage)
+            }
         }
     }
     

@@ -9,10 +9,12 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    @State private var isAuthenticated = false
+    // MARK: - TODO
+    // set to false
+    @State private var isAuthenticated = true
     var body: some View {
         if isAuthenticated {
-            Text("hello world")
+            PlacesList()
         } else {
             AuthenticationView(isAuthenticated: $isAuthenticated)
         }
@@ -22,5 +24,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(PlacesContainer())
     }
 }
