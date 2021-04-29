@@ -11,6 +11,7 @@
 		21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD6BDB261A9C500009EFC1 /* ContentView.swift */; };
 		21CD6BDE261A9C510009EFC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CD6BDD261A9C510009EFC1 /* Assets.xcassets */; };
 		21CD6BE1261A9C510009EFC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CD6BE0261A9C510009EFC1 /* Preview Assets.xcassets */; };
+		21F48B4E263A505800A6293B /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F48B4D263A505800A6293B /* AuthenticationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		21CD6BDD261A9C510009EFC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21CD6BE0261A9C510009EFC1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21CD6BE2261A9C510009EFC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21F48B4D263A505800A6293B /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 		21CD6BD8261A9C500009EFC1 /* BucketList */ = {
 			isa = PBXGroup;
 			children = (
+				21F48B4C263A504D00A6293B /* Views */,
 				21CD6BD9261A9C500009EFC1 /* BucketListApp.swift */,
 				21CD6BDB261A9C500009EFC1 /* ContentView.swift */,
 				21CD6BDD261A9C510009EFC1 /* Assets.xcassets */,
@@ -67,6 +70,14 @@
 				21CD6BE0261A9C510009EFC1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		21F48B4C263A504D00A6293B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				21F48B4D263A505800A6293B /* AuthenticationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			files = (
 				21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */,
 				21CD6BDA261A9C500009EFC1 /* BucketListApp.swift in Sources */,
+				21F48B4E263A505800A6293B /* AuthenticationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

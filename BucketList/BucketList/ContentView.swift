@@ -9,8 +9,13 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
+    @State private var isAuthenticated = false
     var body: some View {
-        Text("hello world")
+        if isAuthenticated {
+            Text("hello world")
+        } else {
+            AuthenticationView(isAuthenticated: $isAuthenticated)
+        }
     }
 }
 
