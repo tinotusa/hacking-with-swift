@@ -26,6 +26,7 @@ class PlacesContainer: ObservableObject, Codable {
         for offset in offsets {
             places.remove(at: offset)
         }
+        print(places)
     }
     
     func move(offsets: IndexSet, newIndex: Int) {

@@ -9,21 +9,24 @@ import SwiftUI
 
 struct PlaceRow: View {
     let place: Place
-    let imageLoader = ImageLoader()
     @State private var showingPlaceDetail = false
     @State private var image: Image? = nil
+    // get url from unsplash ???? search by the name of the place
+    let url = URL(string: "https://www.nationsonline.org/gallery/Switzerland/Sunrise-on-the-Matterhorn.jpg")!
     
     var body: some View {
         ZStack {
             
             NavigationLink(destination: PlaceDetail(place: place), isActive: $showingPlaceDetail) { EmptyView() }
             
-            image?
-                .resizable()
-                .frame(width: 390, height: 200)
-                .cornerRadius(32)
-                .shadow(radius: 10)
-            
+            AsyncImage(url: url) {
+                Text("loading...")
+            }
+            .scaledToFill()
+            .frame(width: 390, height: 200)
+            .cornerRadius(32)
+            .shadow(radius: 10)
+        
             Text(place.name.capitalized)
                 .font(.largeTitle)
                 .bold()
@@ -35,15 +38,6 @@ struct PlaceRow: View {
         .padding(.bottom)
         .onTapGesture {
             showingPlaceDetail = true
-        }
-        .onAppear {
-//            if let uiImage = imageLoader.load(string: "some unsplash url string here based on the name") {
-//                // MARK: - TODO
-//                // fix this
-////                image = Image(uiImage: uiImage)
-//                image = Image("default")
-//            }
-            image = Image("default")
         }
     }
 }

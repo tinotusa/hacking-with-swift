@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		21166C91263A9292001A72A2 /* PlacesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21166C90263A9292001A72A2 /* PlacesContainer.swift */; };
 		21166C93263AA090001A72A2 /* PlaceDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21166C92263AA090001A72A2 /* PlaceDetail.swift */; };
+		2144B081263BABAF00C445F4 /* DeletePlacesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2144B080263BABAF00C445F4 /* DeletePlacesList.swift */; };
+		2144B083263BAC2C00C445F4 /* AddPlaceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2144B082263BAC2C00C445F4 /* AddPlaceSheet.swift */; };
+		2144B085263BB1A700C445F4 /* AverageColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2144B084263BB1A700C445F4 /* AverageColour.swift */; };
+		2144B087263BDA8700C445F4 /* WikipediaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2144B086263BDA8700C445F4 /* WikipediaResult.swift */; };
+		2144B089263BDDAC00C445F4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2144B088263BDDAC00C445F4 /* NetworkManager.swift */; };
+		21AB1EE4263C1A2C00E56CFB /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AB1EE3263C1A2C00E56CFB /* AsyncImage.swift */; };
 		21CD6BDA261A9C500009EFC1 /* BucketListApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD6BD9261A9C500009EFC1 /* BucketListApp.swift */; };
 		21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CD6BDB261A9C500009EFC1 /* ContentView.swift */; };
 		21CD6BDE261A9C510009EFC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CD6BDD261A9C510009EFC1 /* Assets.xcassets */; };
@@ -25,6 +31,12 @@
 /* Begin PBXFileReference section */
 		21166C90263A9292001A72A2 /* PlacesContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesContainer.swift; sourceTree = "<group>"; };
 		21166C92263AA090001A72A2 /* PlaceDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetail.swift; sourceTree = "<group>"; };
+		2144B080263BABAF00C445F4 /* DeletePlacesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePlacesList.swift; sourceTree = "<group>"; };
+		2144B082263BAC2C00C445F4 /* AddPlaceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlaceSheet.swift; sourceTree = "<group>"; };
+		2144B084263BB1A700C445F4 /* AverageColour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageColour.swift; sourceTree = "<group>"; };
+		2144B086263BDA8700C445F4 /* WikipediaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaResult.swift; sourceTree = "<group>"; };
+		2144B088263BDDAC00C445F4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		21AB1EE3263C1A2C00E56CFB /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		21CD6BD6261A9C500009EFC1 /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CD6BD9261A9C500009EFC1 /* BucketListApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BucketListApp.swift; sourceTree = "<group>"; };
 		21CD6BDB261A9C500009EFC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +63,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2144B07F263BAB8800C445F4 /* Places */ = {
+			isa = PBXGroup;
+			children = (
+				21F48B53263A7B2F00A6293B /* PlacesList.swift */,
+				21F48B58263A7D0800A6293B /* PlaceRow.swift */,
+				21166C92263AA090001A72A2 /* PlaceDetail.swift */,
+				2144B080263BABAF00C445F4 /* DeletePlacesList.swift */,
+			);
+			path = Places;
+			sourceTree = "<group>";
+		};
 		21CD6BCD261A9C500009EFC1 = {
 			isa = PBXGroup;
 			children = (
@@ -95,11 +118,10 @@
 		21F48B4C263A504D00A6293B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2144B07F263BAB8800C445F4 /* Places */,
 				21F48B4D263A505800A6293B /* AuthenticationView.swift */,
-				21F48B53263A7B2F00A6293B /* PlacesList.swift */,
-				21F48B58263A7D0800A6293B /* PlaceRow.swift */,
-				21166C92263AA090001A72A2 /* PlaceDetail.swift */,
 				21F48B5A263A817300A6293B /* AddPlace.swift */,
+				2144B082263BAC2C00C445F4 /* AddPlaceSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -108,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				21F48B50263A574D00A6293B /* ImageLoader.swift */,
+				2144B084263BB1A700C445F4 /* AverageColour.swift */,
+				2144B088263BDDAC00C445F4 /* NetworkManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -117,6 +141,7 @@
 			children = (
 				21F48B56263A7B7200A6293B /* Place.swift */,
 				21166C90263A9292001A72A2 /* PlacesContainer.swift */,
+				2144B086263BDA8700C445F4 /* WikipediaResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -124,6 +149,7 @@
 		21F48B5C263A831F00A6293B /* Custom components */ = {
 			isa = PBXGroup;
 			children = (
+				21AB1EE3263C1A2C00E56CFB /* AsyncImage.swift */,
 			);
 			path = "Custom components";
 			sourceTree = "<group>";
@@ -208,7 +234,13 @@
 				21CD6BDC261A9C500009EFC1 /* ContentView.swift in Sources */,
 				21166C91263A9292001A72A2 /* PlacesContainer.swift in Sources */,
 				21CD6BDA261A9C500009EFC1 /* BucketListApp.swift in Sources */,
+				21AB1EE4263C1A2C00E56CFB /* AsyncImage.swift in Sources */,
+				2144B085263BB1A700C445F4 /* AverageColour.swift in Sources */,
+				2144B089263BDDAC00C445F4 /* NetworkManager.swift in Sources */,
 				21F48B59263A7D0800A6293B /* PlaceRow.swift in Sources */,
+				2144B087263BDA8700C445F4 /* WikipediaResult.swift in Sources */,
+				2144B083263BAC2C00C445F4 /* AddPlaceSheet.swift in Sources */,
+				2144B081263BABAF00C445F4 /* DeletePlacesList.swift in Sources */,
 				21166C93263AA090001A72A2 /* PlaceDetail.swift in Sources */,
 				21F48B51263A574D00A6293B /* ImageLoader.swift in Sources */,
 				21F48B57263A7B7200A6293B /* Place.swift in Sources */,

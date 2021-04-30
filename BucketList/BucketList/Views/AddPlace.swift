@@ -32,34 +32,6 @@ import MapKit
 //    }
 //}
 
-struct AddSheet: View {
-    let region: MKCoordinateRegion
-    @State private var name = ""
-    @State private var subtitle = ""
-    
-    @EnvironmentObject var places: PlacesContainer
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View {
-        Form {
-            TextField("Name", text: $name)
-            TextField("Subtitle", text: $subtitle)
-            Button(action: addPlace) {
-                Text("Add")
-            }
-        }
-    }
-    
-    func addPlace() {
-        let newPlace = Place(name: name, coordinates: region.center)
-        places.add(newPlace)
-        dismiss()
-    }
-    
-    func dismiss() {
-        presentationMode.wrappedValue.dismiss()
-    }
-}
 
 struct AddPlace: View {
     @Environment(\.presentationMode) var presentationMode
@@ -94,7 +66,7 @@ struct AddPlace: View {
                 .padding(.trailing)
         }
         .sheet(isPresented: $showAddSheet) {
-            AddSheet(region: region)
+            AddPlaceSheet(region: region)
         }
         .navigationBarHidden(true)
     }

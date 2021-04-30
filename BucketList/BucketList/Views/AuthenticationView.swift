@@ -10,21 +10,19 @@ import LocalAuthentication
 
 struct AuthenticationView: View {
     @Binding var isAuthenticated: Bool
-    let context = LAContext()
-    let imageLoader = ImageLoader()
-    let url = "https://www.fodors.com/wp-content/uploads/2018/10/HERO_UltimateRome_Hero_shutterstock789412159.jpg"
-    @State private var image: Image? = nil
+    let context = LAContext() // try to use combine stuff for this
+    let url = URL(string: "https://theawesomedaily.com/wp-content/uploads/2016/08/pictures-of-tokyo-1.jpg")!
+    @State private var buttonColour: Color = .blue
     
     var body: some View {
         GeometryReader { proxy in
             ZStack {
-                image?
-                    .resizable()
+                AsyncImage(url: url) { Text("loading...") }
                     .scaledToFill()
                     .blur(radius: 10)
+                    .ignoresSafeArea()
                 
-                image?
-                    .resizable()
+                AsyncImage(url: url) { Text("loading...") }
                     .scaledToFit()
                     .frame(width: proxy.size.width)
                     .shadow(radius: 10)
@@ -34,18 +32,13 @@ struct AuthenticationView: View {
                     Button(action: authenticate) {
                         Text("Authenticate")
                             .padding()
-                            .background(Color.blue)
+                            .background(buttonColour)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
                 }
             }
             .frame(width: proxy.size.width)
-        }
-        .onAppear {
-            if let uiImage = imageLoader.load(string: url) {
-                image = Image(uiImage: uiImage)
-            }
         }
     }
     

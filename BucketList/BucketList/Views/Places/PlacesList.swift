@@ -7,28 +7,6 @@
 
 import SwiftUI
 
-struct DeleteList: View {
-    @EnvironmentObject var places: PlacesContainer
-    
-    var body: some View {
-        List {
-            ForEach(places.places) { place in
-                HStack {
-                    Image("default")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                    Text(place.name)
-                }
-            }
-            .onDelete(perform: places.remove)
-            .onMove(perform: places.move)
-        }
-        .toolbar {
-            EditButton()
-        }
-    }
-}
-
 struct PlacesList: View {
     
     @State private var showingAddScreen = false
@@ -39,7 +17,8 @@ struct PlacesList: View {
         NavigationView {
             ZStack {
                 NavigationLink(destination: AddPlace(), isActive: $showingAddScreen) { EmptyView() }
-                NavigationLink(destination: DeleteList(), isActive: $showingDeleteList) { EmptyView() }
+                NavigationLink(destination: DeletePlacesList(), isActive: $showingDeleteList) { EmptyView() }
+                
                 ScrollView {
                     ForEach(places.places, id: \.id) { place in
                         PlaceRow(place: place)

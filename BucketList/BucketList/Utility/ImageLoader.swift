@@ -6,32 +6,31 @@
 //
 
 import SwiftUI
+import Combine
 
 // this is broken somehow
-class ImageLoader {
-    var image: UIImage?
+class ImageLoader: ObservableObject {
+    @Published var image: UIImage?
+    private let url: URL
+    private var cancellable: AnyCancellable?
     
-    func load(string url: String) -> UIImage? {
-        guard let url = URL(string: url) else {
-            print("invalid url")
-            return nil
-        }
-        let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: getImageFromRequest)
-        task.resume()
-
-        return image
+    init(url: URL) {
+        self.url = url
     }
     
-    private func getImageFromRequest(data: Data?, response: URLResponse?, error: Error?) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        }
-        guard let data = data else {
-            print("There was no data found")
-            return
-        }
-        image = UIImage(data: data)
+    deinit {
+        cancel()
+    }
+    
+    func load() {
+        cancellable = URLSession.shared.dataTaskPublisher(for: url)
+            .map { UIImage(data: $0.data) }
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in self?.image = $0 }
+    }
+    
+    func cancel() {
+        cancellable?.cancel()
     }
 }

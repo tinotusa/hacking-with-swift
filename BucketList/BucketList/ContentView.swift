@@ -9,10 +9,11 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    // MARK: - TODO
-    // set to false
-    @State private var isAuthenticated = true
+    @State private var isAuthenticated = false
+    //  get url from somewhere
+    private let url = URL(string: "https://www.australia.com/content/australia/en/places/sydney-and-surrounds/guide-to-sydney/jcr:content/hero/desktop.adapt.1920.high.jpg")!
     var body: some View {
+        
         if isAuthenticated {
             PlacesList()
         } else {
