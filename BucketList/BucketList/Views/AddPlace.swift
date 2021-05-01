@@ -8,31 +8,6 @@
 import SwiftUI
 import MapKit
 
-//struct SearchBar: View {
-//    let placeholder: String
-//    @Binding var text: String
-//
-//    init(_ placeholder: String = "Search", text: Binding<String>) {
-//        self.placeholder = placeholder
-//        _text = text
-//    }
-//
-//    var body: some View {
-//        HStack {
-//            TextField(placeholder, text: $text)
-//                .foregroundColor(.black)
-//            Button(action: {}) {
-//                Image(systemName: "magnifyingglass")
-//                    .font(.title2)
-//            }
-//        }
-//        .padding()
-//        .background(Color.white.opacity(0.6))
-//        .cornerRadius(20)
-//    }
-//}
-
-
 struct AddPlace: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var places: PlacesContainer
@@ -42,9 +17,12 @@ struct AddPlace: View {
         center:
             CLLocationCoordinate2D(latitude: 25.734968, longitude: 134.489563),
         span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100))
-//    @State private var showingSearchBar = false
-    @State private var text = ""
+
+    @State private var searchText = ""
     @State private var showAddSheet = false
+    @State private var latitude = 0.0
+    @State private var longitude = 0.0
+    
     
     var body: some View {
         ZStack(alignment: .center) {
@@ -57,29 +35,31 @@ struct AddPlace: View {
                 .stroke(Color.blue.opacity(0.4))
                 .frame(width: 30, height: 30)
             
-            backButton
-                .floatView(to: .topLeft)
-                .padding(.leading)
+            VStack {
+                HStack {
+                    backButton
+    
+                    Spacer()
+                    TextField("Place", text: $searchText, onCommit: searchForPlace)
+                        .padding()
+                        .foregroundColor(.black)
+                        .background(Color.white.opacity(0.6))
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                Spacer()
+            }
             
             addButton
                 .floatView(to: .bottomRight)
                 .padding(.trailing)
         }
         .sheet(isPresented: $showAddSheet) {
-            AddPlaceSheet(region: region)
+            AddPlaceSheet(name: $searchText, region: region)
         }
         .navigationBarHidden(true)
     }
-    
-//    var searchButton: some View {
-//        Button(action: { showingSearchBar.toggle() }) {
-//            Image(systemName: "magnifyingglass")
-//                .font(.largeTitle)
-//                .foregroundColor(.blue)
-//        }
-//
-//    }
-//
+
     var backButton: some View {
         Button(action: dismiss) {
             Image(systemName: "chevron.left")
@@ -99,6 +79,57 @@ struct AddPlace: View {
                 .background(Color.blue)
                 .foregroundColor(.white)
                 .clipShape(Circle())
+        }
+    }
+    
+    func searchForPlace() {
+        let searchText = self.searchText.trimmingCharacters(in: .whitespacesAndNewlines).capitalized
+        if searchText.isEmpty { return }
+        
+        // url from wiki
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "en.wikipedia.org"
+        components.path = "/w/api.php"
+        let parameters = [
+            "action": "query",
+            "prop": "coordinates",
+            "titles": searchText,
+            "format": "json"
+        ]
+        components.queryItems = parameters.map { (key, value) in
+            URLQueryItem.init(name: key, value: value)
+        }
+        let url = components.url
+        // get json from wiki
+        // move map to new lat and lon
+        loadJSON(from: url!.absoluteString) { (result: Result<WikipediaResult, NetworkError>) in
+            switch result {
+            case .success(let searchResult):
+                if let test = searchResult.query.pages.first?.value {
+                    latitude = test.coordinates.first!.lat
+                    longitude = test.coordinates.first!.lon
+                    withAnimation {
+                        region = MKCoordinateRegion(
+                            center:
+                                CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+                    }
+                }
+            case .failure(let error):
+                switch error {
+                case .url: print("invalid url")
+                case .server(let error): print(error.localizedDescription)
+                case .response(let response): print("Response error: ", response)
+                case .decoding(let error):
+                    withAnimation {
+                        region = MKCoordinateRegion(
+                            center: region.center,
+                            span: MKCoordinateSpan(latitudeDelta: 100, longitudeDelta: 100))
+                    }
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }

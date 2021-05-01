@@ -9,12 +9,14 @@ import SwiftUI
 import MapKit
 
 struct AddPlaceSheet: View {
+    @Binding var name: String
     let region: MKCoordinateRegion
-    @State private var name = ""
-    @State private var subtitle = ""
     
+    @State private var subtitle = ""
     @EnvironmentObject var places: PlacesContainer
     @Environment(\.presentationMode) var presentationMode
+    
+//    init(
     
     var body: some View {
         Form {
@@ -33,7 +35,8 @@ struct AddPlaceSheet: View {
     }
     
     func addPlace() {
-        let newPlace = Place(name: name, coordinates: region.center)
+        var newPlace = Place(name: name, coordinates: region.center)
+        newPlace.subtitle = subtitle
         places.add(newPlace)
         dismiss()
     }
@@ -46,6 +49,7 @@ struct AddPlaceSheet: View {
 struct AddPlaceSheet_Previews: PreviewProvider {
     static var previews: some View {
         AddPlaceSheet(
+            name: .constant("no name"),
             region: MKCoordinateRegion(
                 center: Place.example.coordinates,
                 span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)

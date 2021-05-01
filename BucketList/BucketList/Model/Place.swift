@@ -10,20 +10,23 @@ import CoreLocation
 struct Place: Codable, Identifiable {
     let id = UUID()
     var name: String
+    var subtitle: String
     var coordinates: CLLocationCoordinate2D
 
     init(name: String, coordinates: CLLocationCoordinate2D) {
         self.name = name
         self.coordinates = coordinates
+        self.subtitle = ""
     }
     
     enum CodingKeys: CodingKey  {
-        case name, longitude, latitude
+        case name, subtitle, longitude, latitude
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
+        subtitle = try container.decode(String.self, forKey: .subtitle)
         let longitude = try container.decode(Double.self, forKey: .longitude)
         let latitude = try container.decode(Double.self, forKey: .latitude)
         coordinates = CLLocationCoordinate2D()
@@ -34,6 +37,7 @@ struct Place: Codable, Identifiable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
+        try container.encode(subtitle, forKey: .subtitle)
         let latitude = coordinates.latitude
         let longitude = coordinates.longitude
         try container.encode(latitude, forKey: .latitude)

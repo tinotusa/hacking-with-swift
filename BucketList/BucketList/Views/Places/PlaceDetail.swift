@@ -9,21 +9,15 @@ import SwiftUI
 import MapKit
 
 struct PlaceDetail: View {
-    @Environment(\.presentationMode) var presentationMode
+    
     let place: Place
     
-    var region: MKCoordinateRegion {
-        MKCoordinateRegion(
-            center: place.coordinates,
-            span: MKCoordinateSpan(latitudeDelta: 0.6, longitudeDelta: 0.6))
-    }
+    @Environment(\.presentationMode) var presentationMode
     @State private var nearbyPlaces: WikipediaResult? = nil
-    enum LoadingState {
-        case loading, loaded, error
-    }
-    
     @State private var loadingState: LoadingState = .loading
+    
     let url = URL(string: "https://images.unsplash.com/photo-1619720655461-ba20fa0cfec9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=691&q=80")!
+    
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
@@ -31,40 +25,24 @@ struct PlaceDetail: View {
                     .frame(height: 300)
                     .ignoresSafeArea()
                 
-                AsyncImage(url: url) { Text("loading...") }
-                    .scaledToFill()
-                    .frame(width: 200, height: 200)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                    .padding(.top, -150)
+                HStack {
+                    Spacer()
+                
+                    AsyncImage(url: url) { Text("loading...") }
+                        .scaledToFill()
+                        .frame(width: 200, height: 200)
+                        .clipShape(Circle())
+                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                        .padding(.top, -150)
+                    Spacer()
+                }
                 
                 Text("Near by Places")
                     .font(.largeTitle)
                 
                 switch loadingState {
                 case .loaded:
-                    List {
-                        ForEach(Array(nearbyPlaces!.query.pages.values)) { page in
-                            HStack {
-                                if page.thumbnailURL != nil {
-                                    AsyncImage(url: url) {
-                                        Text("loading ...")
-                                    }
-                                    .scaledToFill()
-                                    .frame(width: 60, height: 60)
-                                    .cornerRadius(10)
-                                }
-                                VStack(alignment: .leading) {
-                                    Text(page.title)
-                                        .font(.headline)
-                                    Spacer()
-                                    Text(page.description)
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                        }
-                    }
+                    NearbyList(pages: Array(nearbyPlaces!.query.pages.values))
                 case .loading:
                     // try to show a loading icon here
                     Text("loading...")
@@ -80,46 +58,7 @@ struct PlaceDetail: View {
                 .padding(.leading)
         }
         .navigationBarHidden(true)
-        .onAppear {
-            var components = URLComponents()
-            components.scheme = "https"
-            components.host = "en.wikipedia.org"
-            components.path = "/w/api.php"
-            components.queryItems = [
-                .init(name: "action", value: "query"),
-                .init(name: "generator", value: "geosearch"),
-                .init(name: "prop", value: "coordinates|pageimages|pageterms"),
-                .init(name: "ggscoord", value: "\(place.coordinates.latitude)|\(place.coordinates.longitude)"),
-                .init(name: "format", value: "json")
-            ]
-            let url = components.url!
-            loadJSON(from: url.absoluteString) { (result: Result<WikipediaResult, NetworkError>) in
-                switch result {
-                case .success(let wikiResult):
-                    nearbyPlaces = wikiResult
-                    loadingState = .loaded
-
-                case .failure(let error):
-                    switch error {
-                    case .url:
-                        print("invalid url")
-                        loadingState = .error
-                    case .server(let serverError):
-                        print("server error")
-                        print(serverError.localizedDescription)
-                        loadingState = .error
-                    case .response(let response):
-                        let httpResponse = response as! HTTPURLResponse
-                        print(httpResponse.statusCode)
-                        loadingState = .error
-                    case .decoding(let decodingError):
-                        print("decoding error")
-                        print(decodingError.localizedDescription)
-                        loadingState = .error
-                    }
-                }
-            }
-        }
+        .onAppear(perform: loadNearbyPlaces)
     }
     
     var backButton: some View {
@@ -133,6 +72,58 @@ struct PlaceDetail: View {
     func dismiss() {
         presentationMode.wrappedValue.dismiss()
     }
+    
+    var region: MKCoordinateRegion {
+        MKCoordinateRegion(
+            center: place.coordinates,
+            span: MKCoordinateSpan(latitudeDelta: 0.6, longitudeDelta: 0.6))
+    }
+    
+    enum LoadingState {
+        case loading, loaded, error
+    }
+    
+    func loadNearbyPlaces() {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "en.wikipedia.org"
+        components.path = "/w/api.php"
+        components.queryItems = [
+            .init(name: "action", value: "query"),
+            .init(name: "generator", value: "geosearch"),
+            .init(name: "prop", value: "coordinates|pageimages|pageterms"),
+            .init(name: "ggscoord", value: "\(place.coordinates.latitude)|\(place.coordinates.longitude)"),
+            .init(name: "format", value: "json")
+        ]
+        let url = components.url!
+        loadJSON(from: url.absoluteString) { (result: Result<WikipediaResult, NetworkError>) in
+            switch result {
+            case .success(let wikiResult):
+                nearbyPlaces = wikiResult
+                loadingState = .loaded
+
+            case .failure(let error):
+                switch error {
+                case .url:
+                    print("invalid url")
+                    loadingState = .error
+                case .server(let serverError):
+                    print("server error")
+                    print(serverError.localizedDescription)
+                    loadingState = .error
+                case .response(let response):
+                    let httpResponse = response as! HTTPURLResponse
+                    print(httpResponse.statusCode)
+                    loadingState = .error
+                case .decoding(let decodingError):
+                    print("decoding error")
+                    print(decodingError.localizedDescription)
+                    loadingState = .error
+                }
+            }
+        }
+    }
+    
 }
 
 struct PlaceDetail_Previews: PreviewProvider {
