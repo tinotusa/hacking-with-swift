@@ -12,20 +12,21 @@ struct PlaceRow: View {
     @State private var showingPlaceDetail = false
     @State private var image: Image? = nil
     // get url from unsplash ???? search by the name of the place
-    let url = URL(string: "https://www.nationsonline.org/gallery/Switzerland/Sunrise-on-the-Matterhorn.jpg")!
+    @State private var imageURL: URL?
     
     var body: some View {
         ZStack {
-            
             NavigationLink(destination: PlaceDetail(place: place), isActive: $showingPlaceDetail) { EmptyView() }
             
-            AsyncImage(url: url) {
-                Text("loading...")
+            if imageURL != nil {
+                AsyncImage(url: imageURL!) {
+                    Text("loading...")
+                }
+                .scaledToFill()
+                .frame(width: 390, height: 200)
+                .cornerRadius(32)
+                .shadow(radius: 10)
             }
-            .scaledToFill()
-            .frame(width: 390, height: 200)
-            .cornerRadius(32)
-            .shadow(radius: 10)
         
             Text(place.name.capitalized)
                 .font(.largeTitle)
@@ -38,6 +39,32 @@ struct PlaceRow: View {
         .padding(.bottom)
         .onTapGesture {
             showingPlaceDetail = true
+        }
+        .onAppear(perform: loadBackgroundImage)
+    }
+    
+    func loadBackgroundImage() {
+    
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.unsplash.com"
+        components.path = "/photos/random"
+        let parameters = [
+            "query": "\(place.name)",
+            "format": "json",
+            "client_id": accessKey
+        ]
+        components.queryItems = parameters.map { (key, value) in
+            URLQueryItem(name: key, value: value)
+        }
+        
+        loadJSON(from: components.url!.absoluteString) { (result: Result<UnsplashResult, NetworkError>) in
+            switch result {
+            case .success(let result):
+                imageURL = URL(string: result.urls["regular"] ?? "")
+            case .failure(_):
+                print("something went wrong")
+            }
         }
     }
 }

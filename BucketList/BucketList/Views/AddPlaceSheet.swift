@@ -16,8 +16,6 @@ struct AddPlaceSheet: View {
     @EnvironmentObject var places: PlacesContainer
     @Environment(\.presentationMode) var presentationMode
     
-//    init(
-    
     var body: some View {
         Form {
             TextField("Name", text: $name)

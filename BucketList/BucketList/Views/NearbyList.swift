@@ -18,12 +18,14 @@ struct NearbyList: View {
             ForEach(pages) { page in
                 HStack {
                     if page.thumbnailURL != nil {
-                        AsyncImage(url: url) {
-                            Text("loading ...")
+                        if page.thumbnailURL != nil {
+                            AsyncImage(url: URL(string: page.thumbnailURL!)!) {
+                                Text("loading ...")
+                            }
+                            .scaledToFill()
+                            .frame(width: 60, height: 60)
+                            .cornerRadius(10)
                         }
-                        .scaledToFill()
-                        .frame(width: 60, height: 60)
-                        .cornerRadius(10)
                     }
                     VStack(alignment: .leading) {
                         Text(page.title)

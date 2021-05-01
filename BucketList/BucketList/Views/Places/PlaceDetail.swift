@@ -15,8 +15,7 @@ struct PlaceDetail: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var nearbyPlaces: WikipediaResult? = nil
     @State private var loadingState: LoadingState = .loading
-    
-    let url = URL(string: "https://images.unsplash.com/photo-1619720655461-ba20fa0cfec9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=691&q=80")!
+    @State private var imageURL: String?
     
     var body: some View {
         ZStack {
@@ -27,13 +26,14 @@ struct PlaceDetail: View {
                 
                 HStack {
                     Spacer()
-                
-                    AsyncImage(url: url) { Text("loading...") }
-                        .scaledToFill()
-                        .frame(width: 200, height: 200)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                        .padding(.top, -150)
+                    if imageURL != nil {
+                        AsyncImage(url: URL(string: imageURL!)!) { Text("loading...") }
+                            .scaledToFill()
+                            .frame(width: 200, height: 200)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                            .padding(.top, -150)
+                    }
                     Spacer()
                 }
                 
@@ -59,6 +59,7 @@ struct PlaceDetail: View {
         }
         .navigationBarHidden(true)
         .onAppear(perform: loadNearbyPlaces)
+        .onAppear(perform: loadPlaceImage)
     }
     
     var backButton: some View {
@@ -82,6 +83,31 @@ struct PlaceDetail: View {
     enum LoadingState {
         case loading, loaded, error
     }
+    
+    func loadPlaceImage() {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.unsplash.com"
+        components.path = "/photos/random"
+        let parameters = [
+            "query": "\(place.name)",
+            "format": "json",
+            "client_id": accessKey
+        ]
+        components.queryItems = parameters.map { (key, value) in
+            URLQueryItem(name: key, value: value)
+        }
+        
+        loadJSON(from: components.url!.absoluteString) { (result: Result<UnsplashResult, NetworkError>) in
+            switch result {
+            case .success(let result):
+                imageURL = result.urls["regular"]
+            case .failure(_):
+                print("something went wrong")
+            }
+        }
+    }
+    
     
     func loadNearbyPlaces() {
         var components = URLComponents()

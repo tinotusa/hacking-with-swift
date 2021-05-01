@@ -109,11 +109,13 @@ struct AddPlace: View {
                 if let test = searchResult.query.pages.first?.value {
                     latitude = test.coordinates.first!.lat
                     longitude = test.coordinates.first!.lon
-                    withAnimation {
-                        region = MKCoordinateRegion(
-                            center:
-                                CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            region = MKCoordinateRegion(
+                                center:
+                                    CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
+                                span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10))
+                        }
                     }
                 }
             case .failure(let error):

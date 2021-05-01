@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum NetworkError: Error {
     case url, server(Error), response(URLResponse), decoding(Error)
