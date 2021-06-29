@@ -15,32 +15,43 @@ enum ProspectTab: String {
 
 struct ProspectsTab: View {
     @EnvironmentObject var prospectList: ProspectList
+    @State private var showingAddScreen = false
     var tab: ProspectTab
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(prospectList.prospects.indices, id: \.self) { index in
-                    if tab == .contacted {
-                        if prospectList.prospects[index].isContacted {
+            VStack {
+                NavigationLink(
+                    destination: AddProspectView(),
+                    isActive: $showingAddScreen
+                ) {
+                    EmptyView()
+                }
+                
+                List {   
+                    ForEach(prospectList.prospects.indices, id: \.self) { index in
+                        if tab == .contacted {
+                            if prospectList.prospects[index].isContacted {
+                                ProspectRow(prospect: $prospectList.prospects[index])
+                            }
+                        } else {
                             ProspectRow(prospect: $prospectList.prospects[index])
                         }
-                    } else {
-                        ProspectRow(prospect: $prospectList.prospects[index])
                     }
+                    .onDelete(perform: prospectList.remove)
                 }
-                .onDelete(perform: prospectList.remove)
+                .navigationTitle(tab.rawValue)
+                .navigationBarItems(trailing: HStack {
+                    EditButton()
+                    
+                    Button(action: {
+                        showingAddScreen = true
+    //                    prospectList.add(Prospect(name: "test\(Int.random(in: 0...100))", email: "test@email.com"))
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                })
             }
-            .navigationTitle(tab.rawValue)
-            .navigationBarItems(trailing: HStack {
-                EditButton()
-                
-                Button(action: {
-                    prospectList.add(Prospect(name: "test\(Int.random(in: 0...100))", email: "test@email.com"))
-                }) {
-                    Image(systemName: "plus")
-                }
-            })
         }
     }
     
@@ -57,5 +68,6 @@ struct ProspectsTab: View {
 struct ProspectsTab_Previews: PreviewProvider {
     static var previews: some View {
         ProspectsTab(tab: .all)
+            .environmentObject(ProspectList())
     }
 }

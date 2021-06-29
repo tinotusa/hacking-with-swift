@@ -14,17 +14,15 @@ struct MyDetailsView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Group {
-                    TextField("Name", text: $name)
-                    TextField("Email", text: $email)
-                }
-                .disableAutocorrection(true)
+                TextField("Name", text: $name)
+                TextField("Email", text: $email)
                 if fieldsHaveText {
                     Text("Your QRCode")
                     QRCodeView(text: details)
                 }
                 Spacer()
             }
+            .disableAutocorrection(true)
             .padding(.horizontal)
             .navigationTitle("My Details")
         }
@@ -35,8 +33,8 @@ struct MyDetailsView: View {
     }
     
     private var fieldsHaveText: Bool {
-        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        let email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let name = name.trimmingCharacters(in: .newlines)
+        let email = email.trimmingCharacters(in: .newlines)
         return !name.isEmpty && !email.isEmpty
     }
 }
