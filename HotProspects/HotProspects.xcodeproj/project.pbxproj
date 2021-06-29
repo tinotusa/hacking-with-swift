@@ -15,6 +15,8 @@
 		21F351E0268AD63C005B074D /* ProspectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F351DF268AD63C005B074D /* ProspectList.swift */; };
 		21F351E2268AD673005B074D /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F351E1268AD673005B074D /* Prospect.swift */; };
 		21F351E4268AD691005B074D /* ProspectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F351E3268AD691005B074D /* ProspectRow.swift */; };
+		21F351E6268AED72005B074D /* MyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F351E5268AED72005B074D /* MyDetailsView.swift */; };
+		21F351E8268AED91005B074D /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F351E7268AED91005B074D /* QRCodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		21F351DF268AD63C005B074D /* ProspectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectList.swift; sourceTree = "<group>"; };
 		21F351E1268AD673005B074D /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
 		21F351E3268AD691005B074D /* ProspectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectRow.swift; sourceTree = "<group>"; };
+		21F351E5268AED72005B074D /* MyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDetailsView.swift; sourceTree = "<group>"; };
+		21F351E7268AED91005B074D /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 			children = (
 				21F351DB268AD608005B074D /* ProspectsTab.swift */,
 				21F351E3268AD691005B074D /* ProspectRow.swift */,
+				21F351E5268AED72005B074D /* MyDetailsView.swift */,
+				21F351E7268AED91005B074D /* QRCodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -170,9 +176,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21F351E6268AED72005B074D /* MyDetailsView.swift in Sources */,
 				2172B9ED261D7779008CC57E /* ContentView.swift in Sources */,
 				21F351E2268AD673005B074D /* Prospect.swift in Sources */,
 				21F351E0268AD63C005B074D /* ProspectList.swift in Sources */,
+				21F351E8268AED91005B074D /* QRCodeView.swift in Sources */,
 				2172B9EB261D7779008CC57E /* HotProspectsApp.swift in Sources */,
 				21F351E4268AD691005B074D /* ProspectRow.swift in Sources */,
 				21F351DC268AD608005B074D /* ProspectsTab.swift in Sources */,

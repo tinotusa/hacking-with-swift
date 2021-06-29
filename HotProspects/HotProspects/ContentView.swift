@@ -20,7 +20,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Contacted", systemImage: "star")
                 }
-            Text("My details")
+            MyDetailsView()
                 .tabItem {
                     Label("My Details", systemImage: "person")
                 }
