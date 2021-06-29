@@ -24,9 +24,11 @@ struct AddProspectView: View {
         .disableAutocorrection(true)
         .navigationTitle("Add new person")
         .navigationBarItems(trailing:
-            Button("Scan QRCode") {
-                // show qrcode scanner
-            }
+                                Button {
+                                    // add qr code scanner
+                                } label: {
+                                    Image(systemName: "qrcode")
+                                }
         )
     }
     
