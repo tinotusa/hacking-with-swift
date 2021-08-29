@@ -5,135 +5,172 @@
 //  Created by Tino on 8/4/21.
 //
 
+// MARK: - TODO
+// implement loading and saving
+// add timer
+// make ui pretty
+
 import SwiftUI
 
-// MARK: -- TODO
-// remove cards when swiped
-//
-
-class UserData: ObservableObject {
-    var correctCount = 0
-    var incorrectCount = 0
-    @Published var currentQuestion = 0
-    
-    private(set) var cards: [Card] = [
-        Card(question: "hello a", answer: "answer a"),
-        Card(question: "hello b", answer: "answer b"),
-        Card(question: "hello c", answer: "answer c")
-    ]
-    
-    init() {
-        load()
-    }
-    
-    func load() {
-        // todo
-    }
-    
-    func save() {
-        // todo
-    }
-    
-    var totalCards: Int {
-        return cards.count
-    }
-    
-    var currentCard: Card {
-        cards[currentQuestion]
-    }
-}
-
-struct CardView: View {
-    var card: Card
-    
-    @State private var position = CGSize()
-    @State private var isDragging = false
-    @State private var showingAnswer = false
+struct AddQuestionView: View {
+    @State private var question = ""
+    @State private var answer = ""
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
     
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                VStack {
-                    Text(card.question)
-                    if showingAnswer {
-                        Text(card.answer)
+        NavigationView {
+            Form {
+                TextField("Question", text: $question)
+                TextField("Answer", text: $answer)
+                
+                Button("Add") {
+                    let card = Card(question: question, answer: answer)
+                    userData.addCard(card)
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .disabled(!allFieldsFilled)
+            }
+            .navigationTitle("Add Question")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") {
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
-            .frame(width: proxy.size.width, height: proxy.size.height)
-            .padding()
-            .foregroundColor(isDragging ? .green : .red)
-            .background(Color.white)
-            .cornerRadius(5)
-            .rotationEffect(Angle(degrees: Double(position.width) * 0.2))
-            .offset(position)
-            .onTapGesture {
-                print("tapped")
-                withAnimation {
-                    showingAnswer.toggle()
-                }
-            }
-            .gesture(
-                DragGesture()
-                    .onEnded { _ in
-                        isDragging = false
-                        if abs(position.width) > proxy.size.width / 2 {
-                            // remove card
-                            userData.currentQuestion += 1
-                            print(userData.currentQuestion)
-                            if position.width < 0 {
-                                userData.incorrectCount += 1
-                            } else {
-                                userData.correctCount += 1
-                            }
-                        }
-                        withAnimation {
-                            position = CGSize()
-                        }
-                    }
-                    .onChanged { value in
-                        withAnimation {
-                            position.width = value.translation.width
-                        }
-                        isDragging = true
-                    }
-            )
         }
-        .frame(width: 300, height: 150)
+        .navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    private var allFieldsFilled: Bool {
+        !question.isEmpty && !answer.isEmpty
     }
 }
 
-struct Card: Codable, Identifiable {
-    let id = UUID()
+struct EditScreen: View {
+    @EnvironmentObject var userData: UserData
+    @State private var showingAddQuestionScreen = false
+    @Environment(\.presentationMode) var presentationMode
     
-    enum CodingKeys: CodingKey {
-        case question, answer
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(userData.cards) { card in
+                    VStack {
+                        Text("Q: \(card.question)")
+                            .font(.headline)
+                        Text("A: \(card.answer)")
+                            .font(.caption)
+                    }
+                    
+                }
+                .onDelete(perform: userData.remove)
+            }
+            .navigationTitle("Questions")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add Question") {
+                        showingAddQuestionScreen = true
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Close") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
+            .sheet(isPresented: $showingAddQuestionScreen) {
+                AddQuestionView()
+            }
+        }
     }
-    let question: String
-    let answer: String
 }
+
 
 struct ContentView: View {
     @EnvironmentObject var userData: UserData
+    @State private var showingEditScreen = false
     
     var body: some View {
         ZStack {
             Color.gray
                 .ignoresSafeArea()
+            
             // show cards
             VStack {
-                ForEach(userData.cards.indices) { index in
-                    CardView(card: userData.cards[index])
+                ZStack {
+                    ForEach(userData.cards) { card in
+                        CardView(card: card)
+                            .offset(x: 0, y: CGFloat(userData.cards.count - (getIndex(of: card, in: userData.cards) ?? 0) * 10))
+                            .disabled(getIndex(of: card, in: userData.cards) ?? 0 < userData.cards.count - 1)
+                    }
                 }
             }
-            if userData.currentQuestion >= userData.totalCards {
-                Text("game over")
+            
+            editQuestionsButton
+            resetButton
+            
+            if userData.cards.isEmpty {
+                GameOverView()
             }
         }
         .background(Color.gray)
-        // create card information
-        // add swipe to answer
+        .sheet(isPresented: $showingEditScreen) {
+            EditScreen()
+        }
+    }
+    
+    private func getIndex(of card: Card, in cards: [Card]) -> Int? {
+        if let index = cards.firstIndex(where: { $0.id == card.id }) {
+            return index
+        }
+        return nil
+    }
+    
+    private var editQuestionsButton: some View {
+        VStack {
+            HStack {
+                Spacer()
+                
+                Button {
+                    showingEditScreen = true
+                } label: {
+                    Text("edit questions")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .clipShape(Circle())
+                }
+            }
+            Spacer()
+        }
+        .padding(.vertical)
+    }
+    
+    private var resetButton: some View {
+        VStack {
+            HStack {
+                Button {
+                    userData.reset()
+                    
+                } label: {
+                    Text("Reset")
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .clipShape(Circle())
+                }
+                Spacer()
+            }
+            Spacer()
+        }
+        .padding(.vertical)
     }
 }
 
