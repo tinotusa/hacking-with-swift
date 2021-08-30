@@ -6,7 +6,6 @@
 //
 
 // MARK: - TODO
-// implement loading and saving
 // add timer
 // make ui pretty
 
@@ -45,7 +44,9 @@ struct AddQuestionView: View {
     }
     
     private var allFieldsFilled: Bool {
-        !question.isEmpty && !answer.isEmpty
+        let question = question.trimmingCharacters(in: .whitespacesAndNewlines)
+        let answer = answer.trimmingCharacters(in: .whitespacesAndNewlines)
+        return !question.isEmpty && !answer.isEmpty
     }
 }
 

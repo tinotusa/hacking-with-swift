@@ -7,15 +7,11 @@
 
 import Foundation
 
-
-// MARK: -- TODO
-// remove cards when swiped
-//
-
 class UserData: ObservableObject {
     var correctCount = 0
     var incorrectCount = 0
     var totalCards = 0
+    static var saveFileName = "cards.data"
     
     // model
     @Published private(set) var cards: [Card] = [
@@ -30,11 +26,31 @@ class UserData: ObservableObject {
     }
     
     func load() {
-        // todo
+        guard var saveFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            print("Error: \(#function)\nFailed to get documents directory")
+            return
+        }
+        do {
+            saveFileURL = saveFileURL.appendingPathComponent(Self.saveFileName)
+            let data = try Data(contentsOf: saveFileURL)
+            cards = try JSONDecoder().decode([Card].self, from: data)
+        } catch CocoaError.fileReadNoSuchFile {
+            // do nothing
+        } catch {
+            print(error)
+        }
     }
     
     func save() {
-        // todo
+        do {
+            let data = try JSONEncoder().encode(cards)
+            var saveFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            saveFileURL = saveFileURL.appendingPathComponent(Self.saveFileName)
+            try data.write(to: saveFileURL, options: [.atomic, .completeFileProtection])
+        } catch {
+            print("error: \(error.localizedDescription)")
+        }
+        
     }
     
     func remove(_ card: Card) {
@@ -45,17 +61,15 @@ class UserData: ObservableObject {
     
     func remove(atOffsets offsets: IndexSet) {
         offsets.forEach { cards.remove(at: $0) }
+        save()
     }
     
     func reset() {
-        cards = [
-            Card(question: "hello a", answer: "answer a"),
-            Card(question: "hello b", answer: "answer b"),
-            Card(question: "hello c", answer: "answer c")
-        ]
+        load()
     }
     
     func addCard(_ card: Card) {
         cards.append(card)
+        save()
     }
 }

@@ -62,12 +62,12 @@
 			children = (
 				21AE16AB261E8224003F89F3 /* FlashzillaApp.swift */,
 				21AE16AD261E8224003F89F3 /* ContentView.swift */,
+				21BB8C3426DB745800F66945 /* Card.swift */,
 				21BB8C3626DB746C00F66945 /* Views */,
 				21BB8C3926DB749900F66945 /* View Model */,
 				21AE16AF261E8225003F89F3 /* Assets.xcassets */,
 				21AE16B4261E8225003F89F3 /* Info.plist */,
 				21AE16B1261E8225003F89F3 /* Preview Content */,
-				21BB8C3426DB745800F66945 /* Card.swift */,
 			);
 			path = Flashzilla;
 			sourceTree = "<group>";
