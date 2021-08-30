@@ -11,13 +11,14 @@ struct GameOverView: View {
     @EnvironmentObject var userData: UserData
     
     private var total: Int { userData.totalCards }
+    var action: (() -> Void)?
     
     var body: some View {
         VStack {
             Text("Score: \(userData.correctCount) / \(total)")
             HStack {
                 Button("Play again") {
-                    userData.reset()
+                    action?()
                 }
             }
         }

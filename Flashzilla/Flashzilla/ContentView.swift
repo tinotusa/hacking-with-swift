@@ -6,97 +6,52 @@
 //
 
 // MARK: - TODO
-// add timer
+// add sounds (maybe haptics when incorrect)
+// move extensions (code clean up)
 // make ui pretty
 
 import SwiftUI
 
-struct AddQuestionView: View {
-    @State private var question = ""
-    @State private var answer = ""
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var userData: UserData
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                TextField("Question", text: $question)
-                TextField("Answer", text: $answer)
-                
-                Button("Add") {
-                    let card = Card(question: question, answer: answer)
-                    userData.addCard(card)
-                    presentationMode.wrappedValue.dismiss()
-                }
-                .disabled(!allFieldsFilled)
+extension View {
+    func appEnteredBackground(_ action: (() -> Void)?) -> some View {
+        self
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+                action?()
             }
-            .navigationTitle("Add Question")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
-            }
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
-    
-    private var allFieldsFilled: Bool {
-        let question = question.trimmingCharacters(in: .whitespacesAndNewlines)
-        let answer = answer.trimmingCharacters(in: .whitespacesAndNewlines)
-        return !question.isEmpty && !answer.isEmpty
     }
 }
 
-struct EditScreen: View {
-    @EnvironmentObject var userData: UserData
-    @State private var showingAddQuestionScreen = false
-    @Environment(\.presentationMode) var presentationMode
-    
-    var body: some View {
-        NavigationView {
-            List {
-                ForEach(userData.cards) { card in
-                    VStack {
-                        Text("Q: \(card.question)")
-                            .font(.headline)
-                        Text("A: \(card.answer)")
-                            .font(.caption)
-                    }
-                    
-                }
-                .onDelete(perform: userData.remove)
+extension View {
+    func appEnteredForeground(_ action: (() -> Void)?) -> some View {
+        self
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                action?()
             }
-            .navigationTitle("Questions")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Add Question") {
-                        showingAddQuestionScreen = true
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Close") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
-            }
-            .sheet(isPresented: $showingAddQuestionScreen) {
-                AddQuestionView()
-            }
-        }
     }
 }
 
+
+struct Stacked: ViewModifier {
+    let index: Int
+    let total: Int
+    let offsetAmount = 10
+    func body(content: Content) -> some View {
+        content
+            .offset(x: 0, y: CGFloat(total - index * offsetAmount))
+    }
+}
+
+extension View {
+    func stacked(index: Int, total: Int) -> some View {
+        self.modifier(Stacked(index: index, total: total))
+    }
+}
 
 struct ContentView: View {
     @EnvironmentObject var userData: UserData
     @State private var showingEditScreen = false
+    @State private var timeIsPaused = false
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
@@ -108,22 +63,39 @@ struct ContentView: View {
                 ZStack {
                     ForEach(userData.cards) { card in
                         CardView(card: card)
-                            .offset(x: 0, y: CGFloat(userData.cards.count - (getIndex(of: card, in: userData.cards) ?? 0) * 10))
-                            .disabled(getIndex(of: card, in: userData.cards) ?? 0 < userData.cards.count - 1)
+                            .stacked(index: userData.index(of: card), total: userData.totalCards)
+                            .disabled(userData.index(of: card) < userData.cards.count - 1)
                     }
                 }
             }
+            .disabled(userData.gameIsOver)
             
+            countdownTimer
             editQuestionsButton
             resetButton
             
-            if userData.cards.isEmpty {
-                GameOverView()
+            if userData.gameIsOver {
+                GameOverView() {
+                    userData.reset()
+                }
             }
         }
-        .background(Color.gray)
         .sheet(isPresented: $showingEditScreen) {
             EditScreen()
+        }
+        .onReceive(timer) { _ in
+            if timeIsPaused || userData.gameIsOver {
+                return
+            }
+            if userData.timeRemaining > 0 {
+                userData.timeRemaining -=  1
+            }
+        }
+        .appEnteredBackground {
+            timeIsPaused = true
+        }
+        .appEnteredForeground {
+            timeIsPaused = false
         }
     }
     
@@ -159,7 +131,6 @@ struct ContentView: View {
             HStack {
                 Button {
                     userData.reset()
-                    
                 } label: {
                     Text("Reset")
                         .padding()
@@ -167,6 +138,25 @@ struct ContentView: View {
                         .background(Color.blue)
                         .clipShape(Circle())
                 }
+                Spacer()
+            }
+            Spacer()
+        }
+        .padding(.vertical)
+    }
+    
+    private var formattedTime: String {
+        let minutes = userData.timeRemaining / 60
+        let seconds = userData.timeRemaining % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+
+    private var countdownTimer: some View {
+        VStack {
+            HStack {
+                Spacer()
+                Text("\(formattedTime)")
+                    .font(.largeTitle)
                 Spacer()
             }
             Spacer()
