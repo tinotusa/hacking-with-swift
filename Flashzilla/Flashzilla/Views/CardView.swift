@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct CardView: View {
     var card: Card
@@ -13,6 +14,7 @@ struct CardView: View {
     @State private var isDragging = false
     @State private var showingAnswer = false
     @EnvironmentObject var userData: UserData
+    private let hapticEngine = HapticEngine()
     
     var body: some View {
         GeometryReader { proxy in
@@ -33,44 +35,50 @@ struct CardView: View {
             .rotationEffect(Angle(degrees: Double(position.width) * 0.2))
             .offset(position)
             .onTapGesture {
-                print("tapped")
                 withAnimation {
                     showingAnswer.toggle()
                 }
             }
-            .gesture(
-                DragGesture()
-                    .onEnded { _ in
-                        isDragging = false
-                        if abs(position.width) > proxy.size.width / 2 {
-                            if position.width < 0 {
-                                userData.incorrectCount += 1
-                            } else {
-                                userData.correctCount += 1
-                            }
-                            print(card)
-                            
-                            userData.remove(card)
-                        }
-                        withAnimation {
-                            position = CGSize()
-                        }
-                    }
-                    .onChanged { value in
-                        withAnimation {
-                            position.width = value.translation.width
-                        }
-                        isDragging = true
-                    }
-            )
+            .gesture(dragGesture(proxy: proxy))
+                
         }
         .frame(width: 300, height: 150)
     }
 }
 
+// MARK: - Private Implementation
+private extension CardView {
+
+    func dragGesture(proxy: GeometryProxy) -> some Gesture {
+        DragGesture()
+            .onEnded { _ in
+                isDragging = false
+                if abs(position.width) > proxy.size.width / 2 {
+                    if position.width < 0 {
+                        userData.incorrectCount += 1
+                        hapticEngine.playHaptic()
+                    } else {
+                        userData.correctCount += 1
+                        AudioPlayer.playAudio("correct.wav")
+                    }
+                    userData.remove(card)
+                }
+                withAnimation {
+                    position = CGSize()
+                }
+            }
+            .onChanged { value in
+                withAnimation {
+                    position.width = value.translation.width
+                }
+                isDragging = true
+            }
+    }
+}
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         CardView(card: Card(question: "test", answer: "testing"))
+            .environmentObject(UserData())
     }
 }

@@ -17,6 +17,9 @@
 		21BB8C3D26DB7EC300F66945 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BB8C3C26DB7EC300F66945 /* GameOverView.swift */; };
 		21C3361126DCE6A300983FA4 /* AddQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C3361026DCE6A200983FA4 /* AddQuestionView.swift */; };
 		21C3361326DCE6E400983FA4 /* EditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C3361226DCE6E400983FA4 /* EditScreen.swift */; };
+		21C354EA26E06A8C00F4D9E1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */; };
+		21C354F426E0714B00F4D9E1 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21C354F326E0714B00F4D9E1 /* correct.wav */; };
+		21C354F626E0732700F4D9E1 /* HapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C354F526E0732700F4D9E1 /* HapticEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		21BB8C3C26DB7EC300F66945 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		21C3361026DCE6A200983FA4 /* AddQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuestionView.swift; sourceTree = "<group>"; };
 		21C3361226DCE6E400983FA4 /* EditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScreen.swift; sourceTree = "<group>"; };
+		21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		21C354F326E0714B00F4D9E1 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
+		21C354F526E0732700F4D9E1 /* HapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +72,10 @@
 			children = (
 				21AE16AB261E8224003F89F3 /* FlashzillaApp.swift */,
 				21AE16AD261E8224003F89F3 /* ContentView.swift */,
-				21BB8C3426DB745800F66945 /* Card.swift */,
+				21C354F526E0732700F4D9E1 /* HapticEngine.swift */,
+				21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */,
+				21C354EE26E06C1200F4D9E1 /* Assets */,
+				21C354E726E0679E00F4D9E1 /* Model */,
 				21BB8C3626DB746C00F66945 /* Views */,
 				21BB8C3926DB749900F66945 /* View Model */,
 				21AE16AF261E8225003F89F3 /* Assets.xcassets */,
@@ -101,6 +110,22 @@
 				21BB8C3A26DB74FB00F66945 /* Game.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		21C354E726E0679E00F4D9E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				21BB8C3426DB745800F66945 /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		21C354EE26E06C1200F4D9E1 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				21C354F326E0714B00F4D9E1 /* correct.wav */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +187,7 @@
 			files = (
 				21AE16B3261E8225003F89F3 /* Preview Assets.xcassets in Resources */,
 				21AE16B0261E8225003F89F3 /* Assets.xcassets in Resources */,
+				21C354F426E0714B00F4D9E1 /* correct.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,9 +200,11 @@
 			files = (
 				21AE16AE261E8224003F89F3 /* ContentView.swift in Sources */,
 				21C3361326DCE6E400983FA4 /* EditScreen.swift in Sources */,
+				21C354EA26E06A8C00F4D9E1 /* AudioPlayer.swift in Sources */,
 				21BB8C3B26DB74FB00F66945 /* Game.swift in Sources */,
 				21C3361126DCE6A300983FA4 /* AddQuestionView.swift in Sources */,
 				21BB8C3526DB745800F66945 /* Card.swift in Sources */,
+				21C354F626E0732700F4D9E1 /* HapticEngine.swift in Sources */,
 				21BB8C3826DB747700F66945 /* CardView.swift in Sources */,
 				21BB8C3D26DB7EC300F66945 /* GameOverView.swift in Sources */,
 				21AE16AC261E8224003F89F3 /* FlashzillaApp.swift in Sources */,

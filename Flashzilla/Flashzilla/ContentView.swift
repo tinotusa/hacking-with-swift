@@ -6,7 +6,6 @@
 //
 
 // MARK: - TODO
-// add sounds (maybe haptics when incorrect)
 // move extensions (code clean up)
 // make ui pretty
 
@@ -98,15 +97,18 @@ struct ContentView: View {
             timeIsPaused = false
         }
     }
-    
-    private func getIndex(of card: Card, in cards: [Card]) -> Int? {
+}
+
+// MARK: - Private Implementaion
+private extension ContentView {
+    func getIndex(of card: Card, in cards: [Card]) -> Int? {
         if let index = cards.firstIndex(where: { $0.id == card.id }) {
             return index
         }
         return nil
     }
     
-    private var editQuestionsButton: some View {
+    var editQuestionsButton: some View {
         VStack {
             HStack {
                 Spacer()
@@ -126,7 +128,7 @@ struct ContentView: View {
         .padding(.vertical)
     }
     
-    private var resetButton: some View {
+    var resetButton: some View {
         VStack {
             HStack {
                 Button {
@@ -145,13 +147,13 @@ struct ContentView: View {
         .padding(.vertical)
     }
     
-    private var formattedTime: String {
+    var formattedTime: String {
         let minutes = userData.timeRemaining / 60
         let seconds = userData.timeRemaining % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
 
-    private var countdownTimer: some View {
+    var countdownTimer: some View {
         VStack {
             HStack {
                 Spacer()

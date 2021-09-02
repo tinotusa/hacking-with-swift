@@ -81,6 +81,7 @@ extension UserData {
             totalCards = cards.count
             cards.shuffle()
         } catch CocoaError.fileReadNoSuchFile {
+            print("this ahhapends")
             // do nothing
         } catch {
             print(error)
