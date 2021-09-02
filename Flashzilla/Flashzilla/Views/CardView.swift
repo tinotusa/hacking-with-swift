@@ -10,62 +10,61 @@ import AVFoundation
 
 struct CardView: View {
     var card: Card
+    
     @State private var position = CGSize()
     @State private var isDragging = false
     @State private var showingAnswer = false
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var settingsData: SettingsData
+    
     private let hapticEngine = HapticEngine()
+    private var width: CGFloat { UIScreen.main.bounds.width < 600 ? 400 : 600 }
+    private var height: CGFloat { UIScreen.main.bounds.height < 400 ? 200 : 300 }
     
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                VStack {
-                    Text(card.question)
-                        .font(.title)
-                    if showingAnswer {
-                        Text(card.answer)
-                    }
+        ZStack {
+            VStack {
+                Text(card.question)
+                    .font(.title)
+                if showingAnswer {
+                    Text(card.answer)
                 }
             }
-            .padding()
-            .frame(width: width(in: proxy), height: height(in: proxy))
-            .foregroundColor(Color("textColour"))
-            .background(Color("foreground"))
-            .cornerRadius(20)
-            .shadow(color: .black, radius: 5, x: 0, y: 1)
-            .rotationEffect(Angle(degrees: Double(position.width) * 0.2))
-            .offset(position)
-            .onTapGesture {
-                withAnimation {
-                    showingAnswer.toggle()
-                }
-            }
-            .gesture(dragGesture(proxy: proxy))
         }
+        .padding()
+        .frame(width: width, height: height)
+        .foregroundColor(Color("textColour"))
+        .background(Color("foreground"))
+        .cornerRadius(20)
+        .shadow(color: .black, radius: 5, x: 0, y: 1)
+        .rotationEffect(Angle(degrees: Double(position.width) * 0.2))
+        .offset(position)
+        .onTapGesture {
+            withAnimation {
+                showingAnswer.toggle()
+            }
+        }
+        .gesture(dragGesture())
     }
 }
 
 // MARK: - Private Implementation
 private extension CardView {
-    func width(in proxy: GeometryProxy) -> CGFloat {
-        proxy.frame(in: .global).width * 0.7
-    }
-    
-    func height(in proxy: GeometryProxy) -> CGFloat {
-        proxy.frame(in: .global).height * 0.8
-    }
-    
-    func dragGesture(proxy: GeometryProxy) -> some Gesture {
+    func dragGesture() -> some Gesture {
         DragGesture()
             .onEnded { _ in
                 isDragging = false
-                if abs(position.width) > proxy.size.width / 2 {
+                if abs(position.width) > UIScreen.main.bounds.width / 4 {
                     if position.width < 0 {
                         userData.incorrectCount += 1
-                        hapticEngine.playHaptic()
+                        if settingsData.haptics {
+                            hapticEngine.playHaptic()
+                        }
                     } else {
                         userData.correctCount += 1
-                        AudioPlayer.playAudio("correct.wav")
+                        if !settingsData.mute {
+                            AudioPlayer.playAudio("correct.wav")
+                        }
                     }
                     userData.remove(card)
                 }

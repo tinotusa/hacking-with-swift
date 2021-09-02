@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2121CA1926E0C45200A7C7CB /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2121CA1826E0C45200A7C7CB /* Settings.swift */; };
+		2121CA1B26E0C69000A7C7CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2121CA1A26E0C69000A7C7CB /* SettingsView.swift */; };
+		2121CA1D26E0DE4F00A7C7CB /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2121CA1C26E0DE4F00A7C7CB /* SettingsData.swift */; };
 		21AE16AC261E8224003F89F3 /* FlashzillaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AE16AB261E8224003F89F3 /* FlashzillaApp.swift */; };
 		21AE16AE261E8224003F89F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21AE16AD261E8224003F89F3 /* ContentView.swift */; };
 		21AE16B0261E8225003F89F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21AE16AF261E8225003F89F3 /* Assets.xcassets */; };
@@ -25,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2121CA1826E0C45200A7C7CB /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		2121CA1A26E0C69000A7C7CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2121CA1C26E0DE4F00A7C7CB /* SettingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		21AE16A8261E8224003F89F3 /* Flashzilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flashzilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21AE16AB261E8224003F89F3 /* FlashzillaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashzillaApp.swift; sourceTree = "<group>"; };
 		21AE16AD261E8224003F89F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,8 +82,6 @@
 			children = (
 				21AE16AB261E8224003F89F3 /* FlashzillaApp.swift */,
 				21AE16AD261E8224003F89F3 /* ContentView.swift */,
-				21C354F526E0732700F4D9E1 /* HapticEngine.swift */,
-				21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */,
 				21C354F726E0767800F4D9E1 /* Utilities */,
 				21C354EE26E06C1200F4D9E1 /* Assets */,
 				21C354E726E0679E00F4D9E1 /* Model */,
@@ -105,6 +109,7 @@
 				21C3361226DCE6E400983FA4 /* EditScreen.swift */,
 				21BB8C3C26DB7EC300F66945 /* GameOverView.swift */,
 				21C3361026DCE6A200983FA4 /* AddQuestionView.swift */,
+				2121CA1A26E0C69000A7C7CB /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				21BB8C3A26DB74FB00F66945 /* Game.swift */,
+				2121CA1C26E0DE4F00A7C7CB /* SettingsData.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -121,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				21BB8C3426DB745800F66945 /* Card.swift */,
+				2121CA1826E0C45200A7C7CB /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,6 +143,8 @@
 		21C354F726E0767800F4D9E1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				21C354F526E0732700F4D9E1 /* HapticEngine.swift */,
+				21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */,
 				21C354F826E0769D00F4D9E1 /* ViewExtensions.swift */,
 				21C354FA26E08B0900F4D9E1 /* PurpleIconButtonStyle.swift */,
 			);
@@ -214,10 +223,13 @@
 			files = (
 				21C354F926E0769D00F4D9E1 /* ViewExtensions.swift in Sources */,
 				21AE16AE261E8224003F89F3 /* ContentView.swift in Sources */,
+				2121CA1D26E0DE4F00A7C7CB /* SettingsData.swift in Sources */,
+				2121CA1926E0C45200A7C7CB /* Settings.swift in Sources */,
 				21C3361326DCE6E400983FA4 /* EditScreen.swift in Sources */,
 				21C354EA26E06A8C00F4D9E1 /* AudioPlayer.swift in Sources */,
 				21BB8C3B26DB74FB00F66945 /* Game.swift in Sources */,
 				21C3361126DCE6A300983FA4 /* AddQuestionView.swift in Sources */,
+				2121CA1B26E0C69000A7C7CB /* SettingsView.swift in Sources */,
 				21BB8C3526DB745800F66945 /* Card.swift in Sources */,
 				21C354F626E0732700F4D9E1 /* HapticEngine.swift in Sources */,
 				21C354FB26E08B0900F4D9E1 /* PurpleIconButtonStyle.swift in Sources */,

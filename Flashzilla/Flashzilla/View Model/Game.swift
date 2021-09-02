@@ -9,13 +9,14 @@ import Foundation
 
 class UserData: ObservableObject {
     private static var saveFileName = "cards.data"
-    private static var defaultTime = 60
+    private static var defaultTime = SettingsData.defaultTimeLimit
     
     var correctCount = 0
     var incorrectCount = 0
     var totalCards = 0
     
     @Published var gameIsOver = false
+    var totalTime = defaultTime
     @Published var timeRemaining: Int = defaultTime {
         willSet {
             if newValue <= 0 {
@@ -29,6 +30,11 @@ class UserData: ObservableObject {
     
     init() {
         load()
+    }
+    
+    func update(_ settings: Settings) {
+        totalTime = settings.timeLimit
+        timeRemaining = totalTime
     }
     
     func remove(_ card: Card) {
@@ -55,7 +61,7 @@ class UserData: ObservableObject {
         load()
         correctCount = 0
         incorrectCount = 0
-        timeRemaining = Self.defaultTime
+        timeRemaining = totalTime
         gameIsOver = false
     }
     

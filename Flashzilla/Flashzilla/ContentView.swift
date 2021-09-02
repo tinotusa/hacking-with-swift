@@ -6,16 +6,18 @@
 //
 
 // MARK: - TODO
-// make ui pretty
-// fix different sizes
 // add the ability to change the running time
 
 import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var settingsData: SettingsData
+    
     @State private var showingEditScreen = false
     @State private var timeIsPaused = false
+    @State private var showingSettings = false
+    
     private let timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common).autoconnect()
     
     var body: some View {
@@ -32,10 +34,10 @@ struct ContentView: View {
                 .foregroundColor(Color("textColour"))
             }
             
-            // show cards
             VStack {
                 HStack {
                     resetButton
+                    settingsButton
                     Spacer()
                     countdownTimer
                     Spacer()
@@ -44,7 +46,8 @@ struct ContentView: View {
                 .padding()
                 
                 Spacer()
-            
+                
+                // show cards
                 ZStack {
                     ForEach(userData.cards) { card in
                         CardView(card: card)
@@ -62,6 +65,13 @@ struct ContentView: View {
         .sheet(isPresented: $showingEditScreen) {
             EditScreen()
                 .environmentObject(userData)
+        }
+        .sheet(isPresented: $showingSettings) {
+            SettingsView()
+                .environmentObject(settingsData)
+                .onDisappear {
+                    userData.update(settingsData.settings)
+                }
         }
         .onReceive(timer) { _ in
             // DON'T update the time if
@@ -81,6 +91,9 @@ struct ContentView: View {
         .appEnteredForeground {
             timeIsPaused = false
         }
+        .onAppear {
+            userData.update(settingsData.settings)
+        }
     }
 }
 
@@ -95,6 +108,15 @@ private extension ContentView {
             return index
         }
         return nil
+    }
+    
+    var settingsButton: some View {
+        Button {
+            showingSettings = true
+        } label: {
+            Image(systemName: "gearshape")
+        }
+        .buttonStyle(PurpleIconButtonStyle())
     }
     
     var editQuestionsButton: some View {
@@ -134,5 +156,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(UserData())
+            .environmentObject(SettingsData())
     }
 }

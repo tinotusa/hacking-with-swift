@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import SwiftUI
 
 struct AudioPlayer {
     static var audioPlayer: AVAudioPlayer?
@@ -14,6 +15,7 @@ struct AudioPlayer {
         if let path = Bundle.main.path(forResource: name, ofType: nil) {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+                audioPlayer?.volume = 1
                 audioPlayer?.prepareToPlay()
                 audioPlayer?.play()
             } catch {

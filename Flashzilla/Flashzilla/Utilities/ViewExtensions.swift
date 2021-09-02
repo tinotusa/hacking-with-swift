@@ -42,3 +42,27 @@ extension View {
         self.modifier(Stacked(index: index, total: total))
     }
 }
+
+
+struct Dismissable: ViewModifier {
+    var dismiss: (() -> Void)?
+    
+    func body(content: Content) -> some View {
+        NavigationView {
+            content
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Close") {
+                            dismiss?()
+                        }
+                    }
+                }
+        }
+    }
+}
+
+extension View {
+    func dismissable(_ dismiss: (() -> Void)?) -> some View {
+        self.modifier(Dismissable(dismiss: dismiss))
+    }
+}
