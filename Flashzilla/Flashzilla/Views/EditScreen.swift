@@ -22,7 +22,6 @@ struct EditScreen: View {
                         Text("A: \(card.answer)")
                             .font(.caption)
                     }
-                    
                 }
                 .onDelete(perform: userData.remove)
             }
@@ -33,8 +32,10 @@ struct EditScreen: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Add Question") {
+                    Button {
                         showingAddQuestionScreen = true
+                    } label: {
+                        Image(systemName: "plus")
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -53,5 +54,6 @@ struct EditScreen: View {
 struct EditScreen_Previews: PreviewProvider {
     static var previews: some View {
         EditScreen()
+            .environmentObject(UserData())
     }
 }

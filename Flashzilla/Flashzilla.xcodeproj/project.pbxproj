@@ -20,6 +20,8 @@
 		21C354EA26E06A8C00F4D9E1 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */; };
 		21C354F426E0714B00F4D9E1 /* correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = 21C354F326E0714B00F4D9E1 /* correct.wav */; };
 		21C354F626E0732700F4D9E1 /* HapticEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C354F526E0732700F4D9E1 /* HapticEngine.swift */; };
+		21C354F926E0769D00F4D9E1 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C354F826E0769D00F4D9E1 /* ViewExtensions.swift */; };
+		21C354FB26E08B0900F4D9E1 /* PurpleIconButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C354FA26E08B0900F4D9E1 /* PurpleIconButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		21C354F326E0714B00F4D9E1 /* correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correct.wav; sourceTree = "<group>"; };
 		21C354F526E0732700F4D9E1 /* HapticEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticEngine.swift; sourceTree = "<group>"; };
+		21C354F826E0769D00F4D9E1 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
+		21C354FA26E08B0900F4D9E1 /* PurpleIconButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleIconButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 				21AE16AD261E8224003F89F3 /* ContentView.swift */,
 				21C354F526E0732700F4D9E1 /* HapticEngine.swift */,
 				21C354E926E06A8C00F4D9E1 /* AudioPlayer.swift */,
+				21C354F726E0767800F4D9E1 /* Utilities */,
 				21C354EE26E06C1200F4D9E1 /* Assets */,
 				21C354E726E0679E00F4D9E1 /* Model */,
 				21BB8C3626DB746C00F66945 /* Views */,
@@ -126,6 +131,15 @@
 				21C354F326E0714B00F4D9E1 /* correct.wav */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		21C354F726E0767800F4D9E1 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				21C354F826E0769D00F4D9E1 /* ViewExtensions.swift */,
+				21C354FA26E08B0900F4D9E1 /* PurpleIconButtonStyle.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21C354F926E0769D00F4D9E1 /* ViewExtensions.swift in Sources */,
 				21AE16AE261E8224003F89F3 /* ContentView.swift in Sources */,
 				21C3361326DCE6E400983FA4 /* EditScreen.swift in Sources */,
 				21C354EA26E06A8C00F4D9E1 /* AudioPlayer.swift in Sources */,
@@ -205,6 +220,7 @@
 				21C3361126DCE6A300983FA4 /* AddQuestionView.swift in Sources */,
 				21BB8C3526DB745800F66945 /* Card.swift in Sources */,
 				21C354F626E0732700F4D9E1 /* HapticEngine.swift in Sources */,
+				21C354FB26E08B0900F4D9E1 /* PurpleIconButtonStyle.swift in Sources */,
 				21BB8C3826DB747700F66945 /* CardView.swift in Sources */,
 				21BB8C3D26DB7EC300F66945 /* GameOverView.swift in Sources */,
 				21AE16AC261E8224003F89F3 /* FlashzillaApp.swift in Sources */,

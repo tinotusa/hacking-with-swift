@@ -9,8 +9,10 @@ import Foundation
 import CoreHaptics
 
 struct HapticEngine {
+    /// The CoreHaptics engine.
     var engine: CHHapticEngine?
     
+    /// Returns true if the current device supports haptics.
     static var supportsHaptics = CHHapticEngine.capabilitiesForHardware().supportsHaptics
     
     init() {

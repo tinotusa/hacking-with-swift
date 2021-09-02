@@ -21,17 +21,18 @@ struct CardView: View {
             ZStack {
                 VStack {
                     Text(card.question)
+                        .font(.title)
                     if showingAnswer {
                         Text(card.answer)
                     }
                 }
             }
-            .frame(width: proxy.size.width, height: proxy.size.height)
             .padding()
-            .foregroundColor(isDragging ? .green : .red)
-            .background(Color.white)
-            .cornerRadius(5)
-            .shadow(radius: 5)
+            .frame(width: width(in: proxy), height: height(in: proxy))
+            .foregroundColor(Color("textColour"))
+            .background(Color("foreground"))
+            .cornerRadius(20)
+            .shadow(color: .black, radius: 5, x: 0, y: 1)
             .rotationEffect(Angle(degrees: Double(position.width) * 0.2))
             .offset(position)
             .onTapGesture {
@@ -40,15 +41,20 @@ struct CardView: View {
                 }
             }
             .gesture(dragGesture(proxy: proxy))
-                
         }
-        .frame(width: 300, height: 150)
     }
 }
 
 // MARK: - Private Implementation
 private extension CardView {
-
+    func width(in proxy: GeometryProxy) -> CGFloat {
+        proxy.frame(in: .global).width * 0.7
+    }
+    
+    func height(in proxy: GeometryProxy) -> CGFloat {
+        proxy.frame(in: .global).height * 0.8
+    }
+    
     func dragGesture(proxy: GeometryProxy) -> some Gesture {
         DragGesture()
             .onEnded { _ in
@@ -78,7 +84,7 @@ private extension CardView {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(card: Card(question: "test", answer: "testing"))
+        CardView(card: Card(question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam tortor eu euismod pulvinar. Maecenas et laoreet leo, vitae dictum odio. Donec pellentesque ex ut euismod bibendum.", answer: "testing"))
             .environmentObject(UserData())
     }
 }

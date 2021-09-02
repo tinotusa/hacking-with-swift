@@ -17,8 +17,8 @@ class UserData: ObservableObject {
     
     @Published var gameIsOver = false
     @Published var timeRemaining: Int = defaultTime {
-        didSet {
-            if oldValue <= 1 {
+        willSet {
+            if newValue <= 0 {
                 gameIsOver = true
             }
         }
@@ -68,8 +68,8 @@ class UserData: ObservableObject {
 }
 
 // MARK: - Private Implementation
-extension UserData {
-    private func load() {
+private extension UserData {
+    func load() {
         guard var saveFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             print("Error: \(#function)\nFailed to get documents directory")
             return
@@ -81,14 +81,13 @@ extension UserData {
             totalCards = cards.count
             cards.shuffle()
         } catch CocoaError.fileReadNoSuchFile {
-            print("this ahhapends")
             // do nothing
         } catch {
             print(error)
         }
     }
     
-    private func save() {
+    func save() {
         do {
             let data = try JSONEncoder().encode(cards)
             var saveFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

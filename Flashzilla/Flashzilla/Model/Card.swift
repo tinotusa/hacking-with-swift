@@ -8,11 +8,16 @@
 import Foundation
 
 struct Card: Codable, Identifiable {
+    /// The unique id for this card.
     let id = UUID()
+    /// The question on the flash card.
+    let question: String
+    /// The answer on the flash card.
+    let answer: String
     
+    // this is to silence the warning about id
     enum CodingKeys: CodingKey {
         case question, answer
     }
-    let question: String
-    let answer: String
+    
 }
