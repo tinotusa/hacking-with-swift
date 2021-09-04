@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Card: Codable, Identifiable {
+struct Card {
     /// The unique id for this card.
     let id = UUID()
     /// The question on the flash card.
@@ -19,5 +19,7 @@ struct Card: Codable, Identifiable {
     enum CodingKeys: CodingKey {
         case question, answer
     }
-    
 }
+
+extension Card: Codable { }
+extension Card: Identifiable { }

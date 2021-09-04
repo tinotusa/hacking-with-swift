@@ -7,7 +7,7 @@
 
 import Foundation
 
-class UserData: ObservableObject {
+final class UserData: ObservableObject {
     private static var saveFileName = "cards.data"
     private static var defaultTime = SettingsData.defaultTimeLimit
     

@@ -5,9 +5,6 @@
 //  Created by Tino on 8/4/21.
 //
 
-// MARK: - TODO
-// add the ability to change the running time
-
 import SwiftUI
 
 struct ContentView: View {
@@ -40,6 +37,7 @@ struct ContentView: View {
                     settingsButton
                     Spacer()
                     countdownTimer
+                    Spacer()
                     Spacer()
                     editQuestionsButton
                 }
