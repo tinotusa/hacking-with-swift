@@ -16,7 +16,7 @@ struct EditScreen: View {
     var body: some View {
         List {
             ForEach(userData.cards) { card in
-                VStack {
+                VStack(alignment: .leading) {
                     Text("Q: \(card.question)")
                         .font(.headline)
                     Text("A: \(card.answer)")
